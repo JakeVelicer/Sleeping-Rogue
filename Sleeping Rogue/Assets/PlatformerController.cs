@@ -61,7 +61,7 @@ public class PlatformerController : MonoBehaviour {
         else if (wall && !grounded && rb2d.velocity.y <= 0)
         {
             wallJumpEnabled = true;
-            rb2d.velocity = Vector3.zero;
+            rb2d.velocity = new Vector2(0, -1f);
             wallJumpTimer = 0;
             if (Input.GetButtonDown("Jump"))
             {
@@ -72,6 +72,7 @@ public class PlatformerController : MonoBehaviour {
         if (!wall && !grounded)
         {
             maxSpeed = airSpeed;
+            jumps = 1;
         }
         else maxSpeed = groundSpeed;
         
