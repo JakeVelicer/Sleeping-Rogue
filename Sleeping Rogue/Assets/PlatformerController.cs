@@ -5,33 +5,38 @@ using UnityEngine;
 public class PlatformerController : MonoBehaviour {
 
     [HideInInspector] public bool facingRight = true;
-    public bool wallJumpEnabled = false;
+    bool wallJumpEnabled, wallJumping = false;
     public float moveForce;
     float maxSpeed;
     public float groundSpeed;
     public float airSpeed;
     public float jumpForce;
+    public float longJumpForce;
     public Transform groundCheck1, groundCheck2;
-    public Transform wallCheck1;
+    public Transform wallCheck1, wallCheck2;
 
-    public bool grounded = false;
-    public bool wall = false;
+    bool grounded = false;
+    bool wall = false;
     private Animator anim;
     private Rigidbody2D rb2d;
 
-    public int jumps = 0;
-    private int maxJumps = 1;
+    private int jumps = 0;
+    public int maxJumps = 1;
 
-    public float jumpTimer, wallJumpTimer = 0.0f;
-    public static Vector3 check;
+    public float jumpTimer, wallJumpTimer, heightTime = 0.0f;
 
-    float horiz;
+    public Color real, dream;
+
+    public float horiz;
+
+    public bool dreaming;
 
     private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         horiz = 0;
+        dreaming = false;
     }
 
     // Update is called once per frame
@@ -40,15 +45,39 @@ public class PlatformerController : MonoBehaviour {
         jumpTimer += Time.deltaTime;
 
         grounded = Physics2D.Linecast(groundCheck2.position, groundCheck1.position, 1 << LayerMask.NameToLayer("Ground"));
-        wall = Physics2D.Linecast(transform.position, wallCheck1.position, 1 << LayerMask.NameToLayer("Ground"));
+        wall = Physics2D.Linecast(wallCheck2.position, wallCheck1.position, 1 << LayerMask.NameToLayer("Ground"));
 
-        
+        if (dreaming)
+        {
+            Camera.main.backgroundColor = dream;
+            rb2d.gravityScale = 0.5f;
+        }
+        else
+        {
+            Camera.main.backgroundColor = real;
+            rb2d.gravityScale = 1.0f;
 
-        if(Input.GetButtonDown("Jump") && jumps < maxJumps)
+        }
+        if (Input.GetButtonDown("Jump") && jumps < maxJumps)
         {
             jumpTimer = 0;
-            Jump();
+            heightTime = 0;
             jumps++;
+        }
+
+        if (Input.GetButton("Jump") && grounded)
+        {
+            heightTime += Time.deltaTime;
+        }
+
+        if(Input.GetButtonUp("Jump") && heightTime < 0.2f && heightTime > 0)
+        {
+            Jump(jumpForce);
+        }
+
+        if(heightTime > 0.2f)
+        {
+            Jump(longJumpForce);
         }
 
         if (grounded)
@@ -58,7 +87,7 @@ public class PlatformerController : MonoBehaviour {
                 jumps = 0;
             }
         }
-        else if (wall && !grounded && rb2d.velocity.y <= 0)
+        else if (wall && !grounded && rb2d.velocity.y <= 0 && !dreaming)
         {
             wallJumpEnabled = true;
             rb2d.velocity = new Vector2(0, -1f);
@@ -80,19 +109,40 @@ public class PlatformerController : MonoBehaviour {
 
     private void FixedUpdate()
     {
-       
+        if (!wallJumping)
+        {
             horiz = Input.GetAxis("Horizontal");
 
             anim.SetFloat("Speed", Mathf.Abs(horiz));
-       
+
+            if (wallJumpEnabled)
+            {
+                if (facingRight)
+                {
+                    if (horiz > 0)
+                    {
+                        horiz = 0;
+                    }
+                }
+                if (!facingRight)
+                {
+                    if (horiz < 0)
+                    {
+                        horiz = 0;
+                    }
+                }
+            }
+
             if (horiz * rb2d.velocity.x < maxSpeed)
             {
                 rb2d.AddForce(Vector2.right * horiz * moveForce);
             }
-            if (Mathf.Abs(rb2d.velocity.x) > maxSpeed)
-            {
-                rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
-            }
+        }
+        if (Mathf.Abs(rb2d.velocity.x) > maxSpeed)
+        {
+            rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
+        }
+        
         if(horiz > 0 && !facingRight)
         {
             Flip();
@@ -101,9 +151,10 @@ public class PlatformerController : MonoBehaviour {
         {
             Flip();
         }
-        
 
-        if (wallJumpEnabled)
+        if (wallJumpEnabled && !wall) wallJumpEnabled = false;
+
+        if (wallJumping)
         {
             horiz = 0;
             if (!wall)
@@ -114,27 +165,35 @@ public class PlatformerController : MonoBehaviour {
         
         if(wallJumpTimer >= .25)
         {
-            wallJumpEnabled = false;
+            wallJumping = false;
         }
-        
+
+        if (Input.GetButtonDown("Dream"))
+        {
+            dreaming = !dreaming;
+        }
+
     }
 
-    void Jump()
+    void Jump(float height)
     {
         anim.SetTrigger("Jump");
-        rb2d.AddForce(new Vector2(0f, jumpForce));
+        heightTime = 0;
+        rb2d.AddForce(new Vector2(0f, height));
     } 
 
     void WallJump()
     {
         anim.SetTrigger("Jump");
+        wallJumpEnabled = false;
+        wallJumping = true;
         if (facingRight)
         {
-            rb2d.AddForce(new Vector2(-jumpForce * 1.3f, jumpForce * 1.2f));
+            rb2d.AddForce(new Vector2(-longJumpForce * 1.3f, longJumpForce * 1.2f));
         } else
         {
 
-            rb2d.AddForce(new Vector2(jumpForce * 1.3f, jumpForce * 1.2f));
+            rb2d.AddForce(new Vector2(longJumpForce * 1.3f, longJumpForce * 1.2f));
         }
         Flip();
     }
