@@ -6,6 +6,7 @@ public class PlatformerController : MonoBehaviour {
 
     [HideInInspector] public bool facingRight = true;
     bool wallJumpEnabled, wallJumping = false;
+    private Vector3 checkPointSave;
     public float moveForce;
     float maxSpeed;
     public float groundSpeed;
@@ -26,9 +27,7 @@ public class PlatformerController : MonoBehaviour {
     public float jumpTimer, wallJumpTimer, heightTime = 0.0f;
 
     public Color real, dream;
-
     public float horiz;
-
     public bool dreaming;
 
     private void Awake()
@@ -39,8 +38,13 @@ public class PlatformerController : MonoBehaviour {
         dreaming = false;
     }
 
+    void Start()
+    {
+        checkPointSave = this.transform.position;
+	}
+
     // Update is called once per frame
-    void Update () {
+    void Update() {
 
         jumpTimer += Time.deltaTime;
 
@@ -207,11 +211,34 @@ public class PlatformerController : MonoBehaviour {
         transform.localScale = theScale;
     }
 
+    private IEnumerator Respawn()
+    {
+        GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+        yield return new WaitForSeconds(0); //Going to be used to display death animation
+        this.transform.position = checkPointSave;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.layer == 11)
+        if (collision.gameObject.layer == 11)
         {
             jumpTimer = 0;
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Checkpoint")
+        {
+            checkPointSave = this.transform.position;
+        }
+        if (collision.gameObject.tag == "Kill")
+        {
+            if (dreaming == false)
+            {
+                StartCoroutine(Respawn());
+            }
+        }
+    }
+
 }

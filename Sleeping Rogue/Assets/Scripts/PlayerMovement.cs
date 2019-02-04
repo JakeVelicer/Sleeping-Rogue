@@ -195,6 +195,7 @@ public class PlayerMovement : MonoBehaviour {
             }
         }
     }
+    
     void turn()
     {
         if ( Input.GetKey(KeyCode.A))
