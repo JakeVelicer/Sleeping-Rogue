@@ -6,5 +6,4 @@ public class InteractableObject : MonoBehaviour {
 
     public bool isActive;
     
-
 }

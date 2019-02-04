@@ -36,8 +36,6 @@ public class ButtonScript : MonoBehaviour {
         if(collision.gameObject.tag == "Player")
         {
             touch = true;
-            
-
         }
     }
 

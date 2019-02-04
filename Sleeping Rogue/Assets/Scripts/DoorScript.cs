@@ -4,18 +4,40 @@ using UnityEngine;
 
 public class DoorScript : InteractableObject {
 
-	
+    public bool MoveUp;
+    public float MoveTime;
+    private  bool CanMove;
+
 	// Update is called once per frame
 	void Update () {
-        if (isActive)
+        if (isActive && !CanMove)
         {
-            GetComponent<BoxCollider2D>().enabled = true;
-            GetComponent<SpriteRenderer>().enabled = true;
+            StartCoroutine(Activation());
         }
-        else
-        {
-            GetComponent<BoxCollider2D>().enabled = false;
-            GetComponent<SpriteRenderer>().enabled = false;
-        }
+        Movement();
 	}
+
+    private IEnumerator Activation () {
+        isActive = false;
+        CanMove = true;
+        yield return new WaitForSeconds(MoveTime);
+        CanMove = false;
+        if (MoveUp) {
+            MoveUp = false;
+        }
+        else if (!MoveUp) {
+            MoveUp = true;
+        }
+    }
+
+    private void Movement() {
+        if (CanMove) {
+            if (MoveUp) {
+                transform.Translate(Vector3.up * 0.1f, Space.World);
+            }
+            else if (!MoveUp) {
+                transform.Translate(Vector3.down * 0.1f, Space.World);
+            }
+        }
+    }
 }
