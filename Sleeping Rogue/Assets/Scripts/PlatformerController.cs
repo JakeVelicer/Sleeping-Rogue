@@ -137,10 +137,13 @@ public class PlatformerController : MonoBehaviour {
             }
 
             if (horiz * rb2d.velocity.x < maxSpeed)
+            if (horiz * rb2d.velocity.x < maxSpeed)
             {
                 rb2d.AddForce(Vector2.right * horiz * moveForce);
             }
         }
+
+
         if (Mathf.Abs(rb2d.velocity.x) > maxSpeed)
         {
             rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
@@ -159,7 +162,8 @@ public class PlatformerController : MonoBehaviour {
         {
             if(!jumpHeld && rb2d.velocity.y > 0)
             {
-                rb2d.AddForce(Vector2.down * (JumpForce-350));
+                //rb2d.AddForce(Vector2.down * (JumpForce-350));
+                rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
             }
         }
 
@@ -193,6 +197,11 @@ public class PlatformerController : MonoBehaviour {
             dreaming = !dreaming;
         }
 
+
+        if (Input.GetButtonDown("Cancel"))
+        {
+            StartCoroutine(Respawn());
+        }
     }
 
     //void Jump()
@@ -282,4 +291,13 @@ public class PlatformerController : MonoBehaviour {
         }
     }
 
+    //Used the check if the player is holding a movement method
+    public bool GetAxisDown(string name)
+    {
+        if (Input.GetAxisRaw(name) == 0)
+        {
+            return false;
+        }
+        else return true;
+    }
 }
