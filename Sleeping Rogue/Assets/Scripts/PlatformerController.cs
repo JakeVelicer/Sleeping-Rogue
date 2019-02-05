@@ -269,6 +269,9 @@ public class PlatformerController : MonoBehaviour {
         if (collision.gameObject.tag == "Inhibitor")
         {
             canDream = false;
+            if (dreaming) {
+                dreaming = false;
+            }
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
