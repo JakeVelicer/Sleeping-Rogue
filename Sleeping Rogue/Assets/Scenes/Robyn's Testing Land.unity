@@ -170,12 +170,13 @@ MonoBehaviour:
   moveForce: 100
   groundSpeed: 5
   airSpeed: 6
-  jumpForce: 250
-  longJumpForce: 500
+  JumpForce: 500
+  wallJumpForce: {x: 650, y: 600}
   groundCheck1: {fileID: 498082631}
   groundCheck2: {fileID: 1069885897}
   wallCheck1: {fileID: 2053782060}
   wallCheck2: {fileID: 1542848169}
+  jumps: 0
   maxJumps: 1
   jumpTimer: 0
   wallJumpTimer: 0
@@ -407,11 +408,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4466512030090516, guid: 453072903b0b80a4cb483ebe5f874c1f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.99
+      value: -3.31
       objectReference: {fileID: 0}
     - target: {fileID: 4466512030090516, guid: 453072903b0b80a4cb483ebe5f874c1f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 4466512030090516, guid: 453072903b0b80a4cb483ebe5f874c1f, type: 3}
       propertyPath: m_LocalPosition.z
