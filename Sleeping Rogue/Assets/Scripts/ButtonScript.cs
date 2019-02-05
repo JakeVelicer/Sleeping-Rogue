@@ -12,7 +12,7 @@ public class ButtonScript : MonoBehaviour {
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetButtonDown("Interact"))
         {
             if (touch)
             {
