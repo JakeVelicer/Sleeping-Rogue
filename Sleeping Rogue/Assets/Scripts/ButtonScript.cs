@@ -10,6 +10,17 @@ public class ButtonScript : MonoBehaviour {
     
     public bool touch = false;
 
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        for (int i = 0; i < connected.Length; i++)
+        {
+            if (connected[i] != null)
+                Gizmos.DrawLine(transform.position, connected[i].transform.position);
+        }
+
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F))
