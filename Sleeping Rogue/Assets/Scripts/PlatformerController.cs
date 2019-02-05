@@ -22,14 +22,17 @@ public class PlatformerController : MonoBehaviour {
     private Animator anim;
     private Rigidbody2D rb2d;
 
-    public int jumps = 0;
-    public int maxJumps = 1;
+    [HideInInspector] public int jumps = 0;
+    [HideInInspector] public int maxJumps = 1;
 
-    public float jumpTimer, wallJumpTimer, heightTime = 0.0f;
+    [HideInInspector] public float jumpTimer, wallJumpTimer, heightTime = 0.0f;
 
     public Color real, dream;
-    public float horiz;
-    public bool dreaming;
+    [HideInInspector] public float horiz;
+    [HideInInspector] public bool dreaming;
+
+    GameObject shadow;
+    Vector3 shadowPos;
 
     private void Awake()
     {
@@ -37,7 +40,8 @@ public class PlatformerController : MonoBehaviour {
         anim = GetComponent<Animator>();
         horiz = 0;
         dreaming = false;
-        
+        shadow = GameObject.Find("Shadow");
+        shadowPos = shadow.transform.position;
     }
 
     void Start()
@@ -57,12 +61,13 @@ public class PlatformerController : MonoBehaviour {
         {
             Camera.main.backgroundColor = dream;
             rb2d.gravityScale = 0.5f;
+            shadow.transform.position = shadowPos;
         }
         else
         {
             Camera.main.backgroundColor = real;
             rb2d.gravityScale = 1.0f;
-
+            shadow.transform.position = new Vector3(transform.position.x, transform.position.y, 1);
         }
         if (Input.GetButtonDown("Jump") && grounded)
         {
@@ -175,6 +180,15 @@ public class PlatformerController : MonoBehaviour {
 
         if (Input.GetButtonDown("Dream"))
         {
+            if (dreaming)
+            {
+                this.transform.position = new Vector3(shadow.transform.position.x, shadow.transform.position.y, 0);
+                rb2d.velocity = Vector3.zero;
+            }
+            if (!dreaming)
+            {
+                shadowPos = shadow.transform.position;
+            }
             dreaming = !dreaming;
         }
 
