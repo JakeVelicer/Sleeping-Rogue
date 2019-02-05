@@ -5,20 +5,13 @@ using UnityEngine;
 public class LaserScript : InteractableObject {
 
     public float length;
-
     public float width;
-
     public LineRenderer line;
-
-    public BoxCollider2D box;
 
 
 	// Use this for initialization
 	void Start () {
         line = GetComponent<LineRenderer>();
-
-        box = GetComponent<BoxCollider2D>();
-
         line.useWorldSpace = false;
     }
 	

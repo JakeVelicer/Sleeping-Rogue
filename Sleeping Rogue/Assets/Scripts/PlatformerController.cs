@@ -75,8 +75,6 @@ public class PlatformerController : MonoBehaviour {
         {
             jumpHeld = false;
         }
-      
-
         //if (grounded)
         //{
         //    if (jumpTimer > .1)
@@ -103,6 +101,7 @@ public class PlatformerController : MonoBehaviour {
         }
         else maxSpeed = groundSpeed;
         
+        Debug.Log(jumping);
 	}
 
     private void FixedUpdate()
