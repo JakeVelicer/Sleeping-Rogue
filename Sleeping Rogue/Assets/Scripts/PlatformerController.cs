@@ -158,7 +158,7 @@ public class PlatformerController : MonoBehaviour {
         {
             if(!jumpHeld && rb2d.velocity.y > 0)
             {
-                rb2d.AddForce(Vector2.down * JumpForce);
+                rb2d.AddForce(Vector2.down * (JumpForce-350));
             }
         }
 
