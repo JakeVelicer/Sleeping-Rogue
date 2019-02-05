@@ -30,7 +30,7 @@ public class PlatformerController : MonoBehaviour {
     public Color real, dream;
     [HideInInspector] public float horiz;
     [HideInInspector] public bool dreaming;
-    [HideInInspector] public bool canDream;
+    public bool canDream;
 
     GameObject shadow;
     Vector3 shadowPos;
@@ -240,6 +240,13 @@ public class PlatformerController : MonoBehaviour {
         if (collision.gameObject.layer == 11)
         {
             jumpTimer = 0;
+        }
+        if (collision.gameObject.tag == "Kill")
+        {
+            if (dreaming == false)
+            {
+                StartCoroutine(Respawn());
+            }
         }
     }
 
