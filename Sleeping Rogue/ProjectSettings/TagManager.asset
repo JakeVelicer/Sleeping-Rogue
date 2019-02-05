@@ -11,6 +11,7 @@ TagManager:
   - Enemy
   - Checkpoint
   - Kill
+  - Inhibitor
   layers:
   - Default
   - TransparentFX

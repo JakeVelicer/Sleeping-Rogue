@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour {
     public int jumps = 0;
     int maxJumps = 1;
 
-
+    public bool canDream = true;
     public static bool dream;
 
     public Vector2 power;
@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour {
         }
            
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && canDream==true)
         {
             Debug.Log(dream);
         }
@@ -194,8 +194,9 @@ public class PlayerMovement : MonoBehaviour {
                 GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             }
         }
+       
     }
-    
+
     void turn()
     {
         if ( Input.GetKey(KeyCode.A))

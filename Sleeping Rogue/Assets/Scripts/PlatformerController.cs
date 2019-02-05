@@ -30,6 +30,7 @@ public class PlatformerController : MonoBehaviour {
     public Color real, dream;
     [HideInInspector] public float horiz;
     [HideInInspector] public bool dreaming;
+    [HideInInspector] public bool canDream;
 
     GameObject shadow;
     Vector3 shadowPos;
@@ -178,7 +179,7 @@ public class PlatformerController : MonoBehaviour {
             wallJumping = false;
         }
 
-        if (Input.GetButtonDown("Dream"))
+        if (Input.GetButtonDown("Dream") && canDream == true)
         {
             if (dreaming)
             {
@@ -254,6 +255,20 @@ public class PlatformerController : MonoBehaviour {
             {
                 StartCoroutine(Respawn());
             }
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Inhibitor")
+        {
+            canDream = false;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Inhibitor")
+        {
+            canDream = true;
         }
     }
 
