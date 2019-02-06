@@ -5,7 +5,7 @@ using UnityEngine;
 public class DoorScript : InteractableObject {
 
     public bool MoveUp;
-    public float MoveTime;
+    public float MoveDistance;
     private  bool CanMove;
 
 	// Update is called once per frame
@@ -20,7 +20,7 @@ public class DoorScript : InteractableObject {
     private IEnumerator Activation () {
         isActive = false;
         CanMove = true;
-        yield return new WaitForSeconds(MoveTime);
+        yield return new WaitForSeconds(MoveDistance);
         CanMove = false;
         if (MoveUp) {
             MoveUp = false;
@@ -33,10 +33,10 @@ public class DoorScript : InteractableObject {
     private void Movement() {
         if (CanMove) {
             if (MoveUp) {
-                transform.Translate(Vector3.up * 0.1f, Space.World);
+                transform.Translate(Vector3.up * 0.5f, Space.World);
             }
             else if (!MoveUp) {
-                transform.Translate(Vector3.down * 0.1f, Space.World);
+                transform.Translate(Vector3.down * 0.5f, Space.World);
             }
         }
     }

@@ -16,6 +16,8 @@ public class PlatformerController : MonoBehaviour {
     public Vector2 wallJumpForce;
     public Transform groundCheck1, groundCheck2;
     public Transform wallCheck1, wallCheck2;
+    public GameObject shadow;
+    Vector3 shadowPos;
 
     bool grounded = false;
     bool wall = false;
@@ -33,17 +35,14 @@ public class PlatformerController : MonoBehaviour {
     public bool canDream;
     private bool canMove;
 
-    GameObject shadow;
-    Vector3 shadowPos;
-
     private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         horiz = 0;
         dreaming = false;
-        shadow = GameObject.Find("Shadow");
-        shadowPos = shadow.transform.position;
+        //shadow = GameObject.Find("Shadow");
+        //shadowPos = shadow.transform.position;
     }
 
     void Start()
@@ -63,14 +62,12 @@ public class PlatformerController : MonoBehaviour {
         if (dreaming)
         {
             Camera.main.backgroundColor = dream;
-            rb2d.gravityScale = 0.5f;
-            shadow.transform.position = shadowPos;
+            //shadow.transform.position = shadowPos;
         }
         else
         {
             Camera.main.backgroundColor = real;
-            rb2d.gravityScale = 1.0f;
-            shadow.transform.position = new Vector3(transform.position.x, transform.position.y, 1);
+            //shadow.transform.position = new Vector3(transform.position.x, transform.position.y, 1);
         }
         if (Input.GetButtonDown("Jump") && grounded && canMove)
         {
@@ -188,18 +185,9 @@ public class PlatformerController : MonoBehaviour {
             wallJumping = false;
         }
 
-        if (Input.GetButtonDown("Dream") && canDream == true && canMove)
+        if (Input.GetButtonDown("Dream") && canMove)
         {
-            if (dreaming)
-            {
-                this.transform.position = new Vector3(shadow.transform.position.x, shadow.transform.position.y, 0);
-                rb2d.velocity = Vector3.zero;
-            }
-            if (!dreaming)
-            {
-                shadowPos = shadow.transform.position;
-            }
-            dreaming = !dreaming;
+            EnterExitDreaming();
         }
 
         if (Input.GetButtonDown("Cancel") && canMove)
@@ -208,12 +196,24 @@ public class PlatformerController : MonoBehaviour {
         }
     }
 
-    //void Jump()
-    //{
-    //    anim.SetTrigger("Jump");
-    //    jumps++;
-    //    rb2d.AddForce(new Vector2(0f, jumpHeight));
-    //} 
+    void EnterExitDreaming()
+    {
+        if (dreaming)
+        {
+            Destroy(GameObject.FindGameObjectWithTag("Shadow"));
+            dreaming = false;
+            rb2d.gravityScale = 1.0f;
+            this.transform.position = shadowPos;
+            rb2d.velocity = Vector3.zero;
+        }
+        else if (!dreaming && canDream == true)
+        {
+            dreaming = true;
+            Instantiate(shadow, this.transform.position, Quaternion.identity);
+            rb2d.gravityScale = 0.5f;
+            shadowPos = this.transform.position;
+        }
+    }
 
     void WallJump()
     {
@@ -231,8 +231,6 @@ public class PlatformerController : MonoBehaviour {
         Flip();
     }
     
-
-
     void Flip()
     {
         facingRight = !facingRight;
@@ -282,16 +280,18 @@ public class PlatformerController : MonoBehaviour {
             }
         }
     }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Inhibitor")
         {
             canDream = false;
             if (dreaming) {
-                dreaming = false;
+                EnterExitDreaming();
             }
         }
     }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Inhibitor")

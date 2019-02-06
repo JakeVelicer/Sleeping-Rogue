@@ -12,6 +12,7 @@ TagManager:
   - Checkpoint
   - Kill
   - Inhibitor
+  - Shadow
   layers:
   - Default
   - TransparentFX
