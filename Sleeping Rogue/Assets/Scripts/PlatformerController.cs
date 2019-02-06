@@ -31,6 +31,7 @@ public class PlatformerController : MonoBehaviour {
     [HideInInspector] public float horiz;
     [HideInInspector] public bool dreaming;
     public bool canDream;
+    private bool canMove;
 
     GameObject shadow;
     Vector3 shadowPos;
@@ -48,6 +49,7 @@ public class PlatformerController : MonoBehaviour {
     void Start()
     {
         checkPointSave = this.transform.position;
+        canMove = true;
 	}
 
     // Update is called once per frame
@@ -70,7 +72,7 @@ public class PlatformerController : MonoBehaviour {
             rb2d.gravityScale = 1.0f;
             shadow.transform.position = new Vector3(transform.position.x, transform.position.y, 1);
         }
-        if (Input.GetButtonDown("Jump") && grounded)
+        if (Input.GetButtonDown("Jump") && grounded && canMove)
         {
             //jumpTimer = 0;
             jumpHeld = true;
@@ -94,7 +96,7 @@ public class PlatformerController : MonoBehaviour {
             rb2d.velocity = new Vector2(0, -1f);
             jumping = false;
             wallJumpTimer = 0;
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Jump") && canMove)
             {
                 WallJump();
             }
@@ -107,12 +109,15 @@ public class PlatformerController : MonoBehaviour {
         }
         else maxSpeed = groundSpeed;
         
-        Debug.Log(jumping);
+        if (!canMove)
+        {
+            rb2d.velocity = Vector3.zero;
+        }
 	}
 
     private void FixedUpdate()
     {
-        if (!wallJumping)
+        if (!wallJumping && canMove)
         {
             horiz = Input.GetAxis("Horizontal");
 
@@ -183,7 +188,7 @@ public class PlatformerController : MonoBehaviour {
             wallJumping = false;
         }
 
-        if (Input.GetButtonDown("Dream") && canDream == true)
+        if (Input.GetButtonDown("Dream") && canDream == true && canMove)
         {
             if (dreaming)
             {
@@ -197,8 +202,7 @@ public class PlatformerController : MonoBehaviour {
             dreaming = !dreaming;
         }
 
-
-        if (Input.GetButtonDown("Cancel"))
+        if (Input.GetButtonDown("Cancel") && canMove)
         {
             StartCoroutine(Respawn());
         }
@@ -239,9 +243,10 @@ public class PlatformerController : MonoBehaviour {
 
     private IEnumerator Respawn()
     {
-        GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-        yield return new WaitForSeconds(0); //Going to be used to display death animation
+        canMove = false;
         this.transform.position = checkPointSave;
+        yield return new WaitForSeconds(4); //Going to be used to display death animation
+        canMove = true;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
