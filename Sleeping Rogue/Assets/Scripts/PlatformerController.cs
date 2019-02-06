@@ -243,9 +243,13 @@ public class PlatformerController : MonoBehaviour {
 
     private IEnumerator Respawn()
     {
+        var Image = GameObject.Find("DeathFade").GetComponent<DeathFade>();
+        Image.FadeIn();
         canMove = false;
+        yield return new WaitForSeconds(2);
+        Image.FadeOut();
         this.transform.position = checkPointSave;
-        yield return new WaitForSeconds(4); //Going to be used to display death animation
+        yield return new WaitForSeconds(0.5f);
         canMove = true;
     }
 
