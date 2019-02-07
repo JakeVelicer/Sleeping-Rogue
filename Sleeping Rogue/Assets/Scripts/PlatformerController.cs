@@ -16,6 +16,8 @@ public class PlatformerController : MonoBehaviour {
     public Vector2 wallJumpForce;
     public Transform groundCheck1, groundCheck2;
     public Transform wallCheck1, wallCheck2;
+    public GameObject shadow;
+    Vector3 shadowPos;
 
     bool grounded = false;
     bool wall = false;
@@ -31,9 +33,7 @@ public class PlatformerController : MonoBehaviour {
     [HideInInspector] public float horiz;
     [HideInInspector] public bool dreaming;
     public bool canDream;
-
-    GameObject shadow;
-    Vector3 shadowPos;
+    private bool canMove;
 
     private void Awake()
     {
@@ -41,13 +41,14 @@ public class PlatformerController : MonoBehaviour {
         anim = GetComponent<Animator>();
         horiz = 0;
         dreaming = false;
-        shadow = GameObject.Find("Shadow");
-        shadowPos = shadow.transform.position;
+        //shadow = GameObject.Find("Shadow");
+        //shadowPos = shadow.transform.position;
     }
 
     void Start()
     {
         checkPointSave = this.transform.position;
+        canMove = true;
 	}
 
     // Update is called once per frame
@@ -61,16 +62,14 @@ public class PlatformerController : MonoBehaviour {
         if (dreaming)
         {
             Camera.main.backgroundColor = dream;
-            rb2d.gravityScale = 0.5f;
-            shadow.transform.position = shadowPos;
+            //shadow.transform.position = shadowPos;
         }
         else
         {
             Camera.main.backgroundColor = real;
-            rb2d.gravityScale = 1.0f;
-            shadow.transform.position = new Vector3(transform.position.x, transform.position.y, 1);
+            //shadow.transform.position = new Vector3(transform.position.x, transform.position.y, 1);
         }
-        if (Input.GetButtonDown("Jump") && grounded)
+        if (Input.GetButtonDown("Jump") && grounded && canMove)
         {
             //jumpTimer = 0;
             jumpHeld = true;
@@ -94,7 +93,7 @@ public class PlatformerController : MonoBehaviour {
             rb2d.velocity = new Vector2(0, -1f);
             jumping = false;
             wallJumpTimer = 0;
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Jump") && canMove)
             {
                 WallJump();
             }
@@ -107,12 +106,15 @@ public class PlatformerController : MonoBehaviour {
         }
         else maxSpeed = groundSpeed;
         
-        Debug.Log(jumping);
+        if (!canMove)
+        {
+            rb2d.velocity = Vector3.zero;
+        }
 	}
 
     private void FixedUpdate()
     {
-        if (!wallJumping)
+        if (!wallJumping && canMove)
         {
             horiz = Input.GetAxis("Horizontal");
 
@@ -183,33 +185,35 @@ public class PlatformerController : MonoBehaviour {
             wallJumping = false;
         }
 
-        if (Input.GetButtonDown("Dream") && canDream == true)
+        if (Input.GetButtonDown("Dream") && canMove)
         {
-            if (dreaming)
-            {
-                this.transform.position = new Vector3(shadow.transform.position.x, shadow.transform.position.y, 0);
-                rb2d.velocity = Vector3.zero;
-            }
-            if (!dreaming)
-            {
-                shadowPos = shadow.transform.position;
-            }
-            dreaming = !dreaming;
+            EnterExitDreaming();
         }
 
-
-        if (Input.GetButtonDown("Cancel"))
+        if (Input.GetButtonDown("Cancel") && canMove)
         {
             StartCoroutine(Respawn());
         }
     }
 
-    //void Jump()
-    //{
-    //    anim.SetTrigger("Jump");
-    //    jumps++;
-    //    rb2d.AddForce(new Vector2(0f, jumpHeight));
-    //} 
+    void EnterExitDreaming()
+    {
+        if (dreaming)
+        {
+            Destroy(GameObject.FindGameObjectWithTag("Shadow"));
+            dreaming = false;
+            rb2d.gravityScale = 1.0f;
+            this.transform.position = shadowPos;
+            rb2d.velocity = Vector3.zero;
+        }
+        else if (!dreaming && canDream == true)
+        {
+            dreaming = true;
+            Instantiate(shadow, this.transform.position, Quaternion.identity);
+            rb2d.gravityScale = 0.5f;
+            shadowPos = this.transform.position;
+        }
+    }
 
     void WallJump()
     {
@@ -227,8 +231,6 @@ public class PlatformerController : MonoBehaviour {
         Flip();
     }
     
-
-
     void Flip()
     {
         facingRight = !facingRight;
@@ -239,9 +241,14 @@ public class PlatformerController : MonoBehaviour {
 
     private IEnumerator Respawn()
     {
-        GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-        yield return new WaitForSeconds(0); //Going to be used to display death animation
+        var Image = GameObject.Find("DeathFade").GetComponent<DeathFade>();
+        Image.FadeIn();
+        canMove = false;
+        yield return new WaitForSeconds(2);
+        Image.FadeOut();
         this.transform.position = checkPointSave;
+        yield return new WaitForSeconds(0.5f);
+        canMove = true;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -273,16 +280,18 @@ public class PlatformerController : MonoBehaviour {
             }
         }
     }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Inhibitor")
         {
             canDream = false;
             if (dreaming) {
-                dreaming = false;
+                EnterExitDreaming();
             }
         }
     }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Inhibitor")
