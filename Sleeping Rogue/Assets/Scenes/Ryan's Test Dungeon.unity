@@ -4075,6 +4075,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inhibitor
       objectReference: {fileID: 0}
+    - target: {fileID: 9071099941684105546, guid: c9ac2ea3b6ab44b28adf3f7c61000000,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 9071099941684105548, guid: c9ac2ea3b6ab44b28adf3f7c61000000,
         type: 3}
       propertyPath: m_LocalPosition.x
