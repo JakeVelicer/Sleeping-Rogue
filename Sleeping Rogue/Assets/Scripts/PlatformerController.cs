@@ -35,6 +35,8 @@ public class PlatformerController : MonoBehaviour {
     public bool canDream;
     private bool canMove;
 
+    public bool isMoving;
+
     private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -43,6 +45,7 @@ public class PlatformerController : MonoBehaviour {
         dreaming = false;
         //shadow = GameObject.Find("Shadow");
         //shadowPos = shadow.transform.position;
+        isMoving = false;
     }
 
     void Start()
@@ -87,7 +90,7 @@ public class PlatformerController : MonoBehaviour {
         //        jumps = 0;
         //    }
         //}
-        else if (wall && !grounded && rb2d.velocity.y <= 0 && !dreaming)
+        if (wall && !grounded && rb2d.velocity.y <= 0 && !dreaming)
         {
             wallJumpEnabled = true;
             rb2d.velocity = new Vector2(0, -1f);
@@ -110,6 +113,8 @@ public class PlatformerController : MonoBehaviour {
         {
             rb2d.velocity = Vector3.zero;
         }
+
+        
 	}
 
     private void FixedUpdate()
@@ -138,7 +143,22 @@ public class PlatformerController : MonoBehaviour {
                 }
             }
 
-            if (horiz * rb2d.velocity.x < maxSpeed)
+            if (GetAxisDown("Horizontal"))
+            {
+                if (!isMoving)
+                {
+                    isMoving = true;
+                    if(Mathf.Abs(rb2d.velocity.x) < maxSpeed)
+                    {
+                        rb2d.AddForce(Mathf.Sign(Input.GetAxisRaw("Horizontal")) * (moveForce * 5) * Vector2.right);
+                    }
+                }
+            }
+            if (!GetAxisDown("Horizontal"))
+            {
+                isMoving = false;
+            }
+
             if (horiz * rb2d.velocity.x < maxSpeed)
             {
                 rb2d.AddForce(Vector2.right * horiz * moveForce);
