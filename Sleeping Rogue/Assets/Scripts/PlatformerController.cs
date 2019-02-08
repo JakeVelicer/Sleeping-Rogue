@@ -17,7 +17,6 @@ public class PlatformerController : MonoBehaviour {
     public Transform groundCheck1, groundCheck2;
     public Transform wallCheck1, wallCheck2;
     public GameObject shadow;
-    Vector3 shadowPos;
 
     bool grounded = false;
     bool wall = false;
@@ -43,8 +42,6 @@ public class PlatformerController : MonoBehaviour {
         anim = GetComponent<Animator>();
         horiz = 0;
         dreaming = false;
-        //shadow = GameObject.Find("Shadow");
-        //shadowPos = shadow.transform.position;
         isMoving = false;
     }
 
@@ -83,13 +80,6 @@ public class PlatformerController : MonoBehaviour {
         {
             jumpHeld = false;
         }
-        //if (grounded)
-        //{
-        //    if (jumpTimer > .1)
-        //    {
-        //        jumps = 0;
-        //    }
-        //}
         if (wall && !grounded && rb2d.velocity.y <= 0 && !dreaming)
         {
             wallJumpEnabled = true;
@@ -220,10 +210,11 @@ public class PlatformerController : MonoBehaviour {
     {
         if (dreaming)
         {
-            Destroy(GameObject.FindGameObjectWithTag("Shadow"));
+            GameObject Shadow = GameObject.FindGameObjectWithTag("Shadow");
+            this.transform.position = Shadow.transform.position;
+            Destroy(Shadow);
             dreaming = false;
             rb2d.gravityScale = 1.0f;
-            this.transform.position = shadowPos;
             rb2d.velocity = Vector3.zero;
         }
         else if (!dreaming && canDream == true)
@@ -231,7 +222,6 @@ public class PlatformerController : MonoBehaviour {
             dreaming = true;
             Instantiate(shadow, this.transform.position, Quaternion.identity);
             rb2d.gravityScale = 0.5f;
-            shadowPos = this.transform.position;
         }
     }
 
@@ -305,7 +295,6 @@ public class PlatformerController : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Inhibitor")
         {
-            canDream = false;
             if (dreaming) {
                 EnterExitDreaming();
             }
