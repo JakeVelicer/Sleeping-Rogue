@@ -32,6 +32,8 @@ public class PlatformerController : MonoBehaviour {
     [HideInInspector] public float horiz;
     [HideInInspector] public bool dreaming;
     public bool canDream;
+    private bool canLadder;
+    private bool climbing;
     private bool canMove;
 
     public bool isMoving;
@@ -62,12 +64,10 @@ public class PlatformerController : MonoBehaviour {
         if (dreaming)
         {
             Camera.main.backgroundColor = dream;
-            //shadow.transform.position = shadowPos;
         }
         else
         {
             Camera.main.backgroundColor = real;
-            //shadow.transform.position = new Vector3(transform.position.x, transform.position.y, 1);
         }
         if (Input.GetButtonDown("Jump") && grounded && canMove)
         {
@@ -103,7 +103,6 @@ public class PlatformerController : MonoBehaviour {
         {
             rb2d.velocity = Vector3.zero;
         }
-
         
 	}
 
@@ -135,12 +134,12 @@ public class PlatformerController : MonoBehaviour {
 
             if (GetAxisDown("Horizontal"))
             {
-                if (!isMoving)
+                if (!isMoving && !climbing)
                 {
                     isMoving = true;
                     if(Mathf.Abs(rb2d.velocity.x) < maxSpeed)
                     {
-                        rb2d.AddForce(Mathf.Sign(Input.GetAxisRaw("Horizontal")) * (moveForce * 5) * Vector2.right);
+                        rb2d.AddForce(Mathf.Sign(horiz) * (moveForce * 5) * Vector2.right);
                     }
                 }
             }
@@ -149,9 +148,22 @@ public class PlatformerController : MonoBehaviour {
                 isMoving = false;
             }
 
-            if (horiz * rb2d.velocity.x < maxSpeed)
+            if (horiz * rb2d.velocity.x < maxSpeed && !climbing)
             {
                 rb2d.AddForce(Vector2.right * horiz * moveForce);
+            }
+
+            if (GetAxisDown("Vertical") && canLadder && !dreaming)
+            {
+                if(Mathf.Abs(rb2d.velocity.y) < maxSpeed)
+                {
+                    rb2d.AddForce(Mathf.Sign(Input.GetAxisRaw("Vertical")) * (moveForce * 2) * Vector2.up);
+                }
+                climbing = true;
+            }
+            else if (!GetAxisDown("Vertical"))
+            {
+                climbing = false;
             }
         }
 
@@ -289,6 +301,10 @@ public class PlatformerController : MonoBehaviour {
                 StartCoroutine(Respawn());
             }
         }
+        if (collision.gameObject.tag == "Ladder")
+        {
+            canLadder = true;
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -306,6 +322,10 @@ public class PlatformerController : MonoBehaviour {
         if (collision.gameObject.tag == "Inhibitor")
         {
             canDream = true;
+        }
+        if (collision.gameObject.tag == "Ladder")
+        {
+            canLadder = false;
         }
     }
 
