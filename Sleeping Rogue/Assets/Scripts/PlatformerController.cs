@@ -20,8 +20,11 @@ public class PlatformerController : MonoBehaviour {
 
     bool grounded = false;
     bool wall = false;
+    public bool runInto = false;
     private Animator anim;
     private Rigidbody2D rb2d;
+
+    public LayerMask collidables;
 
     [HideInInspector] public int jumps = 0;
     [HideInInspector] public int maxJumps = 1;
@@ -60,6 +63,7 @@ public class PlatformerController : MonoBehaviour {
 
         grounded = Physics2D.Linecast(groundCheck2.position, groundCheck1.position, 1 << LayerMask.NameToLayer("Ground"));
         wall = Physics2D.Linecast(wallCheck2.position, wallCheck1.position, 1 << LayerMask.NameToLayer("Ground"));
+        runInto = Physics2D.Linecast(wallCheck2.position, wallCheck1.position, collidables);
 
         if (dreaming)
         {
@@ -148,7 +152,7 @@ public class PlatformerController : MonoBehaviour {
                 isMoving = false;
             }
 
-            if (horiz * rb2d.velocity.x < maxSpeed && !climbing)
+            if (horiz * rb2d.velocity.x < maxSpeed && !climbing && !runInto)
             {
                 rb2d.AddForce(Vector2.right * horiz * moveForce);
             }
