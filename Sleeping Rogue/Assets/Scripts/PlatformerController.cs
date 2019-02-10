@@ -40,6 +40,7 @@ public class PlatformerController : MonoBehaviour {
     private bool canMove;
 
     public bool isMoving;
+    float lastMove;
 
     private void Awake()
     {
@@ -87,6 +88,7 @@ public class PlatformerController : MonoBehaviour {
         if (wall && !grounded && rb2d.velocity.y <= 0 && !dreaming)
         {
             wallJumpEnabled = true;
+            lastMove = Input.GetAxisRaw("Horizontal");
             rb2d.velocity = new Vector2(0, -1f);
             jumping = false;
             wallJumpTimer = 0;
@@ -202,14 +204,17 @@ public class PlatformerController : MonoBehaviour {
             horiz = 0;
             if (!wall)
             {
-                wallJumpTimer += Time.deltaTime;
+                if(Input.GetAxisRaw("Horizontal") != lastMove)
+                {
+                    wallJumping = false;
+                }
             }
         }
         
-        if(wallJumpTimer >= .25)
+        /*if(wallJumpTimer >= .25)
         {
             wallJumping = false;
-        }
+        }*/
 
         if (Input.GetButtonDown("Dream") && canMove)
         {
