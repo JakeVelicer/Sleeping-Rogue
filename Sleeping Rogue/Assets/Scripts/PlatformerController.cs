@@ -24,7 +24,7 @@ public class PlatformerController : MonoBehaviour {
     public bool runInto = false;
     private Animator anim;
     private Rigidbody2D rb2d;
-    private Collider2D collider;
+    private Collider2D playerCollider;
 
     LayerMask collidables;
     LayerMask flooring;
@@ -51,7 +51,7 @@ public class PlatformerController : MonoBehaviour {
     private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        collider = GetComponent<Collider2D>();
+        playerCollider = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
         horiz = 0;
         dreaming = false;
@@ -267,7 +267,7 @@ public class PlatformerController : MonoBehaviour {
                 movingToBody = false;
                 Destroy(ShadowInScene);
                 dreaming = false;
-                collider.enabled = true;
+                playerCollider.enabled = true;
                 rb2d.gravityScale = 1.0f;
                 rb2d.velocity = Vector3.zero;
                 canMove = true;
@@ -282,7 +282,7 @@ public class PlatformerController : MonoBehaviour {
         {
             canMove = false;
             movingToBody = true;
-            collider.enabled = false;
+            playerCollider.enabled = false;
         }
         else if (!dreaming && canDream == true)
         {
