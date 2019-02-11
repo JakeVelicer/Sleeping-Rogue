@@ -19,9 +19,14 @@ public class PlatformerController : MonoBehaviour {
     public GameObject shadow;
 
     bool grounded = false;
-    bool wall = false;
+    public bool wall, wallBlock = false;
+    public bool runInto = false;
     private Animator anim;
     private Rigidbody2D rb2d;
+
+    LayerMask collidables;
+    LayerMask flooring;
+    LayerMask wallType;
 
     [HideInInspector] public int jumps = 0;
     [HideInInspector] public int maxJumps = 1;
@@ -37,6 +42,8 @@ public class PlatformerController : MonoBehaviour {
     private bool canMove;
 
     public bool isMoving;
+    float lastMove;
+    public float showVert;
 
     private void Awake()
     {
@@ -45,6 +52,9 @@ public class PlatformerController : MonoBehaviour {
         horiz = 0;
         dreaming = false;
         isMoving = false;
+        flooring = LayerMask.GetMask("Ground", "Box");
+        wallType = LayerMask.GetMask("Ground");
+        collidables = LayerMask.GetMask("Default", "Wall", "Box");
     }
 
     void Start()
@@ -56,10 +66,14 @@ public class PlatformerController : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
+        showVert = Input.GetAxis("Vertical");
         jumpTimer += Time.deltaTime;
 
-        grounded = Physics2D.Linecast(groundCheck2.position, groundCheck1.position, 1 << LayerMask.NameToLayer("Ground"));
-        wall = Physics2D.Linecast(wallCheck2.position, wallCheck1.position, 1 << LayerMask.NameToLayer("Ground"));
+        grounded = Physics2D.Linecast(groundCheck2.position, groundCheck1.position, flooring);
+        if(!wallBlock) wall = Physics2D.Linecast(wallCheck2.position, wallCheck1.position, wallType);
+        runInto = Physics2D.Linecast(wallCheck2.position, wallCheck1.position, collidables);
+
+        
 
         if (dreaming)
         {
@@ -80,9 +94,10 @@ public class PlatformerController : MonoBehaviour {
         {
             jumpHeld = false;
         }
-        if (wall && !grounded && rb2d.velocity.y <= 0 && !dreaming)
+        if (wall && !grounded && rb2d.velocity.y <= 0 && !dreaming && !wallBlock)
         {
             wallJumpEnabled = true;
+            lastMove = Input.GetAxisRaw("Horizontal");
             rb2d.velocity = new Vector2(0, -1f);
             jumping = false;
             wallJumpTimer = 0;
@@ -90,7 +105,13 @@ public class PlatformerController : MonoBehaviour {
             {
                 WallJump();
             }
+            if (Input.GetAxisRaw("Vertical") == -1)
+            {
+                wallBlock = true;
+            }
         }
+
+        if (Input.GetAxisRaw("Vertical") != -1) wallBlock = false;
 
         if (!wall && !grounded)
         {
@@ -103,6 +124,8 @@ public class PlatformerController : MonoBehaviour {
         {
             rb2d.velocity = Vector3.zero;
         }
+
+        if (grounded || !wall) wallBlock = false;
         
 	}
 
@@ -150,11 +173,19 @@ public class PlatformerController : MonoBehaviour {
 
             if (horiz * rb2d.velocity.x < maxSpeed && !climbing)
             {
-                rb2d.AddForce(Vector2.right * horiz * moveForce);
+                if (!grounded)
+                {
+                    if (!runInto)
+                    {
+                        rb2d.AddForce(Vector2.right * horiz * moveForce);
+                    }
+                }
+                else rb2d.AddForce(Vector2.right * horiz * moveForce);
             }
 
             if (GetAxisDown("Vertical") && canLadder && !dreaming)
             {
+                rb2d.velocity = new Vector2(0, rb2d.velocity.y);
                 if(Mathf.Abs(rb2d.velocity.y) < maxSpeed)
                 {
                     rb2d.AddForce(Mathf.Sign(Input.GetAxisRaw("Vertical")) * (moveForce * 2) * Vector2.up);
@@ -198,18 +229,25 @@ public class PlatformerController : MonoBehaviour {
             horiz = 0;
             if (!wall)
             {
-                wallJumpTimer += Time.deltaTime;
+                if(Input.GetAxisRaw("Horizontal") != lastMove)
+                {
+                    wallJumping = false;
+                }
             }
         }
         
-        if(wallJumpTimer >= .25)
+        /*if(wallJumpTimer >= .25)
         {
             wallJumping = false;
-        }
+        }*/
 
         if (Input.GetButtonDown("Dream") && canMove)
         {
-            EnterExitDreaming();
+            if (!dreaming)
+            {
+                if(grounded) EnterExitDreaming();
+            }
+            else EnterExitDreaming();
         }
 
         if (Input.GetButtonDown("Cancel") && canMove)
