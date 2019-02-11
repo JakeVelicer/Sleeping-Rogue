@@ -18,11 +18,13 @@ public class PlatformerController : MonoBehaviour {
     public Transform wallCheck1, wallCheck2;
     public GameObject shadow;
 
+
     bool grounded = false;
     public bool wall, wallBlock = false;
     public bool runInto = false;
     private Animator anim;
     private Rigidbody2D rb2d;
+    private Collider2D collider;
 
     LayerMask collidables;
     LayerMask flooring;
@@ -40,6 +42,7 @@ public class PlatformerController : MonoBehaviour {
     private bool canLadder;
     private bool climbing;
     private bool canMove;
+    private bool movingToBody;
 
     public bool isMoving;
     float lastMove;
@@ -48,6 +51,7 @@ public class PlatformerController : MonoBehaviour {
     private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        collider = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
         horiz = 0;
         dreaming = false;
@@ -72,8 +76,6 @@ public class PlatformerController : MonoBehaviour {
         grounded = Physics2D.Linecast(groundCheck2.position, groundCheck1.position, flooring);
         if(!wallBlock) wall = Physics2D.Linecast(wallCheck2.position, wallCheck1.position, wallType);
         runInto = Physics2D.Linecast(wallCheck2.position, wallCheck1.position, collidables);
-
-        
 
         if (dreaming)
         {
@@ -254,18 +256,33 @@ public class PlatformerController : MonoBehaviour {
         {
             StartCoroutine(Respawn());
         }
+
+        // Handles returning player to real body when exiting dream mode
+        if (movingToBody)
+        {
+            GameObject ShadowInScene = GameObject.FindGameObjectWithTag("Shadow");
+            transform.position = Vector2.MoveTowards(transform.position, ShadowInScene.transform.position, (30 * Time.deltaTime));
+            if (transform.position == ShadowInScene.transform.position)
+            {
+                movingToBody = false;
+                Destroy(ShadowInScene);
+                dreaming = false;
+                collider.enabled = true;
+                rb2d.gravityScale = 1.0f;
+                rb2d.velocity = Vector3.zero;
+                canMove = true;
+            }
+        }
+
     }
 
-    void EnterExitDreaming()
+    private void EnterExitDreaming()
     {
         if (dreaming)
         {
-            GameObject Shadow = GameObject.FindGameObjectWithTag("Shadow");
-            this.transform.position = Shadow.transform.position;
-            Destroy(Shadow);
-            dreaming = false;
-            rb2d.gravityScale = 1.0f;
-            rb2d.velocity = Vector3.zero;
+            canMove = false;
+            movingToBody = true;
+            collider.enabled = false;
         }
         else if (!dreaming && canDream == true)
         {
