@@ -48,9 +48,24 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: shadow
-    uniqueID: 2945479057
-    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 4099069569
+    locked: 0
+  - name: Shadow
+    uniqueID: 2945479057
+    locked: 0
+  - name: Interactable Objects 1
+    uniqueID: 3495800609
+    locked: 0
+  - name: Interactable Objects 2
+    uniqueID: 1470038757
+    locked: 0
+  - name: Player
+    uniqueID: 458035097
+    locked: 0
+  - name: Foreground
+    uniqueID: 1679322571
     locked: 0

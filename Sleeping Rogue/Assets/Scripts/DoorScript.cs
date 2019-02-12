@@ -17,7 +17,7 @@ public class DoorScript : InteractableObject {
         Movement();
 	}
 
-    private IEnumerator Activation () {
+    private IEnumerator Activation() {
         isActive = false;
         CanMove = true;
         yield return new WaitForSeconds(MoveDistance);

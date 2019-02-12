@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2721792916051241982}
   - component: {fileID: 2721792916051241983}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: WallCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 2721792916317975120}
   - component: {fileID: 2721792916317975123}
   - component: {fileID: 2721792916317975122}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2721792916317975213}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.11627746, z: -10}
+  m_LocalPosition: {x: 0, y: 2.46, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2721792917609572486}
@@ -171,7 +171,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2721792916580691835}
   - component: {fileID: 2721792916580691832}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: WallCheck (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,7 +249,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2721792917181544475}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: GroundCheck (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -284,7 +284,7 @@ GameObject:
   - component: {fileID: 2721792917609572483}
   - component: {fileID: 2721792917609572482}
   - component: {fileID: 2721792917609572487}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -344,8 +344,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 458035097
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ed98f0fbe518c294895f72efcd31a801, type: 3}
   m_Color: {r: 0.8962264, g: 0.10568706, b: 0.10568706, a: 1}
@@ -407,6 +407,9 @@ MonoBehaviour:
   wallCheck1: {fileID: 2721792916051241982}
   wallCheck2: {fileID: 2721792916580691835}
   shadow: {fileID: 6957988990428405131, guid: a89dd3bc27e5e9b4aa913c7914b7d090, type: 3}
+  wall: 0
+  wallBlock: 0
+  runInto: 0
   jumps: 0
   maxJumps: 1
   jumpTimer: 0
@@ -417,6 +420,8 @@ MonoBehaviour:
   horiz: 0
   dreaming: 0
   canDream: 1
+  isMoving: 0
+  showVert: 0
 --- !u!50 &2721792917609572482
 Rigidbody2D:
   serializedVersion: 4
@@ -466,7 +471,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2721792917750592149}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
