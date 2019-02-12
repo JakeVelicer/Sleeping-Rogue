@@ -85,6 +85,7 @@ public class PlatformerController : MonoBehaviour {
         {
             Camera.main.backgroundColor = real;
         }
+
         if (Input.GetButtonDown("Jump") && grounded && canMove)
         {
             //jumpTimer = 0;
@@ -129,6 +130,11 @@ public class PlatformerController : MonoBehaviour {
 
         if (grounded || !wall) wallBlock = false;
         
+
+        if(!grounded && runInto)
+        {
+            rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+        }
 	}
 
     private void FixedUpdate()
