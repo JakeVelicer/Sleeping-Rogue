@@ -58,7 +58,6 @@ public class PlatformerController : MonoBehaviour {
         isMoving = false;
         flooring = LayerMask.GetMask("Ground", "Box");
         wallType = LayerMask.GetMask("Ground");
-        collidables = LayerMask.GetMask("Default", "Wall", "Box");
     }
 
     void Start()
@@ -80,10 +79,13 @@ public class PlatformerController : MonoBehaviour {
         if (dreaming)
         {
             Camera.main.backgroundColor = dream;
+
+            collidables = LayerMask.GetMask("Default", "Wall", "Box", "Ground");
         }
         else
         {
             Camera.main.backgroundColor = real;
+            collidables = LayerMask.GetMask("Default", "Wall", "Box");
         }
 
         if (Input.GetButtonDown("Jump") && grounded && canMove)
