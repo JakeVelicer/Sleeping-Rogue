@@ -10,6 +10,9 @@ public class ButtonScript : MonoBehaviour {
     
     public bool touch = false;
 
+    bool pressed;
+    SpriteRenderer spr;
+
     void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
@@ -21,6 +24,10 @@ public class ButtonScript : MonoBehaviour {
 
     }
 
+    private void Start()
+    {
+        spr = GetComponent<SpriteRenderer>();
+    }
 
     private void Update()
     {
@@ -39,8 +46,15 @@ public class ButtonScript : MonoBehaviour {
                         i.GetComponent<InteractableObject>().isActive = true;
                     }
                 }
+                pressed = !pressed;
             }
         }
+
+        if (pressed)
+        {
+            spr.color = Color.blue;
+        }
+        else spr.color = Color.yellow;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
