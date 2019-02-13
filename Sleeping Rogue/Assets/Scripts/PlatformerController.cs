@@ -48,6 +48,8 @@ public class PlatformerController : MonoBehaviour {
     float lastMove;
     public float showVert;
 
+    float dragSpeed;
+
     private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -64,6 +66,7 @@ public class PlatformerController : MonoBehaviour {
     {
         checkPointSave = this.transform.position;
         canMove = true;
+        dragSpeed = groundSpeed / 2;
 	}
 
     // Update is called once per frame
@@ -75,6 +78,8 @@ public class PlatformerController : MonoBehaviour {
         grounded = Physics2D.Linecast(groundCheck2.position, groundCheck1.position, flooring);
         if(!wallBlock) wall = Physics2D.Linecast(wallCheck2.position, wallCheck1.position, wallType);
         runInto = Physics2D.Linecast(wallCheck2.position, wallCheck1.position, collidables);
+
+        
 
         if (dreaming)
         {
@@ -88,7 +93,7 @@ public class PlatformerController : MonoBehaviour {
             collidables = LayerMask.GetMask("Default", "Wall", "Box");
         }
 
-        if (Input.GetButtonDown("Jump") && grounded && canMove)
+        if (Input.GetButtonDown("Jump") && grounded && canMove && !Drag.boxDrag)
         {
             //jumpTimer = 0;
             jumpHeld = true;
@@ -118,7 +123,11 @@ public class PlatformerController : MonoBehaviour {
 
         if (Input.GetAxisRaw("Vertical") != -1) wallBlock = false;
 
-        if (!wall && !grounded)
+        if (Drag.boxDrag)
+        {
+            maxSpeed = dragSpeed;
+        }
+        else if (!wall && !grounded)
         {
             maxSpeed = airSpeed;
             jumps = 1;
@@ -319,13 +328,16 @@ public class PlatformerController : MonoBehaviour {
         }
         Flip();
     }
-    
+
     void Flip()
     {
-        facingRight = !facingRight;
-        Vector3 theScale = transform.localScale;
-        theScale.x *= -1;
-        transform.localScale = theScale;
+        if (!Drag.boxDrag)
+        {
+            facingRight = !facingRight;
+            Vector3 theScale = transform.localScale;
+            theScale.x *= -1;
+            transform.localScale = theScale;
+        }
     }
 
     private IEnumerator Respawn()
