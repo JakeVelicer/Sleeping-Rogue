@@ -15,7 +15,7 @@ public class dreamObject : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         m_Collider = GetComponent<Collider2D>();
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlatformerController>();
-        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+        //GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
     }
 
     // Update is called once per frame
