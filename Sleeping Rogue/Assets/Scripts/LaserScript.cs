@@ -7,26 +7,36 @@ public class LaserScript : InteractableObject {
     public float length;
     public float width;
     public LineRenderer line;
+    private PlatformerController PlayerScript;
 
 
 	// Use this for initialization
 	void Start () {
         line = GetComponent<LineRenderer>();
         line.useWorldSpace = false;
+        PlayerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlatformerController>();
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (!isActive)
-        {
+
+        if (PlayerScript.dreaming == false) {
+            if (!isActive)
+            {
+                line.enabled = false;
+                GetComponent<BoxCollider2D>().enabled = false;
+            }
+            else
+            {
+                line.enabled = true;
+                GetComponent<BoxCollider2D>().enabled = true;
+            }
+        }
+        else if (PlayerScript.dreaming == true) {
             line.enabled = false;
             GetComponent<BoxCollider2D>().enabled = false;
         }
-        else
-        {
-            line.enabled = true;
-            GetComponent<BoxCollider2D>().enabled = true;
-        }
+        
         line.startWidth = width;
         line.endWidth = width;
         float pos = line.GetPosition(1).x - line.GetPosition(0).x;
