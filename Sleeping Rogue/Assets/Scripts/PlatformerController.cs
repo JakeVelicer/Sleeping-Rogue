@@ -391,7 +391,9 @@ public class PlatformerController : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Checkpoint")
         {
-            checkPointSave = this.transform.position;
+            if (!dreaming) {
+                checkPointSave = this.transform.position;
+            }
         }
         if (collision.gameObject.tag == "Kill")
         {
