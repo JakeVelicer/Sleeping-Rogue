@@ -55,14 +55,14 @@ TagManager:
   - name: Background
     uniqueID: 4099069569
     locked: 0
-  - name: Shadow
-    uniqueID: 2945479057
-    locked: 0
   - name: Interactable Objects 1
     uniqueID: 3495800609
     locked: 0
   - name: Interactable Objects 2
     uniqueID: 1470038757
+    locked: 0
+  - name: Shadow
+    uniqueID: 2945479057
     locked: 0
   - name: Player
     uniqueID: 458035097
