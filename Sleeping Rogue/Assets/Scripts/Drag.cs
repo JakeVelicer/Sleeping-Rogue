@@ -33,25 +33,17 @@ public class Drag : MonoBehaviour
         if(boxTouch && Input.GetButtonDown("Drag"))
         {
             boxDrag = true;
+            boxTouch.collider.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+            boxTouch.collider.gameObject.GetComponent<FixedJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
         }
         if (Input.GetButtonUp("Drag"))
         {
             boxDrag = false;
+            boxTouch.collider.gameObject.GetComponent<FixedJoint2D>().connectedBody = boxTouch.collider.gameObject.GetComponent<Rigidbody2D>();
+            boxTouch.collider.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionX;
         }
 
        
     }
-    private void FixedUpdate()
-    {
-        if (boxDrag)
-        {
-            boxTouch.collider.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
-            boxTouch.collider.gameObject.GetComponent<FixedJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
-        }
-        else
-        {
-            boxTouch.collider.gameObject.GetComponent<FixedJoint2D>().connectedBody = boxTouch.collider.gameObject.GetComponent<Rigidbody2D>();
-            boxTouch.collider.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionX;
-        }
-    }
+
 }
