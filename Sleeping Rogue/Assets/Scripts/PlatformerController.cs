@@ -228,15 +228,20 @@ public class PlatformerController : MonoBehaviour {
                     Debug.Log("Player is climbing ladder");
                     rb2d.velocity = new Vector2(0, rb2d.velocity.y);
                     rb2d.gravityScale = 0;
-                    rb2d.AddForce(Vector2.up * 300);
+                    rb2d.velocity = Vector2.up * 10;
                 }
                 else if (Input.GetAxisRaw("Vertical") < 0) {
                     rb2d.velocity = new Vector2(0, rb2d.velocity.y);
                     rb2d.gravityScale = 0;
-                    rb2d.AddForce(Vector2.down * 300);
+                    rb2d.velocity = Vector2.down * 10;
+                }
+                else if (Input.GetAxisRaw("Vertical") == 0) {
+                    rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
                 }
             }
         }
+
+        Debug.Log(rb2d.velocity);
 
 
         if (Mathf.Abs(rb2d.velocity.x) > maxSpeed)
