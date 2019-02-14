@@ -241,8 +241,6 @@ public class PlatformerController : MonoBehaviour {
             }
         }
 
-        Debug.Log(rb2d.velocity);
-
 
         if (Mathf.Abs(rb2d.velocity.x) > maxSpeed)
         {

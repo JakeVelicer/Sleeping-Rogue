@@ -177,24 +177,6 @@ public class SecurityGuard : MonoBehaviour
 		}
 	}
 
-	void TrackOtherEnemies () {
-
-		OtherEnemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-		for (int i = 0; i < OtherEnemies.Length; i++) {
-
-			Vector3 toTarget = (OtherEnemies[i].transform.position - transform.position);
-			
-			if (Vector3.Dot(toTarget, transform.right) < 0) {
-				TouchStop = false;
-			} else if (Vector3.Dot(toTarget, transform.right) > 0) {
-				TouchStop = true;
-			}
-
-		}
-
-	}
-
     // Instantiates a chosen projectile in the scene and propels it forward like a bullet
     private IEnumerator GunAttack () {
 
