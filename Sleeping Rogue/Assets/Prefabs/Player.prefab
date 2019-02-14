@@ -422,6 +422,7 @@ MonoBehaviour:
   canDream: 1
   isMoving: 0
   showVert: 0
+  lastHit: {fileID: 0}
 --- !u!50 &2721792917609572482
 Rigidbody2D:
   serializedVersion: 4

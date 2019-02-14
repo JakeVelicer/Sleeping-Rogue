@@ -373,7 +373,7 @@ public class PlatformerController : MonoBehaviour {
 
         if(lastHit == collision.gameObject.GetComponent<BoxCollider2D>())
         {
-            wallJumpVert /= 1.5f;
+            wallJumpVert /= 1.1f;
         }
         else
         {
