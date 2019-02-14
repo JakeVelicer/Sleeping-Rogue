@@ -29,6 +29,7 @@ public class EnemyMovement : MonoBehaviour {
         if (spotted && player.GetComponent<PlatformerController>().dreaming == false)
         {
             //look = new Vector2(player.transform.position.z, player.transform.position.y);
+            transform.GetChild(0).gameObject.GetComponent<Collider2D>().enabled = true;
             speed = trackSpeed;
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, walkTime);
             transform.right = -(player.transform.position - transform.position);
@@ -37,6 +38,7 @@ public class EnemyMovement : MonoBehaviour {
         {
             //look = new Vector2(current.transform.position.z, current.transform.position.y);
             speed = roamSpeed;
+            transform.GetChild(0).gameObject.GetComponent<Collider2D>().enabled = false;
             transform.position = Vector2.MoveTowards(transform.position, current.transform.position, walkTime);
             transform.right = -(current.transform.position - transform.position);
             if (transform.position.Equals(current.transform.position))

@@ -1754,6 +1754,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 3368663357027158598, guid: 4310fb74d43c95c4a8a200ca40f32d51,
+        type: 3}
+      propertyPath: m_Layer
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3368663357027158602, guid: 4310fb74d43c95c4a8a200ca40f32d51,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1858,6 +1863,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3368663356766030866, guid: 4310fb74d43c95c4a8a200ca40f32d51,
+        type: 3}
+      propertyPath: m_Layer
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3368663356766030867, guid: 4310fb74d43c95c4a8a200ca40f32d51,
         type: 3}
