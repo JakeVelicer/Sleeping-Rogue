@@ -35,6 +35,7 @@ public class PlatformerController : MonoBehaviour {
 
     [HideInInspector] public float jumpTimer, wallJumpTimer, heightTime = 0.0f;
 
+    [HideInInspector] public float lowJumpMultiplier = 0.3f;
     public Color real, dream;
     [HideInInspector] public float horiz;
     [HideInInspector] public bool dreaming;
@@ -109,11 +110,11 @@ public class PlatformerController : MonoBehaviour {
         {
             jumpHeld = false;
         }
-        if (wall && !grounded && rb2d.velocity.y <= 0 && !dreaming && !wallBlock)
+        if (wall && !grounded && rb2d.velocity.y <= 2f && !dreaming && !wallBlock)
         {
             wallJumpEnabled = true;
             lastMove = Input.GetAxisRaw("Horizontal");
-            rb2d.velocity = new Vector2(0, -1f);
+            rb2d.velocity = new Vector2(0,-1);
             jumping = false;
             wallJumpTimer = 0;
             if (Input.GetButtonDown("Jump") && canMove)
@@ -151,6 +152,7 @@ public class PlatformerController : MonoBehaviour {
         {
             rb2d.velocity = new Vector2(0, rb2d.velocity.y);
         }
+        Debug.Log(rb2d.velocity);
 	}
 
     private void FixedUpdate()
@@ -243,11 +245,13 @@ public class PlatformerController : MonoBehaviour {
 
         if (jumping)
         {
-            if(!jumpHeld && rb2d.velocity.y > 0)
-            {
-                //rb2d.AddForce(Vector2.down * (JumpForce-350));
-                rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
-            }
+
+                if (!jumpHeld && rb2d.velocity.y > 0)
+                {
+                    rb2d.velocity += Vector2.up * Physics2D.gravity.y * lowJumpMultiplier * Time.deltaTime;
+
+                }
+            
         }
 
         if (wallJumpEnabled && !wall) wallJumpEnabled = false;
@@ -435,5 +439,9 @@ public class PlatformerController : MonoBehaviour {
             return false;
         }
         else return true;
+    }
+    private IEnumerator waitToPush()
+    {
+        yield return new WaitForSeconds(.5f);
     }
 }
