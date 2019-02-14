@@ -50,6 +50,9 @@ public class PlatformerController : MonoBehaviour {
 
     float dragSpeed;
 
+    public Collider2D lastHit;
+    private float wallJumpVert = 600f;
+
     private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -67,10 +70,14 @@ public class PlatformerController : MonoBehaviour {
         checkPointSave = this.transform.position;
         canMove = true;
         dragSpeed = groundSpeed / 2;
-	}
+        wallJumpForce = new Vector2(650f, 600f);
+        collidables = LayerMask.GetMask("Default", "Wall", "Box", "Ground");
+    }
 
     // Update is called once per frame
     void Update() {
+
+        wallJumpForce = new Vector2(650f, wallJumpVert);
 
         showVert = Input.GetAxis("Vertical");
         jumpTimer += Time.deltaTime;
@@ -85,12 +92,10 @@ public class PlatformerController : MonoBehaviour {
         {
             Camera.main.backgroundColor = dream;
 
-            collidables = LayerMask.GetMask("Default", "Wall", "Box", "Ground");
         }
         else
         {
             Camera.main.backgroundColor = real;
-            collidables = LayerMask.GetMask("Default", "Wall", "Box");
         }
 
         if (Input.GetButtonDown("Jump") && grounded && canMove && !Drag.boxDrag)
@@ -365,6 +370,16 @@ public class PlatformerController : MonoBehaviour {
                 StartCoroutine(Respawn());
             }
         }
+
+        if(lastHit == collision.gameObject.GetComponent<BoxCollider2D>())
+        {
+            wallJumpVert /= 1.5f;
+        }
+        else
+        {
+            wallJumpVert = 600;
+        }
+        lastHit = collision.gameObject.GetComponent<BoxCollider2D>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
