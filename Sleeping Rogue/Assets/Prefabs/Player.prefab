@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2721792916051241983}
   m_Layer: 13
   m_Name: WallCheck
-  m_TagString: Untagged
+  m_TagString: WallCheck
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 2721792916580691832}
   m_Layer: 13
   m_Name: WallCheck (1)
-  m_TagString: Untagged
+  m_TagString: WallCheck
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
