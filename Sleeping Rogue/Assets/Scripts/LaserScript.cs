@@ -19,8 +19,7 @@ public class LaserScript : InteractableObject {
 	
 	// Update is called once per frame
 	void Update () {
-
-        if (PlayerScript.dreaming == false) {
+        
             if (!isActive)
             {
                 line.enabled = false;
@@ -31,10 +30,11 @@ public class LaserScript : InteractableObject {
                 line.enabled = true;
                 GetComponent<BoxCollider2D>().enabled = true;
             }
+        if (PlayerScript.dreaming == true)
+        {
+            this.gameObject.layer = 9;
         }
-        else if (PlayerScript.dreaming == true) {
-            GetComponent<BoxCollider2D>().enabled = false;
-        }
+        else this.gameObject.layer = 8;
         
         line.startWidth = width;
         line.endWidth = width;
