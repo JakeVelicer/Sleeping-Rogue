@@ -33,7 +33,6 @@ public class LaserScript : InteractableObject {
             }
         }
         else if (PlayerScript.dreaming == true) {
-            line.enabled = false;
             GetComponent<BoxCollider2D>().enabled = false;
         }
         
