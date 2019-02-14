@@ -16,10 +16,10 @@ public class TextBoxBounce : MonoBehaviour
     void Update()
     {
         if (up) {
-            transform.Translate(Vector3.up * 0.005f, Space.World);
+            transform.Translate(Vector3.up * 0.002f, Space.World);
         }
         else if (!up) {
-            transform.Translate(Vector3.down * 0.005f, Space.World);
+            transform.Translate(Vector3.down * 0.002f, Space.World);
         }
     }
 
