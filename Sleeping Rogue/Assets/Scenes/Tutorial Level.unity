@@ -1873,12 +1873,12 @@ PrefabInstance:
     - target: {fileID: 4343681128676845362, guid: e7d92a72c845945fb88d0782c7aaba03,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 21.667885
+      value: 20.44
       objectReference: {fileID: 0}
     - target: {fileID: 4343681128676845362, guid: e7d92a72c845945fb88d0782c7aaba03,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.7094815
+      value: 2.14
       objectReference: {fileID: 0}
     - target: {fileID: 4343681128676845362, guid: e7d92a72c845945fb88d0782c7aaba03,
         type: 3}
@@ -1943,28 +1943,28 @@ PrefabInstance:
     - target: {fileID: 4343681129051677822, guid: e7d92a72c845945fb88d0782c7aaba03,
         type: 3}
       propertyPath: m_text
-      value: Press X to grab onto ladders. Use the control stick to move up and down
-        it.
+      value: To use a ladder, walk into it and hold the control stick up. To dismount
+        it, hold the desired direction when you exit it.
       objectReference: {fileID: 0}
     - target: {fileID: 4343681129051677822, guid: e7d92a72c845945fb88d0782c7aaba03,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 75
+      value: 121
       objectReference: {fileID: 0}
     - target: {fileID: 4343681129051677822, guid: e7d92a72c845945fb88d0782c7aaba03,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 15
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 4343681129051677822, guid: e7d92a72c845945fb88d0782c7aaba03,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 16
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 4343681129051677822, guid: e7d92a72c845945fb88d0782c7aaba03,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7d92a72c845945fb88d0782c7aaba03, type: 3}
@@ -6273,7 +6273,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4466512030090516, guid: 453072903b0b80a4cb483ebe5f874c1f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.904
+      value: -1.9201
       objectReference: {fileID: 0}
     - target: {fileID: 4466512030090516, guid: 453072903b0b80a4cb483ebe5f874c1f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6317,7 +6317,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4466512030090516, guid: 453072903b0b80a4cb483ebe5f874c1f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.2559218
+      value: 1.2880734
       objectReference: {fileID: 0}
     - target: {fileID: 4466512030090516, guid: 453072903b0b80a4cb483ebe5f874c1f, type: 3}
       propertyPath: m_LocalScale.y
@@ -6755,15 +6755,15 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 0.34512794
       objectReference: {fileID: 0}
-    - target: {fileID: 5572597482060460362, guid: 54abd9b7c81ad429796436738094f3ee,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3292786187238083379, guid: 54abd9b7c81ad429796436738094f3ee,
         type: 3}
       propertyPath: RayCastCenterPointOffset
       value: 5.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5572597482060460362, guid: 54abd9b7c81ad429796436738094f3ee,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54abd9b7c81ad429796436738094f3ee, type: 3}
@@ -10896,15 +10896,15 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 0.5975132
       objectReference: {fileID: 0}
-    - target: {fileID: 5572597482060460362, guid: 54abd9b7c81ad429796436738094f3ee,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3292786187238083379, guid: 54abd9b7c81ad429796436738094f3ee,
         type: 3}
       propertyPath: RayCastCenterPointOffset
       value: 4.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5572597482060460362, guid: 54abd9b7c81ad429796436738094f3ee,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54abd9b7c81ad429796436738094f3ee, type: 3}
