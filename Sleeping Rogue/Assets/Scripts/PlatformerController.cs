@@ -22,8 +22,7 @@ public class PlatformerController : MonoBehaviour {
     bool grounded = false;
     public bool wall, wallBlock = false;
     public bool runInto = false;
-    private Animator anim;
-    private Rigidbody2D rb2d;
+    [HideInInspector] public Rigidbody2D rb2d;
     private Collider2D playerCollider;
 
     LayerMask collidables;
@@ -57,7 +56,6 @@ public class PlatformerController : MonoBehaviour {
     {
         rb2d = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();
-        anim = GetComponent<Animator>();
         horiz = 0;
         dreaming = false;
         isMoving = false;
@@ -76,7 +74,6 @@ public class PlatformerController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-
 
         wallJumpForce = new Vector2(650f, wallJumpVert);
 
@@ -168,8 +165,6 @@ public class PlatformerController : MonoBehaviour {
         if (!wallJumping && canMove)
         {
             horiz = Input.GetAxis("Horizontal");
-
-            anim.SetFloat("Speed", Mathf.Abs(horiz));
 
             if (wallJumpEnabled)
             {
@@ -323,7 +318,6 @@ public class PlatformerController : MonoBehaviour {
 
     void WallJump()
     {
-        anim.SetTrigger("Jump");
         wallJumpEnabled = false;
         wallJumping = true;
         if (facingRight)
