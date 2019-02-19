@@ -151,6 +151,7 @@ MonoBehaviour:
   jumpTimer: 0
   wallJumpTimer: 0
   heightTime: 0
+  maxFallSpeed: -2
   lowJumpMultiplier: 2
   real: {r: 0.19215688, g: 0.21176472, b: 0.47450984, a: 0}
   dream: {r: 0.3647059, g: 0.3137255, b: 0.3803922, a: 0}
