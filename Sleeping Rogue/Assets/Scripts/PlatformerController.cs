@@ -22,6 +22,7 @@ public class PlatformerController : MonoBehaviour {
     [HideInInspector] public bool grounded = false;
     public bool wall, wallBlock = false;
     public bool runInto = false;
+
     [HideInInspector] public Rigidbody2D rb2d;
     private Collider2D playerCollider;
 
@@ -34,7 +35,9 @@ public class PlatformerController : MonoBehaviour {
 
     [HideInInspector] public float jumpTimer, wallJumpTimer, heightTime = 0.0f;
 
+    public float maxFallSpeed = -2f;
     [HideInInspector] public float lowJumpMultiplier = 0.3f;
+
     public Color real, dream;
     [HideInInspector] public float horiz;
     [HideInInspector] public bool dreaming;
@@ -107,11 +110,15 @@ public class PlatformerController : MonoBehaviour {
         {
             jumpHeld = false;
         }
-        if (wall && !grounded && rb2d.velocity.y <= 2f && !dreaming && !wallBlock)
+
+        // Wall sliding is handled in this if statement
+
+        if (wall && !grounded && rb2d.velocity.y <= 0f && !dreaming && !wallBlock)
         {
             wallJumpEnabled = true;
             lastMove = Input.GetAxisRaw("Horizontal");
-            rb2d.velocity = new Vector2(0,-1);
+            CapVelocity();
+            //rb2d.velocity = new Vector2(0,-1);
             jumping = false;
             wallJumpTimer = 0;
             if (Input.GetButtonDown("Jump") && canMove)
@@ -191,7 +198,7 @@ public class PlatformerController : MonoBehaviour {
                     isMoving = true;
                     if(Mathf.Abs(rb2d.velocity.x) < maxSpeed)
                     {
-                        rb2d.AddForce(Mathf.Sign(horiz) * (moveForce * 5) * Vector2.right);
+                        rb2d.AddForce(Mathf.Sign(horiz) * (moveForce * 3) * Vector2.right);
                     }
                 }
             }
@@ -368,15 +375,15 @@ public class PlatformerController : MonoBehaviour {
             }
         }
 
-        if(lastHit == collision.gameObject.GetComponent<BoxCollider2D>())
-        {
-            wallJumpVert /= 1.1f;
-        }
-        else
-        {
-            wallJumpVert = 600;
-        }
-        lastHit = collision.gameObject.GetComponent<BoxCollider2D>();
+        //if(lastHit == collision.gameObject.GetComponent<BoxCollider2D>())
+        //{
+        //    wallJumpVert /= 1.1f;
+        //}
+        //else
+        //{
+        //    wallJumpVert = 600;
+        //}
+        //lastHit = collision.gameObject.GetComponent<BoxCollider2D>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -445,5 +452,13 @@ public class PlatformerController : MonoBehaviour {
     private IEnumerator waitToPush()
     {
         yield return new WaitForSeconds(.5f);
+    }
+
+    //putting a limit on the wall fall speed for the player
+    public void CapVelocity()
+    {
+        float cappedYVelocity = Mathf.Max(rb2d.velocity.y, maxFallSpeed);
+
+        rb2d.velocity = new Vector2(0, cappedYVelocity);
     }
 }
