@@ -17,7 +17,7 @@ public class PlayerAnimation : MonoBehaviour
         anim = GetComponent<Animator>();
         PlayerScript = GetComponent<PlatformerController>();
         rb2d = GetComponent<Rigidbody2D>();
-        FallingTimer = 0.5f;
+        FallingTimer = 0.4f;
     }
 
     // Update is called once per frame
@@ -58,7 +58,7 @@ public class PlayerAnimation : MonoBehaviour
         if (PlayerScript.grounded)
         {
             anim.SetBool("AnimGrounded", true);
-            FallingTimer = 0.5f;
+            FallingTimer = 0.4f;
         }
         else if (!PlayerScript.grounded)
         {
