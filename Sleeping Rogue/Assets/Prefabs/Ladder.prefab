@@ -150,4 +150,4 @@ MonoBehaviour:
   PlayerLayer:
     serializedVersion: 2
     m_Bits: 8192
-  RayCastCenterPointOffset: 4.6
+  RayCastCenterPointOffset: 4.4

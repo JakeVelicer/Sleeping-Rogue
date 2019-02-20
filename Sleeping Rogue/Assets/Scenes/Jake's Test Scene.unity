@@ -125,11 +125,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4466512030090516, guid: 453072903b0b80a4cb483ebe5f874c1f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13
+      value: -13.28
       objectReference: {fileID: 0}
     - target: {fileID: 4466512030090516, guid: 453072903b0b80a4cb483ebe5f874c1f, type: 3}
       propertyPath: m_LocalPosition.y
+<<<<<<< HEAD
       value: 6.59
+=======
+      value: 5.08
+>>>>>>> parent of 0a27a6b... Ladder adjustments
       objectReference: {fileID: 0}
     - target: {fileID: 4466512030090516, guid: 453072903b0b80a4cb483ebe5f874c1f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -725,7 +729,11 @@ PrefabInstance:
     - target: {fileID: 8002221837430525641, guid: 725f8a9f223214f848ff3143c1229041,
         type: 3}
       propertyPath: m_LocalPosition.y
+<<<<<<< HEAD
       value: 18.7
+=======
+      value: 16.1
+>>>>>>> parent of 0a27a6b... Ladder adjustments
       objectReference: {fileID: 0}
     - target: {fileID: 8002221837430525641, guid: 725f8a9f223214f848ff3143c1229041,
         type: 3}
@@ -791,7 +799,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4466512030090516, guid: 453072903b0b80a4cb483ebe5f874c1f, type: 3}
       propertyPath: m_LocalPosition.y
+<<<<<<< HEAD
       value: 6.59
+=======
+      value: 5.08
+>>>>>>> parent of 0a27a6b... Ladder adjustments
       objectReference: {fileID: 0}
     - target: {fileID: 4466512030090516, guid: 453072903b0b80a4cb483ebe5f874c1f, type: 3}
       propertyPath: m_LocalPosition.z
