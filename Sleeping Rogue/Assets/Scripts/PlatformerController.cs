@@ -6,7 +6,7 @@ public class PlatformerController : MonoBehaviour {
 
     [HideInInspector] public bool facingRight = true;
 
-    bool wallJumpEnabled, wallJumping, jumping, jumpHeld = false;
+    [HideInInspector] public bool wallJumpEnabled, wallJumping, jumping, jumpHeld = false;
     private Vector3 checkPointSave;
     public float moveForce;
     float maxSpeed;
@@ -19,7 +19,7 @@ public class PlatformerController : MonoBehaviour {
     public GameObject shadow;
 
 
-    bool grounded = false;
+    [HideInInspector] public bool grounded = false;
     public bool wall, wallBlock = false;
     public bool runInto = false;
     [HideInInspector] public Rigidbody2D rb2d;
@@ -40,7 +40,7 @@ public class PlatformerController : MonoBehaviour {
     [HideInInspector] public bool dreaming;
     public bool canDream;
     private bool canLadder;
-    private bool canMove;
+    [HideInInspector] public bool canMove;
     private bool movingToBody;
 
     public bool isMoving;
