@@ -8,6 +8,7 @@ public class PlayerAnimation : MonoBehaviour
     private PlatformerController PlayerScript;
     private Animator anim;
     private Rigidbody2D rb2d;
+    private float FallingTimer;
 
 
     // Start is called before the first frame update
@@ -16,6 +17,7 @@ public class PlayerAnimation : MonoBehaviour
         anim = GetComponent<Animator>();
         PlayerScript = GetComponent<PlatformerController>();
         rb2d = GetComponent<Rigidbody2D>();
+        FallingTimer = 0.5f;
     }
 
     // Update is called once per frame
@@ -46,18 +48,23 @@ public class PlayerAnimation : MonoBehaviour
         if (rb2d.velocity.y < 1)
         {
             anim.SetTrigger("Falling");
+            FallingTimer -= Time.deltaTime;
+            if (FallingTimer <= 0 && !PlayerScript.grounded) {
+                anim.Play("PlayerJumpFall");
+            }
         }
 
-        // Checks if player is grounded so it can switch back from jump
+        // Checks if player is grounded so it can switch back from jump anims
         if (PlayerScript.grounded)
         {
             anim.SetBool("AnimGrounded", true);
+            FallingTimer = 0.5f;
         }
         else if (!PlayerScript.grounded)
         {
             anim.SetBool("AnimGrounded", false);
         }
         //Debug.Log("Grounded?: " + PlayerScript.grounded);
-        
+        //Debug.Log("FallingTimer: " + FallingTimer);
     }
 }
