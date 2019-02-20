@@ -130,7 +130,15 @@ PrefabInstance:
     - target: {fileID: 4466512030090516, guid: 453072903b0b80a4cb483ebe5f874c1f, type: 3}
       propertyPath: m_LocalPosition.y
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
       value: 6.59
+=======
+      value: 5.08
+>>>>>>> parent of 0a27a6b... Ladder adjustments
+=======
+      value: 5.08
+>>>>>>> parent of 0a27a6b... Ladder adjustments
 =======
       value: 5.08
 >>>>>>> parent of 0a27a6b... Ladder adjustments
@@ -730,7 +738,15 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
       value: 18.7
+=======
+      value: 16.1
+>>>>>>> parent of 0a27a6b... Ladder adjustments
+=======
+      value: 16.1
+>>>>>>> parent of 0a27a6b... Ladder adjustments
 =======
       value: 16.1
 >>>>>>> parent of 0a27a6b... Ladder adjustments
@@ -800,7 +816,15 @@ PrefabInstance:
     - target: {fileID: 4466512030090516, guid: 453072903b0b80a4cb483ebe5f874c1f, type: 3}
       propertyPath: m_LocalPosition.y
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
       value: 6.59
+=======
+      value: 5.08
+>>>>>>> parent of 0a27a6b... Ladder adjustments
+=======
+      value: 5.08
+>>>>>>> parent of 0a27a6b... Ladder adjustments
 =======
       value: 5.08
 >>>>>>> parent of 0a27a6b... Ladder adjustments
