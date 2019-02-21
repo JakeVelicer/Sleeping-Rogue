@@ -17,7 +17,7 @@ public class PlayerAnimation : MonoBehaviour
         anim = GetComponent<Animator>();
         PlayerScript = GetComponent<PlatformerController>();
         rb2d = GetComponent<Rigidbody2D>();
-        FallingTimer = 0.4f;
+        FallingTimer = 0.1f;
     }
 
     // Update is called once per frame
@@ -35,21 +35,26 @@ public class PlayerAnimation : MonoBehaviour
         }
         
         // Activates jumping anim and falling anim
-        if (rb2d.velocity.y > 0 && PlayerScript.jumping == true &&
-            PlayerScript.canMove && !PlayerScript.grounded && !Drag.boxDrag)
+        if (rb2d.velocity.y > 0 && PlayerScript.jumping == true
+        && PlayerScript.canMove && !PlayerScript.grounded && !Drag.boxDrag)
         {
             anim.Play("PlayerJumpIni");
         }
-        if (rb2d.velocity.y > 0 && PlayerScript.wallJumping == true && 
-            PlayerScript.canMove && !PlayerScript.grounded && !Drag.boxDrag)
+        if (rb2d.velocity.y > 0 && PlayerScript.wallJumping == true
+        && PlayerScript.canMove && !PlayerScript.grounded && !Drag.boxDrag)
         {
             anim.Play("PlayerJumpIni");
         }
         if (rb2d.velocity.y < 1)
         {
-            anim.SetTrigger("Falling");
             FallingTimer -= Time.deltaTime;
-            if (FallingTimer <= 0 && !PlayerScript.grounded) {
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("PlayerJumpIni"))
+            {
+                anim.SetTrigger("Falling");
+            }
+            else if (!anim.GetCurrentAnimatorStateInfo(0).IsName("PlayerJumpIni")
+            && FallingTimer <= 0 && !PlayerScript.grounded)
+            {
                 anim.Play("PlayerJumpFall");
             }
         }
@@ -58,7 +63,7 @@ public class PlayerAnimation : MonoBehaviour
         if (PlayerScript.grounded)
         {
             anim.SetBool("AnimGrounded", true);
-            FallingTimer = 0.4f;
+            FallingTimer = 0.1f;
         }
         else if (!PlayerScript.grounded)
         {
