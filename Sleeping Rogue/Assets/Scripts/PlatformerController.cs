@@ -39,7 +39,7 @@ public class PlatformerController : MonoBehaviour {
     [HideInInspector] public float lowJumpMultiplier = 0.3f;
 
     public Color real, dream;
-    [HideInInspector] public float horiz;
+    public float horiz;
     [HideInInspector] public bool dreaming;
     public bool canDream;
     private bool canLadder;
@@ -198,7 +198,7 @@ public class PlatformerController : MonoBehaviour {
 
             if (GetAxisDown("Horizontal"))
             {
-                if (!isMoving)
+                if (!isMoving && Mathf.Abs(Input.GetAxis("Horizontal")) > .25)
                 {
                     isMoving = true;
                     if(Mathf.Abs(rb2d.velocity.x) < maxSpeed)
@@ -207,7 +207,7 @@ public class PlatformerController : MonoBehaviour {
                     }
                 }
             }
-            if (!GetAxisDown("Horizontal"))
+            else 
             {
                 isMoving = false;
                 if(Mathf.Abs(rb2d.velocity.x) > 0)
@@ -216,7 +216,7 @@ public class PlatformerController : MonoBehaviour {
                 }
             }
 
-            if (horiz * rb2d.velocity.x < maxSpeed)
+            if (horiz * rb2d.velocity.x < maxSpeed && (Mathf.Abs(Input.GetAxis("Horizontal")) > .25f))
             {
                 if (!grounded)
                 {
@@ -249,6 +249,8 @@ public class PlatformerController : MonoBehaviour {
         }
 
 
+        if (!GetAxisDown("Horizontal")) horiz = 0;
+
         if (Mathf.Abs(rb2d.velocity.x) > maxSpeed)
         {
             rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
@@ -278,16 +280,13 @@ public class PlatformerController : MonoBehaviour {
 
         if (wallJumping)
         {
-            horiz = 0;
             if (!wall)
             {
                 if (Input.GetAxisRaw("Horizontal") != lastMove)
                 {
-                    if (Mathf.Abs(Input.GetAxis("Horizontal")) == 0)
-                    {
-                        wallJumping = false;
-                    }
-               }
+                    wallJumping = false;
+                }
+                
             }
         }
 
@@ -338,10 +337,12 @@ public class PlatformerController : MonoBehaviour {
         if (facingRight)
         {
             rb2d.AddForce(new Vector2(-wallJumpForce.x, wallJumpForce.y));
+            horiz = -1;
         } else
         {
 
             rb2d.AddForce(new Vector2(wallJumpForce.x, wallJumpForce.y));
+            horiz = 1;
         }
         Flip();
     }
