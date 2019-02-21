@@ -114,11 +114,10 @@ public class PlatformerController : MonoBehaviour {
 
         // Wall sliding is handled in this if statement
 
-        if (wall && !grounded && rb2d.velocity.y <= 0f && !dreaming && !wallBlock)
+        if (wall && !grounded && !dreaming && !wallBlock)
         {
             wallJumpEnabled = true;
             lastMove = Input.GetAxisRaw("Horizontal");
-            CapVelocity();
             //rb2d.velocity = new Vector2(0,-1);
             jumping = false;
             wallJumpTimer = 0;
@@ -181,6 +180,11 @@ public class PlatformerController : MonoBehaviour {
 
             if (wallJumpEnabled)
             {
+                if(rb2d.velocity.y <= 0 && !wallBlock)
+                {
+                    CapVelocity();
+                }
+
                 if (facingRight)
                 {
                     if (horiz > 0)
@@ -269,8 +273,7 @@ public class PlatformerController : MonoBehaviour {
             }
         }
 
-
-        Debug.Log(Input.GetAxis("Vertical"));
+        
 
         if (!GetAxisDown("Horizontal")) horiz = 0;
 
@@ -357,6 +360,8 @@ public class PlatformerController : MonoBehaviour {
     {
         wallJumpEnabled = false;
         wallJumping = true;
+
+        rb2d.velocity = Vector2.zero;
         if (facingRight)
         {
             rb2d.AddForce(new Vector2(-wallJumpForce.x, wallJumpForce.y));
