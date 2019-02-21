@@ -43,6 +43,7 @@ public class PlatformerController : MonoBehaviour {
     [HideInInspector] public bool dreaming;
     public bool canDream;
     private bool canLadder;
+    private bool climbing;
     [HideInInspector] public bool canMove;
     private bool movingToBody;
 
@@ -231,23 +232,45 @@ public class PlatformerController : MonoBehaviour {
             // Climbing up ladder
             if (canLadder)
             {
-                if (Input.GetAxis("Vertical") > 0) {
+                /*if (Input.GetAxis("Vertical") > .25) {
                     Debug.Log("Player is climbing ladder");
                     rb2d.velocity = new Vector2(0, rb2d.velocity.y);
                     rb2d.gravityScale = 0;
                     rb2d.velocity = Vector2.up * 10;
                 }
-                else if (Input.GetAxis("Vertical") < 0) {
+                else if (Input.GetAxis("Vertical") < -.25) {
                     rb2d.velocity = new Vector2(0, rb2d.velocity.y);
                     rb2d.gravityScale = 0;
                     rb2d.velocity = Vector2.down * 10;
                 }
                 else if (Input.GetAxisRaw("Vertical") == 0) {
                     rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
+                }*/
+                if(Mathf.Abs(Input.GetAxis("Vertical")) > .25)
+                {
+                    rb2d.velocity = Vector2.up * 10 * Mathf.Sign(Input.GetAxis("Vertical"));
+                    climbing = true;
                 }
+
+                if (grounded)
+                {
+                    climbing = false;
+                }
+
+                if (climbing)
+                {
+                    rb2d.gravityScale = 0;
+                    if (!GetAxisDown("Vertical")){
+                        rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
+                    }
+                }
+                else rb2d.gravityScale = 1;
+
             }
         }
 
+
+        Debug.Log(Input.GetAxis("Vertical"));
 
         if (!GetAxisDown("Horizontal")) horiz = 0;
 
@@ -445,6 +468,7 @@ public class PlatformerController : MonoBehaviour {
             {
                 canLadder = false;
                 rb2d.gravityScale = 1.0f;
+                if (rb2d.velocity.y > 0) rb2d.velocity = new Vector2(0, 0);
             }
         }
     }
