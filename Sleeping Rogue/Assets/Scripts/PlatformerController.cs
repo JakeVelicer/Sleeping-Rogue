@@ -198,12 +198,12 @@ public class PlatformerController : MonoBehaviour {
 
             if (GetAxisDown("Horizontal"))
             {
-                if (!isMoving && Mathf.Abs(Input.GetAxis("Horizontal")) > .25)
+                if (!isMoving && Mathf.Abs(Input.GetAxis("Horizontal")) > .15)
                 {
                     isMoving = true;
                     if(Mathf.Abs(rb2d.velocity.x) < maxSpeed)
                     {
-                        rb2d.AddForce(Mathf.Sign(horiz) * (moveForce * 3) * Vector2.right);
+                        rb2d.AddForce(Mathf.Sign(horiz) * (moveForce * 5f) * Vector2.right);
                     }
                 }
             }
