@@ -131,6 +131,11 @@ public class PlatformerController : MonoBehaviour {
             }
         }
 
+        if (grounded)
+        {
+            wallJumping = false;
+        }
+
         if (Input.GetAxisRaw("Vertical") != -1) wallBlock = false;
 
         if (Drag.boxDrag)
@@ -276,10 +281,13 @@ public class PlatformerController : MonoBehaviour {
             horiz = 0;
             if (!wall)
             {
-                if(Input.GetAxisRaw("Horizontal") != lastMove)
+                if (Input.GetAxisRaw("Horizontal") != lastMove)
                 {
-                    wallJumping = false;
-                }
+                    if (Mathf.Abs(Input.GetAxis("Horizontal")) == 0)
+                    {
+                        wallJumping = false;
+                    }
+               }
             }
         }
 
@@ -375,15 +383,15 @@ public class PlatformerController : MonoBehaviour {
             }
         }
 
-        //if(lastHit == collision.gameObject.GetComponent<BoxCollider2D>())
+        //if (lasthit == collision.gameobject.getcomponent<boxcollider2d>())
         //{
-        //    wallJumpVert /= 1.1f;
+        //    walljumpvert /= 1.1f;
         //}
         //else
         //{
-        //    wallJumpVert = 600;
+        //    walljumpvert = 600;
         //}
-        //lastHit = collision.gameObject.GetComponent<BoxCollider2D>();
+        //lasthit = collision.gameobject.getcomponent<boxcollider2d>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
