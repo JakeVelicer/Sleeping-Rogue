@@ -406,9 +406,13 @@ public class PlatformerController : MonoBehaviour {
         }
         if (collision.gameObject.tag == "Kill")
         {
-            if (dreaming == false)
+            if (!dreaming)
             {
                 StartCoroutine(Respawn());
+            }
+            else if (dreaming)
+            {
+                EnterExitDreaming();
             }
         }
 
