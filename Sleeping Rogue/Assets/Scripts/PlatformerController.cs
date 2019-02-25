@@ -62,6 +62,9 @@ public class PlatformerController : MonoBehaviour {
     ParticleSystem jumpEffect;
     ParticleSystem wallEffect;
 
+    public bool paused;
+    Vector2 velocHolder = Vector2.zero;
+
     private void Awake()
     {
         jumpEffect = GameObject.Find("Ground Effects").GetComponent<ParticleSystem>();
@@ -86,277 +89,279 @@ public class PlatformerController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-
-        wallJumpForce = new Vector2(650f, wallJumpVert);
-
-        showVert = Input.GetAxis("Vertical");
-        jumpTimer += Time.deltaTime;
-
-        grounded = Physics2D.Linecast(groundCheck2.position, groundCheck1.position, flooring);
-        if(!wallBlock) wall = Physics2D.Linecast(Right1.position, Right2.position, wallType);
-        if (!Drag.boxDrag)
+        if (!paused)
         {
-            runInto = Physics2D.Linecast(Right1.position, Right2.position, collidables);
-        }
-        else runInto = Physics2D.Linecast(Left1.position, Left2.position, collidables);
+            wallJumpForce = new Vector2(650f, wallJumpVert);
 
-        
+            showVert = Input.GetAxis("Vertical");
+            jumpTimer += Time.deltaTime;
 
-        if (dreaming)
-        {
-            Camera.main.backgroundColor = dream;
-
-        }
-        else
-        {
-            Camera.main.backgroundColor = real;
-        }
-
-        if (Input.GetButtonDown("Jump") && grounded && canMove && !Drag.boxDrag)
-        {
-            //jumpTimer = 0;
-            jumpEffect.transform.position = groundCheck1.position;
-            jumpEffect.Play();
-            jumpHeld = true;
-            jumping = true;
-            if(!dreaming) rb2d.AddForce(Vector2.up * JumpForce);
-            if(dreaming) rb2d.AddForce(Vector2.up * DreamJumpForce);
-        }
-        else if (Input.GetButtonUp("Jump"))
-        {
-            jumpHeld = false;
-        }
-
-        // Wall sliding is handled in this if statement
-
-        if (wall && !grounded && !dreaming && !wallBlock)
-        {
-            wallJumpEnabled = true;
-            lastMove = Input.GetAxisRaw("Horizontal");
-            //rb2d.velocity = new Vector2(0,-1);
-            jumping = false;
-            wallJumpTimer = 0;
-            if (Input.GetButtonDown("Jump") && canMove)
+            grounded = Physics2D.Linecast(groundCheck2.position, groundCheck1.position, flooring);
+            if (!wallBlock) wall = Physics2D.Linecast(Right1.position, Right2.position, wallType);
+            if (!Drag.boxDrag)
             {
-                WallJump();
+                runInto = Physics2D.Linecast(Right1.position, Right2.position, collidables);
             }
-            if (Input.GetAxisRaw("Vertical") == -1)
+            else runInto = Physics2D.Linecast(Left1.position, Left2.position, collidables);
+
+            
+
+            if (Input.GetButtonDown("Jump") && grounded && canMove && !Drag.boxDrag)
             {
-                wallBlock = true;
+                //jumpTimer = 0;
+                jumpEffect.transform.position = groundCheck1.position;
+                jumpEffect.Play();
+                jumpHeld = true;
+                jumping = true;
+                if (!dreaming) rb2d.AddForce(Vector2.up * JumpForce);
+                if (dreaming) rb2d.AddForce(Vector2.up * DreamJumpForce);
             }
-        }
-       
-        if (grounded)
-        {
-            wallJumping = false;
-        }
-
-        if (Input.GetAxisRaw("Vertical") != -1) wallBlock = false;
-
-        if (Drag.boxTouch)
-        {
-            maxSpeed = dragSpeed;
-        }
-        else if (!wall && !grounded)
-        {
-            maxSpeed = airSpeed;
-            jumps = 1;
-        }
-        else maxSpeed = groundSpeed;
-        
-        if (!canMove)
-        {
-            rb2d.velocity = Vector3.zero;
-        }
-
-        if (grounded || !wall) wallBlock = false;
-        
-
-
-        if (Input.GetButtonDown("Dream") && canMove)
-        {
-            if (!dreaming)
+            else if (Input.GetButtonUp("Jump"))
             {
-                if(grounded) EnterExitDreaming();
+                jumpHeld = false;
             }
-            else EnterExitDreaming();
+
+            // Wall sliding is handled in this if statement
+
+            if (wall && !grounded && !dreaming && !wallBlock)
+            {
+                wallJumpEnabled = true;
+                lastMove = Input.GetAxisRaw("Horizontal");
+                //rb2d.velocity = new Vector2(0,-1);
+                jumping = false;
+                wallJumpTimer = 0;
+                if (Input.GetButtonDown("Jump") && canMove)
+                {
+                    WallJump();
+                }
+                if (Input.GetAxisRaw("Vertical") == -1)
+                {
+                    wallBlock = true;
+                }
+            }
+
+            if (grounded)
+            {
+                wallJumping = false;
+            }
+
+            if (Input.GetAxisRaw("Vertical") != -1) wallBlock = false;
+
+            if (Drag.boxTouch)
+            {
+                maxSpeed = dragSpeed;
+            }
+            else if (!wall && !grounded)
+            {
+                maxSpeed = airSpeed;
+                jumps = 1;
+            }
+            else maxSpeed = groundSpeed;
+
+            if (!canMove)
+            {
+                rb2d.velocity = Vector3.zero;
+            }
+
+            if (grounded || !wall) wallBlock = false;
+
+
+
+            if (Input.GetButtonDown("Dream") && canMove)
+            {
+                if (!dreaming)
+                {
+                    if (grounded) EnterExitDreaming();
+                }
+                else EnterExitDreaming();
+            }
         }
 	}
 
     private void FixedUpdate()
     {
-        if (!Input.GetButton("Drag"))
+        if (!paused)
         {
-            Drag.boxDrag = false;
-        }
-        if (!wallJumping && canMove)
-        {
-            horiz = Input.GetAxis("Horizontal");
-
-
-            if (runInto)
+            if (!Input.GetButton("Drag"))
             {
-                rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+                Drag.boxDrag = false;
             }
-
-            if (wallJumpEnabled)
+            if (!wallJumping && canMove)
             {
-                if(rb2d.velocity.y <= 0 && !wallBlock)
+                horiz = Input.GetAxis("Horizontal");
+
+
+                if (runInto)
                 {
-                    CapVelocity();
+                    rb2d.velocity = new Vector2(0, rb2d.velocity.y);
                 }
 
-                if (facingRight)
+                if (wallJumpEnabled)
                 {
-                    if (horiz > 0)
+                    if (rb2d.velocity.y <= 0 && !wallBlock)
                     {
-                        horiz = 0;
+                        CapVelocity();
+                    }
+
+                    if (facingRight)
+                    {
+                        if (horiz > 0)
+                        {
+                            horiz = 0;
+                        }
+                    }
+                    if (!facingRight)
+                    {
+                        if (horiz < 0)
+                        {
+                            horiz = 0;
+                        }
                     }
                 }
-                if (!facingRight)
+
+                if (GetAxisDown("Horizontal"))
                 {
-                    if (horiz < 0)
+                    if (!isMoving && Mathf.Abs(Input.GetAxis("Horizontal")) > .1)
                     {
-                        horiz = 0;
+                        isMoving = true;
+                        if (Mathf.Abs(rb2d.velocity.x) < maxSpeed)
+                        {
+                            rb2d.AddForce(Mathf.Sign(horiz) * (moveForce * 2f) * Vector2.right);
+                        }
                     }
                 }
-            }
-
-            if (GetAxisDown("Horizontal"))
-            {
-                if (!isMoving && Mathf.Abs(Input.GetAxis("Horizontal")) > .1)
+                else
                 {
-                    isMoving = true;
-                    if(Mathf.Abs(rb2d.velocity.x) < maxSpeed)
+                    if (Mathf.Abs(rb2d.velocity.x) > 0)
                     {
-                        rb2d.AddForce(Mathf.Sign(horiz) * (moveForce * 2f) * Vector2.right);
+                        rb2d.AddForce(Vector2.left * horiz * moveForce);
                     }
+                    else isMoving = false;
                 }
-            }
-            else 
-            {
-                if(Mathf.Abs(rb2d.velocity.x) > 0)
-                {
-                    rb2d.AddForce(Vector2.left * horiz * moveForce);
-                }
-                else isMoving = false;
-            }
 
-            if (horiz * rb2d.velocity.x < maxSpeed && (Mathf.Abs(Input.GetAxis("Horizontal")) > .25f))
-            {
+                if (horiz * rb2d.velocity.x < maxSpeed && (Mathf.Abs(Input.GetAxis("Horizontal")) > .25f))
+                {
                     if (!runInto)
                     {
                         rb2d.AddForce(Vector2.right * horiz * moveForce);
                     }
-            }
-
-            // Climbing up ladder
-            if (canLadder)
-            {
-                /*if (Input.GetAxis("Vertical") > .25) {
-                    Debug.Log("Player is climbing ladder");
-                    rb2d.velocity = new Vector2(0, rb2d.velocity.y);
-                    rb2d.gravityScale = 0;
-                    rb2d.velocity = Vector2.up * 10;
-                }
-                else if (Input.GetAxis("Vertical") < -.25) {
-                    rb2d.velocity = new Vector2(0, rb2d.velocity.y);
-                    rb2d.gravityScale = 0;
-                    rb2d.velocity = Vector2.down * 10;
-                }
-                else if (Input.GetAxisRaw("Vertical") == 0) {
-                    rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
-                }*/
-                if(Mathf.Abs(Input.GetAxis("Vertical")) > .25)
-                {
-                    rb2d.velocity = Vector2.up * 10 * Mathf.Sign(Input.GetAxis("Vertical"));
-                    climbing = true;
                 }
 
-                if (grounded)
+                // Climbing up ladder
+                if (canLadder)
                 {
-                    climbing = false;
-                }
-
-                if (climbing)
-                {
-                    rb2d.gravityScale = 0;
-                    if (!GetAxisDown("Vertical")){
-                        rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
+                    /*if (Input.GetAxis("Vertical") > .25) {
+                        Debug.Log("Player is climbing ladder");
+                        rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+                        rb2d.gravityScale = 0;
+                        rb2d.velocity = Vector2.up * 10;
                     }
+                    else if (Input.GetAxis("Vertical") < -.25) {
+                        rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+                        rb2d.gravityScale = 0;
+                        rb2d.velocity = Vector2.down * 10;
+                    }
+                    else if (Input.GetAxisRaw("Vertical") == 0) {
+                        rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
+                    }*/
+                    if (Mathf.Abs(Input.GetAxis("Vertical")) > .25)
+                    {
+                        rb2d.velocity = Vector2.up * 10 * Mathf.Sign(Input.GetAxis("Vertical"));
+                        climbing = true;
+                    }
+
+                    if (grounded)
+                    {
+                        climbing = false;
+                    }
+
+                    if (climbing)
+                    {
+                        rb2d.gravityScale = 0;
+                        if (!GetAxisDown("Vertical"))
+                        {
+                            rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
+                        }
+                    }
+                    else rb2d.gravityScale = 1;
+
                 }
-                else rb2d.gravityScale = 1;
-
-            }
-        }
-
-        
-
-        if (!GetAxisDown("Horizontal")) horiz = 0;
-
-        if (Mathf.Abs(rb2d.velocity.x) > maxSpeed)
-        {
-            rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
-        }
-        
-        if(horiz > 0 && !facingRight)
-        {
-            Flip();
-        }
-        else if (horiz < 0 && facingRight)
-        {
-            Flip();
-        }
-
-        if (jumping)
-        {
-
-            if (!dreaming && !jumpHeld && rb2d.velocity.y > 0)
-            {
-                rb2d.velocity += Vector2.up * Physics2D.gravity.y * lowJumpMultiplier * Time.deltaTime;
-
-            }
-            if (dreaming && !jumpHeld && rb2d.velocity.y > 0)
-            {
-                rb2d.velocity += Vector2.up * Physics2D.gravity.y * dreamJumpMultiplier * Time.deltaTime;
             }
 
-        }
 
-        if (wallJumpEnabled && !wall) wallJumpEnabled = false;
 
-        if (wallJumping)
-        {
-            if (!wall)
+            if (!GetAxisDown("Horizontal")) horiz = 0;
+
+            if (Mathf.Abs(rb2d.velocity.x) > maxSpeed)
             {
-                if (Input.GetAxisRaw("Horizontal") != lastMove)
+                rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
+            }
+
+            if (horiz > 0 && !facingRight)
+            {
+                Flip();
+            }
+            else if (horiz < 0 && facingRight)
+            {
+                Flip();
+            }
+
+            if (jumping)
+            {
+
+                if (!dreaming && !jumpHeld && rb2d.velocity.y > 0)
                 {
-                    wallJumping = false;
+                    rb2d.velocity += Vector2.up * Physics2D.gravity.y * lowJumpMultiplier * Time.deltaTime;
+
                 }
-                
+                if (dreaming && !jumpHeld && rb2d.velocity.y > 0)
+                {
+                    rb2d.velocity += Vector2.up * Physics2D.gravity.y * dreamJumpMultiplier * Time.deltaTime;
+                }
+
             }
-        }
 
-        if (Input.GetButtonDown("Cancel") && canMove)
-        {
-            StartCoroutine(Respawn());
-        }
+            if (wallJumpEnabled && !wall) wallJumpEnabled = false;
 
-        // Handles returning player to real body when exiting dream mode
-        if (movingToBody)
-        {
-            GameObject ShadowInScene = GameObject.FindGameObjectWithTag("Shadow");
-            transform.position = Vector2.MoveTowards(transform.position, ShadowInScene.transform.position, (30 * Time.deltaTime));
-            if (transform.position == ShadowInScene.transform.position)
+            if (wallJumping)
             {
-                movingToBody = false;
-                Destroy(ShadowInScene);
-                dreaming = false;
-                playerCollider.enabled = true;
-                rb2d.gravityScale = 1.0f;
-                rb2d.velocity = Vector3.zero;
-                canMove = true;
+                if (!wall)
+                {
+                    if (Input.GetAxisRaw("Horizontal") != lastMove)
+                    {
+                        wallJumping = false;
+                    }
+
+                }
             }
+
+            if (Input.GetButtonDown("Cancel") && canMove)
+            {
+                StartCoroutine(Respawn());
+            }
+
+            // Handles returning player to real body when exiting dream mode
+            if (movingToBody)
+            {
+                GameObject ShadowInScene = GameObject.FindGameObjectWithTag("Shadow");
+                transform.position = Vector2.MoveTowards(transform.position, ShadowInScene.transform.position, (30 * Time.deltaTime));
+                if (transform.position == ShadowInScene.transform.position)
+                {
+                    movingToBody = false;
+                    Destroy(ShadowInScene);
+                    dreaming = false;
+                    playerCollider.enabled = true;
+                    rb2d.gravityScale = 1.0f;
+                    rb2d.velocity = Vector3.zero;
+                    canMove = true;
+                }
+            }
+
+        }
+
+        if (Input.GetButtonDown("Pause"))
+        {
+            Pause();
         }
 
     }
@@ -374,6 +379,22 @@ public class PlatformerController : MonoBehaviour {
             dreaming = true;
             Instantiate(shadow, this.transform.position, Quaternion.identity);
             rb2d.gravityScale = 0.7f;
+        }
+    }
+
+    private void Pause()
+    {
+
+        paused = !paused;
+        if (paused)
+        {
+            velocHolder = rb2d.velocity;
+            rb2d.bodyType = RigidbodyType2D.Static;
+        }
+        else
+        {
+            rb2d.bodyType = RigidbodyType2D.Dynamic;
+            rb2d.velocity = velocHolder;
         }
     }
 
