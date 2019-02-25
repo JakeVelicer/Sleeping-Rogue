@@ -21,7 +21,7 @@ public class PlatformerController : MonoBehaviour {
     public GameObject shadow;
 
 
-     public bool grounded = false;
+    public bool grounded = false;
     public bool wall, wallBlock = false;
     public bool runInto = false;
 
@@ -41,7 +41,6 @@ public class PlatformerController : MonoBehaviour {
     [HideInInspector] public float lowJumpMultiplier = 0.3f;
     [HideInInspector] public float dreamJumpMultiplier = 2f;
 
-    public Color real, dream;
     [HideInInspector] public float horiz;
     [HideInInspector] public bool dreaming;
     [HideInInspector] public bool canDream;
