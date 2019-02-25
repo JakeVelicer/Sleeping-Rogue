@@ -193,7 +193,7 @@ public class PlatformerController : MonoBehaviour {
 
             if (runInto)
             {
-                rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+                rb2d.velocity = new Vector2(rb2d.velocity.x, rb2d.velocity.y);
             }
 
             if (wallJumpEnabled)
@@ -521,6 +521,6 @@ public class PlatformerController : MonoBehaviour {
     {
         float cappedYVelocity = Mathf.Max(rb2d.velocity.y, maxFallSpeed);
 
-        rb2d.velocity = new Vector2(0, cappedYVelocity);
+        rb2d.velocity = new Vector2(rb2d.velocity.x, cappedYVelocity);
     }
 }
