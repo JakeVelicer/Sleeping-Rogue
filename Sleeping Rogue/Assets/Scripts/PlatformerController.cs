@@ -142,10 +142,11 @@ public class PlatformerController : MonoBehaviour {
                 {
                     WallJump();
                 }
-                if (Input.GetAxisRaw("Vertical") == -1)
+                if (Input.GetAxis("Vertical") < -0.1f)
                 {
                     wallBlock = true;
                 }
+                CapVelocity();
             }
 
             if (grounded)
