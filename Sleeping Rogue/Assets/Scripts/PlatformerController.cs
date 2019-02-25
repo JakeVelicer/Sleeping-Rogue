@@ -196,7 +196,7 @@ public class PlatformerController : MonoBehaviour {
 
             if (runInto)
             {
-                rb2d.velocity = new Vector2(rb2d.velocity.x, rb2d.velocity.y);
+                rb2d.velocity = new Vector2(0, rb2d.velocity.y);
             }
 
             if (wallJumpEnabled)
@@ -229,7 +229,7 @@ public class PlatformerController : MonoBehaviour {
                     isMoving = true;
                     if(Mathf.Abs(rb2d.velocity.x) < maxSpeed)
                     {
-                        rb2d.AddForce(Mathf.Sign(horiz) * (moveForce * 5f) * Vector2.right);
+                        rb2d.AddForce(Mathf.Sign(horiz) * (moveForce * 2f) * Vector2.right);
                     }
                 }
             }
@@ -415,7 +415,7 @@ public class PlatformerController : MonoBehaviour {
         var Image = GameObject.Find("DeathFade").GetComponent<DeathFade>();
         Image.FadeIn();
         canMove = false;
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(.5f);
         Image.FadeOut();
         this.transform.position = checkPointSave;
         yield return new WaitForSeconds(0.5f);
@@ -528,6 +528,6 @@ public class PlatformerController : MonoBehaviour {
     {
         float cappedYVelocity = Mathf.Max(rb2d.velocity.y, maxFallSpeed);
 
-        rb2d.velocity = new Vector2(rb2d.velocity.x, cappedYVelocity);
+        rb2d.velocity = new Vector2(0, cappedYVelocity);
     }
 }
