@@ -57,8 +57,13 @@ public class PlatformerController : MonoBehaviour {
     public Collider2D lastHit;
     private float wallJumpVert = 600f;
 
+    public ParticleSystem jumpEffect;
+    ParticleSystem wallEffect;
+
     private void Awake()
     {
+        jumpEffect = GameObject.Find("Ground Effects").GetComponent<ParticleSystem>();
+        wallEffect = GameObject.Find("Wall Effects").GetComponent<ParticleSystem>();
         rb2d = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();
         horiz = 0;
@@ -108,6 +113,8 @@ public class PlatformerController : MonoBehaviour {
         if (Input.GetButtonDown("Jump") && grounded && canMove && !Drag.boxDrag)
         {
             //jumpTimer = 0;
+            jumpEffect.transform.position = groundCheck1.position;
+            jumpEffect.Play();
             jumpHeld = true;
             jumping = true;
             rb2d.AddForce(Vector2.up * JumpForce);
@@ -367,6 +374,9 @@ public class PlatformerController : MonoBehaviour {
     {
         wallJumpEnabled = false;
         wallJumping = true;
+
+        wallEffect.transform.position = Right2.position;
+        wallEffect.Play();
 
         rb2d.velocity = Vector2.zero;
         if (facingRight)
