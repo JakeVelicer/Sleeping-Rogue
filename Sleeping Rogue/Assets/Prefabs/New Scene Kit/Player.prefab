@@ -329,6 +329,7 @@ MonoBehaviour:
   isMoving: 0
   showVert: 0
   lastHit: {fileID: 0}
+  jumpEffect: {fileID: 0}
 --- !u!50 &1325278372992784087
 Rigidbody2D:
   serializedVersion: 4
@@ -348,7 +349,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 2
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!95 &1325278372992784078
 Animator:
