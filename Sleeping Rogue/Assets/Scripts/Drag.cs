@@ -31,10 +31,9 @@ public class Drag : MonoBehaviour
     void Update()
     {
         boxTouch = Physics2D.Linecast(forward1.transform.position, forward2.transform.position, LayerMask.GetMask("Box"));
+        
 
-        Debug.Log(dragging);
-
-        if (boxTouch && player.GetComponent<PlatformerController>().grounded && Input.GetButton("Drag") && !dragging)
+        if (boxTouch && player.GetComponent<PlatformerController>().grounded && !dragging && Input.GetAxis("Drag") != 0)
         {
             dragging = true;
             boxDrag = true;
