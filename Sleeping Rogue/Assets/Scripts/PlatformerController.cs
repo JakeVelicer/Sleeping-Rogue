@@ -21,7 +21,7 @@ public class PlatformerController : MonoBehaviour {
     public GameObject shadow;
 
 
-    [HideInInspector] public bool grounded = false;
+     public bool grounded = false;
     public bool wall, wallBlock = false;
     public bool runInto = false;
 
@@ -42,24 +42,24 @@ public class PlatformerController : MonoBehaviour {
     [HideInInspector] public float dreamJumpMultiplier = 2f;
 
     public Color real, dream;
-    public float horiz;
+    [HideInInspector] public float horiz;
     [HideInInspector] public bool dreaming;
-    public bool canDream;
+    [HideInInspector] public bool canDream;
     private bool canLadder;
     private bool climbing;
     [HideInInspector] public bool canMove;
     private bool movingToBody;
 
-    public bool isMoving;
+    [HideInInspector] public bool isMoving;
     float lastMove;
-    public float showVert;
+    [HideInInspector] public float showVert;
 
     float dragSpeed;
 
-    public Collider2D lastHit;
+    [HideInInspector] public Collider2D lastHit;
     private float wallJumpVert = 600f;
 
-    public ParticleSystem jumpEffect;
+    ParticleSystem jumpEffect;
     ParticleSystem wallEffect;
 
     private void Awake()
@@ -440,6 +440,7 @@ public class PlatformerController : MonoBehaviour {
             }
         }
 
+
         //if (lasthit == collision.gameobject.getcomponent<boxcollider2d>())
         //{
         //    walljumpvert /= 1.1f;
@@ -451,7 +452,6 @@ public class PlatformerController : MonoBehaviour {
         //lasthit = collision.gameobject.getcomponent<boxcollider2d>();
     }
 
-    
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
