@@ -10,7 +10,11 @@ public class Drag : MonoBehaviour
     public GameObject player;
 
     public static bool boxDrag;
-    public RaycastHit2D boxTouch;
+    public static RaycastHit2D boxTouch;
+
+    bool dragging = false;
+
+    public GameObject dragged;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,20 +31,20 @@ public class Drag : MonoBehaviour
     void Update()
     {
         boxTouch = Physics2D.Linecast(forward1.transform.position, forward2.transform.position, LayerMask.GetMask("Box"));
+        
 
-
-
-        if(boxTouch && Input.GetButtonDown("Drag"))
+        if (boxTouch && player.GetComponent<PlatformerController>().grounded && !dragging && Input.GetAxis("Drag") != 0)
         {
+            dragging = true;
             boxDrag = true;
-            boxTouch.collider.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
-            boxTouch.collider.gameObject.GetComponent<FixedJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
+            dragged = boxTouch.collider.gameObject;
+            dragged.GetComponent<FixedJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
         }
-        if (Input.GetButtonUp("Drag"))
+        else if(!boxDrag && dragging)
         {
-            boxDrag = false;
-            boxTouch.collider.gameObject.GetComponent<FixedJoint2D>().connectedBody = boxTouch.collider.gameObject.GetComponent<Rigidbody2D>();
-            boxTouch.collider.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionX;
+            dragging = false;
+            dragged.GetComponent<FixedJoint2D>().connectedBody = dragged.GetComponent<Rigidbody2D>();;
+            dragged = null;
         }
 
        

@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -799166687
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ed98f0fbe518c294895f72efcd31a801, type: 3}
   m_Color: {r: 0.4716981, g: 0.27383104, b: 0.14017443, a: 1}
@@ -152,13 +152,13 @@ FixedJoint2D:
   m_GameObject: {fileID: 1344580248974500}
   m_Enabled: 1
   serializedVersion: 4
-  m_EnableCollision: 0
+  m_EnableCollision: 1
   m_ConnectedRigidBody: {fileID: 0}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.48872232, y: -0.33948684}
+  m_ConnectedAnchor: {x: 1.588, y: 2.153}
   m_DampingRatio: 0
   m_Frequency: 0
 --- !u!114 &980992499
@@ -176,4 +176,3 @@ MonoBehaviour:
   forward1: {fileID: 0}
   forward2: {fileID: 0}
   player: {fileID: 0}
-  boxTouch: 0

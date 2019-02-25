@@ -15,7 +15,8 @@ public class PlatformerController : MonoBehaviour {
     public float JumpForce;
     public Vector2 wallJumpForce;
     public Transform groundCheck1, groundCheck2;
-    public Transform wallCheck1, wallCheck2;
+    public Transform Right1, Right2;
+    public Transform Left1, Left2;
     public GameObject shadow;
 
 
@@ -56,8 +57,13 @@ public class PlatformerController : MonoBehaviour {
     public Collider2D lastHit;
     private float wallJumpVert = 600f;
 
+    public ParticleSystem jumpEffect;
+    ParticleSystem wallEffect;
+
     private void Awake()
     {
+        jumpEffect = GameObject.Find("Ground Effects").GetComponent<ParticleSystem>();
+        wallEffect = GameObject.Find("Wall Effects").GetComponent<ParticleSystem>();
         rb2d = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();
         horiz = 0;
@@ -73,7 +79,7 @@ public class PlatformerController : MonoBehaviour {
         canMove = true;
         dragSpeed = groundSpeed / 2;
         wallJumpForce = new Vector2(650f, 600f);
-        collidables = LayerMask.GetMask("Default", "Wall", "Box", "Ground");
+        collidables = LayerMask.GetMask("Default", "Wall", "Ground");
     }
 
     // Update is called once per frame
@@ -85,8 +91,12 @@ public class PlatformerController : MonoBehaviour {
         jumpTimer += Time.deltaTime;
 
         grounded = Physics2D.Linecast(groundCheck2.position, groundCheck1.position, flooring);
-        if(!wallBlock) wall = Physics2D.Linecast(wallCheck2.position, wallCheck1.position, wallType);
-        runInto = Physics2D.Linecast(wallCheck2.position, wallCheck1.position, collidables);
+        if(!wallBlock) wall = Physics2D.Linecast(Right1.position, Right2.position, wallType);
+        if (!Drag.boxDrag)
+        {
+            runInto = Physics2D.Linecast(Right1.position, Right2.position, collidables);
+        }
+        else runInto = Physics2D.Linecast(Left1.position, Left2.position, collidables);
 
         
 
@@ -103,6 +113,8 @@ public class PlatformerController : MonoBehaviour {
         if (Input.GetButtonDown("Jump") && grounded && canMove && !Drag.boxDrag)
         {
             //jumpTimer = 0;
+            jumpEffect.transform.position = groundCheck1.position;
+            jumpEffect.Play();
             jumpHeld = true;
             jumping = true;
             rb2d.AddForce(Vector2.up * JumpForce);
@@ -138,7 +150,7 @@ public class PlatformerController : MonoBehaviour {
 
         if (Input.GetAxisRaw("Vertical") != -1) wallBlock = false;
 
-        if (Drag.boxDrag)
+        if (Drag.boxTouch)
         {
             maxSpeed = dragSpeed;
         }
@@ -157,10 +169,6 @@ public class PlatformerController : MonoBehaviour {
         if (grounded || !wall) wallBlock = false;
         
 
-        if(!grounded && runInto)
-        {
-            rb2d.velocity = new Vector2(0, rb2d.velocity.y);
-        }
 
         if (Input.GetButtonDown("Dream") && canMove)
         {
@@ -174,9 +182,19 @@ public class PlatformerController : MonoBehaviour {
 
     private void FixedUpdate()
     {
+        if (!Input.GetButton("Drag"))
+        {
+            Drag.boxDrag = false;
+        }
         if (!wallJumping && canMove)
         {
             horiz = Input.GetAxis("Horizontal");
+
+
+            if (runInto)
+            {
+                rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+            }
 
             if (wallJumpEnabled)
             {
@@ -214,23 +232,19 @@ public class PlatformerController : MonoBehaviour {
             }
             else 
             {
-                isMoving = false;
                 if(Mathf.Abs(rb2d.velocity.x) > 0)
                 {
                     rb2d.AddForce(Vector2.left * horiz * moveForce);
                 }
+                else isMoving = false;
             }
 
             if (horiz * rb2d.velocity.x < maxSpeed && (Mathf.Abs(Input.GetAxis("Horizontal")) > .25f))
             {
-                if (!grounded)
-                {
                     if (!runInto)
                     {
                         rb2d.AddForce(Vector2.right * horiz * moveForce);
                     }
-                }
-                else rb2d.AddForce(Vector2.right * horiz * moveForce);
             }
 
             // Climbing up ladder
@@ -361,6 +375,9 @@ public class PlatformerController : MonoBehaviour {
         wallJumpEnabled = false;
         wallJumping = true;
 
+        wallEffect.transform.position = Right2.position;
+        wallEffect.Play();
+
         rb2d.velocity = Vector2.zero;
         if (facingRight)
         {
@@ -406,9 +423,13 @@ public class PlatformerController : MonoBehaviour {
         }
         if (collision.gameObject.tag == "Kill")
         {
-            if (dreaming == false)
+            if (!dreaming)
             {
                 StartCoroutine(Respawn());
+            }
+            else if (dreaming)
+            {
+                EnterExitDreaming();
             }
         }
 
@@ -422,6 +443,8 @@ public class PlatformerController : MonoBehaviour {
         //}
         //lasthit = collision.gameobject.getcomponent<boxcollider2d>();
     }
+
+    
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -472,6 +495,7 @@ public class PlatformerController : MonoBehaviour {
             if (!dreaming)
             {
                 canLadder = false;
+                climbing = false;
                 rb2d.gravityScale = 1.0f;
                 if (rb2d.velocity.y > 0) rb2d.velocity = new Vector2(0, 0);
             }
