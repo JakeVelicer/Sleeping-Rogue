@@ -13,6 +13,7 @@ public class PlatformerController : MonoBehaviour {
     public float groundSpeed;
     public float airSpeed;
     public float JumpForce;
+    public float DreamJumpForce;
     public Vector2 wallJumpForce;
     public Transform groundCheck1, groundCheck2;
     public Transform Right1, Right2;
@@ -38,6 +39,7 @@ public class PlatformerController : MonoBehaviour {
 
     public float maxFallSpeed = -2f;
     [HideInInspector] public float lowJumpMultiplier = 0.3f;
+    [HideInInspector] public float dreamJumpMultiplier = 2f;
 
     public Color real, dream;
     public float horiz;
@@ -117,7 +119,8 @@ public class PlatformerController : MonoBehaviour {
             jumpEffect.Play();
             jumpHeld = true;
             jumping = true;
-            rb2d.AddForce(Vector2.up * JumpForce);
+            if(!dreaming) rb2d.AddForce(Vector2.up * JumpForce);
+            if(dreaming) rb2d.AddForce(Vector2.up * DreamJumpForce);
         }
         else if (Input.GetButtonUp("Jump"))
         {
@@ -142,7 +145,7 @@ public class PlatformerController : MonoBehaviour {
                 wallBlock = true;
             }
         }
-
+       
         if (grounded)
         {
             wallJumping = false;
@@ -308,12 +311,16 @@ public class PlatformerController : MonoBehaviour {
         if (jumping)
         {
 
-                if (!jumpHeld && rb2d.velocity.y > 0)
-                {
-                    rb2d.velocity += Vector2.up * Physics2D.gravity.y * lowJumpMultiplier * Time.deltaTime;
+            if (!dreaming && !jumpHeld && rb2d.velocity.y > 0)
+            {
+                rb2d.velocity += Vector2.up * Physics2D.gravity.y * lowJumpMultiplier * Time.deltaTime;
 
-                }
-            
+            }
+            if (dreaming && !jumpHeld && rb2d.velocity.y > 0)
+            {
+                rb2d.velocity += Vector2.up * Physics2D.gravity.y * dreamJumpMultiplier * Time.deltaTime;
+            }
+
         }
 
         if (wallJumpEnabled && !wall) wallJumpEnabled = false;
@@ -366,7 +373,7 @@ public class PlatformerController : MonoBehaviour {
         {
             dreaming = true;
             Instantiate(shadow, this.transform.position, Quaternion.identity);
-            rb2d.gravityScale = 0.5f;
+            rb2d.gravityScale = 0.7f;
         }
     }
 
