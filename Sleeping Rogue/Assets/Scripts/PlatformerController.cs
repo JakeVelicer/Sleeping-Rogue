@@ -74,7 +74,7 @@ public class PlatformerController : MonoBehaviour {
         canMove = true;
         dragSpeed = groundSpeed / 2;
         wallJumpForce = new Vector2(650f, 600f);
-        collidables = LayerMask.GetMask("Default", "Wall", "Box", "Ground");
+        collidables = LayerMask.GetMask("Default", "Wall", "Ground");
     }
 
     // Update is called once per frame
@@ -143,7 +143,7 @@ public class PlatformerController : MonoBehaviour {
 
         if (Input.GetAxisRaw("Vertical") != -1) wallBlock = false;
 
-        if (Drag.boxDrag)
+        if (Drag.boxTouch)
         {
             maxSpeed = dragSpeed;
         }
@@ -175,6 +175,10 @@ public class PlatformerController : MonoBehaviour {
 
     private void FixedUpdate()
     {
+        if (!Input.GetButton("Drag"))
+        {
+            Drag.boxDrag = false;
+        }
         if (!wallJumping && canMove)
         {
             horiz = Input.GetAxis("Horizontal");
@@ -221,11 +225,11 @@ public class PlatformerController : MonoBehaviour {
             }
             else 
             {
-                isMoving = false;
                 if(Mathf.Abs(rb2d.velocity.x) > 0)
                 {
                     rb2d.AddForce(Vector2.left * horiz * moveForce);
                 }
+                else isMoving = false;
             }
 
             if (horiz * rb2d.velocity.x < maxSpeed && (Mathf.Abs(Input.GetAxis("Horizontal")) > .25f))
@@ -429,6 +433,8 @@ public class PlatformerController : MonoBehaviour {
         //}
         //lasthit = collision.gameobject.getcomponent<boxcollider2d>();
     }
+
+    
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
