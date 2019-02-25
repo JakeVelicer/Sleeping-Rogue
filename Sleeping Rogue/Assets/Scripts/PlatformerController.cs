@@ -408,7 +408,7 @@ public class PlatformerController : MonoBehaviour {
         var Image = GameObject.Find("DeathFade").GetComponent<DeathFade>();
         Image.FadeIn();
         canMove = false;
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(0.8f);
         Image.FadeOut();
         this.transform.position = checkPointSave;
         yield return new WaitForSeconds(0.5f);
