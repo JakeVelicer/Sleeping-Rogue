@@ -191,10 +191,10 @@ public class PlatformerController : MonoBehaviour {
             horiz = Input.GetAxis("Horizontal");
 
 
-            //if (runInto)
-            //{
-            //    rb2d.velocity = new Vector2(0, rb2d.velocity.y);
-            //}
+            if (runInto)
+            {
+                rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+            }
 
             if (wallJumpEnabled)
             {
