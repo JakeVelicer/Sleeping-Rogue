@@ -27,10 +27,9 @@ public class Drag : MonoBehaviour
     void Update()
     {
         boxTouch = Physics2D.Linecast(forward1.transform.position, forward2.transform.position, LayerMask.GetMask("Box"));
+       
 
-
-
-        if(boxTouch && Input.GetButtonDown("Drag"))
+        if (boxTouch && player.GetComponent<PlatformerController>().grounded && Input.GetButtonDown("Drag"))
         {
             boxDrag = true;
             boxTouch.collider.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
@@ -42,7 +41,6 @@ public class Drag : MonoBehaviour
             boxTouch.collider.gameObject.GetComponent<FixedJoint2D>().connectedBody = boxTouch.collider.gameObject.GetComponent<Rigidbody2D>();
             boxTouch.collider.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionX;
         }
-
        
     }
 

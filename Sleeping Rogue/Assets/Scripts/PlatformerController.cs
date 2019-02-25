@@ -15,7 +15,8 @@ public class PlatformerController : MonoBehaviour {
     public float JumpForce;
     public Vector2 wallJumpForce;
     public Transform groundCheck1, groundCheck2;
-    public Transform wallCheck1, wallCheck2;
+    public Transform Right1, Right2;
+    public Transform Left1, Left2;
     public GameObject shadow;
 
 
@@ -85,8 +86,12 @@ public class PlatformerController : MonoBehaviour {
         jumpTimer += Time.deltaTime;
 
         grounded = Physics2D.Linecast(groundCheck2.position, groundCheck1.position, flooring);
-        if(!wallBlock) wall = Physics2D.Linecast(wallCheck2.position, wallCheck1.position, wallType);
-        runInto = Physics2D.Linecast(wallCheck2.position, wallCheck1.position, collidables);
+        if(!wallBlock) wall = Physics2D.Linecast(Right1.position, Right2.position, wallType);
+        if (!Drag.boxDrag)
+        {
+            runInto = Physics2D.Linecast(Right1.position, Right2.position, collidables);
+        }
+        else runInto = Physics2D.Linecast(Left1.position, Left2.position, collidables);
 
         
 
@@ -157,10 +162,6 @@ public class PlatformerController : MonoBehaviour {
         if (grounded || !wall) wallBlock = false;
         
 
-        if(!grounded && runInto)
-        {
-            rb2d.velocity = new Vector2(0, rb2d.velocity.y);
-        }
 
         if (Input.GetButtonDown("Dream") && canMove)
         {
@@ -177,6 +178,12 @@ public class PlatformerController : MonoBehaviour {
         if (!wallJumping && canMove)
         {
             horiz = Input.GetAxis("Horizontal");
+
+
+            if (runInto)
+            {
+                rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+            }
 
             if (wallJumpEnabled)
             {
@@ -203,7 +210,7 @@ public class PlatformerController : MonoBehaviour {
 
             if (GetAxisDown("Horizontal"))
             {
-                if (!isMoving && Mathf.Abs(Input.GetAxis("Horizontal")) > .15)
+                if (!isMoving && Mathf.Abs(Input.GetAxis("Horizontal")) > .15 && !runInto)
                 {
                     isMoving = true;
                     if(Mathf.Abs(rb2d.velocity.x) < maxSpeed)
@@ -223,14 +230,10 @@ public class PlatformerController : MonoBehaviour {
 
             if (horiz * rb2d.velocity.x < maxSpeed && (Mathf.Abs(Input.GetAxis("Horizontal")) > .25f))
             {
-                if (!grounded)
-                {
                     if (!runInto)
                     {
                         rb2d.AddForce(Vector2.right * horiz * moveForce);
                     }
-                }
-                else rb2d.AddForce(Vector2.right * horiz * moveForce);
             }
 
             // Climbing up ladder
