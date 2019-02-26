@@ -2242,12 +2242,12 @@ PrefabInstance:
     - target: {fileID: 1325278372992784083, guid: ddc181011fd904634b5d60dc6e15a7a2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -42.39
+      value: -42.18
       objectReference: {fileID: 0}
     - target: {fileID: 1325278372992784083, guid: ddc181011fd904634b5d60dc6e15a7a2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -38.75
+      value: -38.91
       objectReference: {fileID: 0}
     - target: {fileID: 1325278372992784083, guid: ddc181011fd904634b5d60dc6e15a7a2,
         type: 3}
@@ -10957,7 +10957,7 @@ PrefabInstance:
     - target: {fileID: 2963470235840564119, guid: e469ad48930764e58942f03b3897569e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 14.169
+      value: 14.043
       objectReference: {fileID: 0}
     - target: {fileID: 2963470235840564119, guid: e469ad48930764e58942f03b3897569e,
         type: 3}
@@ -11007,7 +11007,7 @@ PrefabInstance:
     - target: {fileID: 2963470235840564119, guid: e469ad48930764e58942f03b3897569e,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.68836
+      value: 2.814713
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e469ad48930764e58942f03b3897569e, type: 3}
@@ -11447,28 +11447,33 @@ PrefabInstance:
     - target: {fileID: 4343681129051677822, guid: e7d92a72c845945fb88d0782c7aaba03,
         type: 3}
       propertyPath: m_text
-      value: You can grab onto boxes to push and drag them by holding down the X button
-        while touching the box.
+      value: You can push boxes by running into them. You can also grab them by holding
+        the X button.
       objectReference: {fileID: 0}
     - target: {fileID: 4343681129051677822, guid: e7d92a72c845945fb88d0782c7aaba03,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 98
+      value: 88
       objectReference: {fileID: 0}
     - target: {fileID: 4343681129051677822, guid: e7d92a72c845945fb88d0782c7aaba03,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 19
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 4343681129051677822, guid: e7d92a72c845945fb88d0782c7aaba03,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 20
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 4343681129051677822, guid: e7d92a72c845945fb88d0782c7aaba03,
         type: 3}
       propertyPath: m_textInfo.lineCount
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4343681129051677822, guid: e7d92a72c845945fb88d0782c7aaba03,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7d92a72c845945fb88d0782c7aaba03, type: 3}
@@ -13551,7 +13556,7 @@ PrefabInstance:
     - target: {fileID: 1500010818920528374, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 17.9
+      value: 17.8231
       objectReference: {fileID: 0}
     - target: {fileID: 1500010818920528374, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
         type: 3}
@@ -13601,7 +13606,7 @@ PrefabInstance:
     - target: {fileID: 1500010818920528374, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 13.221967
+      value: 13.375341
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48bb3ab6b2563fd43b9a37a45b521a09, type: 3}
