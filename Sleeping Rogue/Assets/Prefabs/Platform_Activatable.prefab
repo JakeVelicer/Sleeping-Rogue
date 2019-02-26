@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 498364316468859990}
   - component: {fileID: 817641620003102829}
   - component: {fileID: 7874042638623497869}
+  - component: {fileID: 4833700486746405849}
   m_Layer: 11
   m_Name: Platform_Activatable
   m_TagString: Floor
@@ -120,3 +121,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 0
+--- !u!114 &4833700486746405849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7874042638623497868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6411ae3c4213046d3b4b0f9d0037df41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Floor: {fileID: 6200000, guid: ab4793613570ca745acb60f37784bde9, type: 2}
+  Slick: {fileID: 6200000, guid: 39e15633c3db64fc38a47db66f44f13d, type: 2}

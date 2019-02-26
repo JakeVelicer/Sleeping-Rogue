@@ -93,6 +93,8 @@ public class PlatformerController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+
+        Debug.Log(wall);
         if (!paused)
         {
             wallJumpForce = new Vector2(650f, wallJumpVert);
@@ -108,11 +110,6 @@ public class PlatformerController : MonoBehaviour {
                 runInto = Physics2D.Linecast(Right1.position, Right2.position, collidables);
             }
             else runInto = Physics2D.Linecast(Left1.position, Left2.position, collidables);
-
-
-            Debug.Log(rb2d.velocity);
-
-
 
             if (runInto && isMoving)
             {
