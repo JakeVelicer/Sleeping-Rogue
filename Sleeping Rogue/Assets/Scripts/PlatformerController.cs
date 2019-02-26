@@ -87,6 +87,7 @@ public class PlatformerController : MonoBehaviour {
         menuOptions = GameObject.Find("Options");
 
         GameObject.Find("Button 0").GetComponent<Button>().onClick.AddListener(Pause);
+        GameObject.Find("Button 0").GetComponent<Button>().onClick.AddListener(Pause);
 
         menuMain.SetActive(false);
         menuOptions.SetActive(false);
