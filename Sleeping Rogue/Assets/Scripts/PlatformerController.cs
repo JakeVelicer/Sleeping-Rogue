@@ -22,7 +22,6 @@ public class PlatformerController : MonoBehaviour {
     public Transform Left1, Left2;
     public GameObject shadow;
     public GameObject menuMain;
-    public GameObject menu1;
     public GameObject menuOptions;
 
 
@@ -83,6 +82,14 @@ public class PlatformerController : MonoBehaviour {
         isMoving = false;
         flooring = LayerMask.GetMask("Ground", "Box");
         wallType = LayerMask.GetMask("Ground");
+
+        menuMain = GameObject.Find("Main");
+        menuOptions = GameObject.Find("Options");
+
+        GameObject.Find("Button 0").GetComponent<Button>().onClick.AddListener(Pause);
+
+        menuMain.SetActive(false);
+        menuOptions.SetActive(false);
     }
 
     void Start()
@@ -428,7 +435,6 @@ public class PlatformerController : MonoBehaviour {
         if (paused)
         {
             menuMain.SetActive(true);
-            menu1.SetActive(true);
             menuOptions.SetActive(false);
             velocHolder = rb2d.velocity;
             rb2d.bodyType = RigidbodyType2D.Static;
@@ -436,7 +442,6 @@ public class PlatformerController : MonoBehaviour {
         else
         {
             menuMain.SetActive(false);
-            menu1.SetActive(false);
             menuOptions.SetActive(false);
             rb2d.bodyType = RigidbodyType2D.Dynamic;
             rb2d.velocity = velocHolder;
