@@ -110,10 +110,6 @@ public class PlatformerController : MonoBehaviour {
             else runInto = Physics2D.Linecast(Left1.position, Left2.position, collidables);
 
 
-            Debug.Log(rb2d.velocity);
-
-
-
             if (runInto && isMoving)
             {
                 rb2d.velocity = new Vector2(0, rb2d.velocity.y);
@@ -136,13 +132,13 @@ public class PlatformerController : MonoBehaviour {
 
             // Wall sliding is handled in this if statement
 
-            if (wall && !grounded && !dreaming && !wallBlock)
+            if (wall && !grounded && !dreaming && !wallBlock && !jumpHeld)
             {
                 wallJumpEnabled = true;
                 lastMove = Input.GetAxisRaw("Horizontal");
-                //rb2d.velocity = new Vector2(0,-1);
                 jumping = false;
                 wallJumpTimer = 0;
+
                 if (Input.GetButtonDown("Jump") && canMove)
                 {
                     WallJump();
@@ -151,10 +147,11 @@ public class PlatformerController : MonoBehaviour {
                 {
                     wallBlock = true;
                 }
+
                 CapVelocity();
             }
 
-            if (grounded)
+             if (grounded)
             {
                 wallJumping = false;
             }
@@ -582,5 +579,9 @@ public class PlatformerController : MonoBehaviour {
         float cappedYVelocity = Mathf.Max(rb2d.velocity.y, maxFallSpeed);
 
         rb2d.velocity = new Vector2(0, cappedYVelocity);
+        if (rb2d.velocity.y == cappedYVelocity)
+        {
+            Debug.Log("capping velocity");
+        }
     }
 }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5909443301092767458}
   - component: {fileID: 841157996554756237}
   - component: {fileID: 440851051082896566}
+  - component: {fileID: 7434942013048164950}
   m_Layer: 11
   m_Name: Platform
   m_TagString: Floor
@@ -106,3 +107,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 0.61}
   m_EdgeRadius: 0
+--- !u!50 &7434942013048164950
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6917765452271037015}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
