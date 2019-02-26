@@ -66,6 +66,7 @@ public class PlatformerController : MonoBehaviour {
 
     ParticleSystem jumpEffect;
     ParticleSystem wallEffect;
+    public ParticleSystem returnEffect;
 
     public static bool paused;
     Vector2 velocHolder = Vector2.zero;
@@ -359,8 +360,13 @@ public class PlatformerController : MonoBehaviour {
                 GameObject ShadowInScene = GameObject.FindGameObjectWithTag("Shadow");
                 transform.position = Vector2.MoveTowards(transform.position, ShadowInScene.transform.position, (ReturnSpeed * Time.deltaTime));
                 ReturnSpeed += 60 * Time.deltaTime;
+                returnEffect.transform.LookAt(ShadowInScene.transform.position);
+                returnEffect.Play();
                 if (transform.position == ShadowInScene.transform.position)
                 {
+
+                    returnEffect.Stop();
+                    returnEffect.Clear();
                     movingToBody = false;
                     Destroy(ShadowInScene);
                     dreaming = false;
