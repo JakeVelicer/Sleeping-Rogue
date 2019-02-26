@@ -39,15 +39,24 @@ public class Drag : MonoBehaviour
             boxDrag = true;
             dragged = boxTouch.collider.gameObject;
             dragged.GetComponent<FixedJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
+            dragged.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         }
         else if(!boxDrag && dragging)
         {
             dragging = false;
-            dragged.GetComponent<FixedJoint2D>().connectedBody = dragged.GetComponent<Rigidbody2D>();;
+
+            dragged.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionX;
+            dragged.GetComponent<FixedJoint2D>().connectedBody = dragged.GetComponent<Rigidbody2D>();
             dragged = null;
         }
 
-       
+        if (!boxTouch)
+        {
+            boxDrag = false;
+
+        }
+
+
     }
 
 }
