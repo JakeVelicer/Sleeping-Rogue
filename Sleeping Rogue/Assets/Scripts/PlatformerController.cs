@@ -393,6 +393,7 @@ public class PlatformerController : MonoBehaviour {
             canMove = false;
             movingToBody = true;
             playerCollider.enabled = false;
+            canDream = true;
         }
         else if (!dreaming && canDream == true)
         {
@@ -532,6 +533,7 @@ public class PlatformerController : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Inhibitor")
         {
+            canDream = false;
             if (dreaming) {
                 EnterExitDreaming();
             }
