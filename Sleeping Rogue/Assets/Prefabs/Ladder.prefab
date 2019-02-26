@@ -124,7 +124,7 @@ MonoBehaviour:
   PlayerLayer:
     serializedVersion: 2
     m_Bits: 8192
-  RayCastCenterPointOffset: 5.5
+  RayCastCenterPointOffset: 4.9
 --- !u!1 &6800851989397647635
 GameObject:
   m_ObjectHideFlags: 0

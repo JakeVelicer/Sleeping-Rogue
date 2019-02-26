@@ -33,15 +33,6 @@ public class MenuScript : MonoBehaviour
         Application.Quit();
     }
 
-    public void MainMenu()
-    {
-        SceneManager.LoadScene("Main Menu");
-    }
-    public void Resume()
-    {
-        PlatformerController.paused = false;
-    }
-
     private void Update()
     {
         Debug.Log(mMenu.activeSelf);

@@ -19,10 +19,6 @@ public class PlatformerController : MonoBehaviour {
     public Transform Right1, Right2;
     public Transform Left1, Left2;
     public GameObject shadow;
-    public GameObject menuMain;
-    public GameObject menu1;
-    public GameObject menuOptions;
-
 
 
     public bool grounded = false;
@@ -48,7 +44,7 @@ public class PlatformerController : MonoBehaviour {
     [HideInInspector] public float horiz;
     [HideInInspector] public bool dreaming;
     [HideInInspector] public bool canDream;
-    public bool canLadder;
+    private bool canLadder;
     private bool climbing;
     [HideInInspector] public bool canMove;
     private bool movingToBody;
@@ -65,7 +61,7 @@ public class PlatformerController : MonoBehaviour {
     ParticleSystem jumpEffect;
     ParticleSystem wallEffect;
 
-    public static bool paused;
+    public bool paused;
     Vector2 velocHolder = Vector2.zero;
 
     private void Awake()
@@ -88,7 +84,6 @@ public class PlatformerController : MonoBehaviour {
         dragSpeed = groundSpeed / 2;
         wallJumpForce = new Vector2(650f, 600f);
         collidables = LayerMask.GetMask("Default", "Wall", "Ground");
-        paused = false;
     }
 
     // Update is called once per frame
@@ -395,23 +390,17 @@ public class PlatformerController : MonoBehaviour {
         }
     }
 
-    public void Pause()
+    private void Pause()
     {
 
         paused = !paused;
         if (paused)
         {
-            menuMain.SetActive(true);
-            menu1.SetActive(true);
-            menuOptions.SetActive(false);
             velocHolder = rb2d.velocity;
             rb2d.bodyType = RigidbodyType2D.Static;
         }
         else
         {
-            menuMain.SetActive(false);
-            menu1.SetActive(false);
-            menuOptions.SetActive(false);
             rb2d.bodyType = RigidbodyType2D.Dynamic;
             rb2d.velocity = velocHolder;
         }
@@ -491,7 +480,7 @@ public class PlatformerController : MonoBehaviour {
         //}
         //lasthit = collision.gameobject.getcomponent<boxcollider2d>();
     }
-    
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -529,15 +518,6 @@ public class PlatformerController : MonoBehaviour {
                 EnterExitDreaming();
             }
         }
-
-        if(collision.gameObject.tag == "Ladder")
-        {
-            if (dreaming)
-            {
-                canLadder = false;
-                rb2d.gravityScale = .7f;
-            }
-        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -554,10 +534,6 @@ public class PlatformerController : MonoBehaviour {
                 climbing = false;
                 rb2d.gravityScale = 1.0f;
                 if (rb2d.velocity.y > 0) rb2d.velocity = new Vector2(0, 0);
-            }
-            else if (dreaming)
-            {
-                rb2d.gravityScale = .7f;
             }
         }
     }
