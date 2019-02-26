@@ -19,6 +19,10 @@ public class PlatformerController : MonoBehaviour {
     public Transform Right1, Right2;
     public Transform Left1, Left2;
     public GameObject shadow;
+    public GameObject menuMain;
+    public GameObject menu1;
+    public GameObject menuOptions;
+
 
 
     public bool grounded = false;
@@ -61,7 +65,7 @@ public class PlatformerController : MonoBehaviour {
     ParticleSystem jumpEffect;
     ParticleSystem wallEffect;
 
-    public bool paused;
+    public static bool paused;
     Vector2 velocHolder = Vector2.zero;
 
     private void Awake()
@@ -84,6 +88,7 @@ public class PlatformerController : MonoBehaviour {
         dragSpeed = groundSpeed / 2;
         wallJumpForce = new Vector2(650f, 600f);
         collidables = LayerMask.GetMask("Default", "Wall", "Ground");
+        paused = false;
     }
 
     // Update is called once per frame
@@ -142,10 +147,11 @@ public class PlatformerController : MonoBehaviour {
                 {
                     WallJump();
                 }
-                if (Input.GetAxisRaw("Vertical") == -1)
+                if (Input.GetAxis("Vertical") < -0.1f)
                 {
                     wallBlock = true;
                 }
+                CapVelocity();
             }
 
             if (grounded)
@@ -389,17 +395,23 @@ public class PlatformerController : MonoBehaviour {
         }
     }
 
-    private void Pause()
+    public void Pause()
     {
 
         paused = !paused;
         if (paused)
         {
+            menuMain.SetActive(true);
+            menu1.SetActive(true);
+            menuOptions.SetActive(false);
             velocHolder = rb2d.velocity;
             rb2d.bodyType = RigidbodyType2D.Static;
         }
         else
         {
+            menuMain.SetActive(false);
+            menu1.SetActive(false);
+            menuOptions.SetActive(false);
             rb2d.bodyType = RigidbodyType2D.Dynamic;
             rb2d.velocity = velocHolder;
         }

@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &475945732
 Transform:
   m_ObjectHideFlags: 0
@@ -95,7 +95,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1202805110
 Transform:
   m_ObjectHideFlags: 0
@@ -322,8 +322,6 @@ MonoBehaviour:
   maxFallSpeed: -3.5
   lowJumpMultiplier: 2
   dreamJumpMultiplier: 2
-  real: {r: 0.19215688, g: 0.21176472, b: 0.47450984, a: 0}
-  dream: {r: 0.3647059, g: 0.3137255, b: 0.3803922, a: 0}
   horiz: 0
   dreaming: 0
   canDream: 1
