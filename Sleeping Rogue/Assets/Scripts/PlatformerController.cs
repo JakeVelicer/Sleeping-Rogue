@@ -48,7 +48,7 @@ public class PlatformerController : MonoBehaviour {
     [HideInInspector] public float horiz;
     [HideInInspector] public bool dreaming;
     [HideInInspector] public bool canDream;
-    private bool canLadder;
+    public bool canLadder;
     private bool climbing;
     [HideInInspector] public bool canMove;
     private bool movingToBody;
@@ -491,7 +491,7 @@ public class PlatformerController : MonoBehaviour {
         //}
         //lasthit = collision.gameobject.getcomponent<boxcollider2d>();
     }
-
+    
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -529,6 +529,15 @@ public class PlatformerController : MonoBehaviour {
                 EnterExitDreaming();
             }
         }
+
+        if(collision.gameObject.tag == "Ladder")
+        {
+            if (dreaming)
+            {
+                canLadder = false;
+                rb2d.gravityScale = .7f;
+            }
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -545,6 +554,10 @@ public class PlatformerController : MonoBehaviour {
                 climbing = false;
                 rb2d.gravityScale = 1.0f;
                 if (rb2d.velocity.y > 0) rb2d.velocity = new Vector2(0, 0);
+            }
+            else if (dreaming)
+            {
+                rb2d.gravityScale = .7f;
             }
         }
     }
