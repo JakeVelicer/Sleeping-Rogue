@@ -2694,6 +2694,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1325278374517298602, guid: ddc181011fd904634b5d60dc6e15a7a2,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1325278374250826758, guid: ddc181011fd904634b5d60dc6e15a7a2,
         type: 3}
       propertyPath: m_BackGroundColor.r
@@ -2713,11 +2718,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ClearFlags
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1325278374517298602, guid: ddc181011fd904634b5d60dc6e15a7a2,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddc181011fd904634b5d60dc6e15a7a2, type: 3}
@@ -3260,14 +3260,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.04
       objectReference: {fileID: 0}
-    - target: {fileID: 980992500, guid: a9b164837612c864789fdc4fc6a95823, type: 3}
-      propertyPath: m_ConnectedAnchor.x
-      value: 166.42
-      objectReference: {fileID: 0}
-    - target: {fileID: 980992500, guid: a9b164837612c864789fdc4fc6a95823, type: 3}
-      propertyPath: m_ConnectedAnchor.y
-      value: 22.486
-      objectReference: {fileID: 0}
     - target: {fileID: 50123766189239672, guid: a9b164837612c864789fdc4fc6a95823,
         type: 3}
       propertyPath: m_Mass
@@ -3282,6 +3274,14 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Constraints
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 980992500, guid: a9b164837612c864789fdc4fc6a95823, type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: 166.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 980992500, guid: a9b164837612c864789fdc4fc6a95823, type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: 22.486
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9b164837612c864789fdc4fc6a95823, type: 3}
@@ -9068,7 +9068,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Main: []
   Options: []
-  Pause: []
   mMenu: {fileID: 0}
   opMenu: {fileID: 0}
   Selected: 0
@@ -10170,6 +10169,11 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 11.948107
       objectReference: {fileID: 0}
+    - target: {fileID: 1383921443733414403, guid: 2d2fb4ed0453a49b6bf0a89f06494eb9,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 11.927115
+      objectReference: {fileID: 0}
     - target: {fileID: 8346059947067709565, guid: 2d2fb4ed0453a49b6bf0a89f06494eb9,
         type: 3}
       propertyPath: RayCastCenterPointOffset
@@ -10179,11 +10183,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 2.228
-      objectReference: {fileID: 0}
-    - target: {fileID: 1383921443733414403, guid: 2d2fb4ed0453a49b6bf0a89f06494eb9,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 11.927115
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d2fb4ed0453a49b6bf0a89f06494eb9, type: 3}
@@ -15284,7 +15283,7 @@ PrefabInstance:
     - target: {fileID: 1500010818920528374, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 219.708
+      value: 219.8
       objectReference: {fileID: 0}
     - target: {fileID: 1500010818920528374, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
         type: 3}
