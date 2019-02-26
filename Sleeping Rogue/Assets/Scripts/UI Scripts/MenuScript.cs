@@ -11,6 +11,8 @@ public class MenuScript : MonoBehaviour
     public Button[] Main;
     public Button[] Options;
 
+    public static Button[] Pause;
+
     public GameObject mMenu, opMenu;
 
     public int Selected;
@@ -20,6 +22,12 @@ public class MenuScript : MonoBehaviour
     {
         Main[Selected].Select();
         canInteract = true;
+        GameObject[] manage = GameObject.FindGameObjectsWithTag("Manager");
+        if(manage.Length > 1)
+        {
+            Destroy(manage[1]);
+        }
+        DontDestroyOnLoad(this.gameObject);
     }
 
     public void PlayGame()
@@ -44,40 +52,74 @@ public class MenuScript : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(mMenu.activeSelf);
-        if(Input.GetAxisRaw("Vertical") != 0 && mMenu.activeSelf && canInteract)
+        if(Input.GetAxisRaw("Vertical") != 0 && canInteract)
         {
             canInteract = false;
             StartCoroutine(ChangeMenu(Input.GetAxisRaw("Vertical")));
         }
-
-        if (opMenu.activeSelf)
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Main Menu"))
         {
-            Options[0].Select();
+            if (opMenu.activeSelf)
+            {
+                Options[0].Select();
+            }
+            if (mMenu.activeSelf)
+            {
+                Main[Selected].Select();
+            }
         }
-        if (mMenu.activeSelf)
+        else
         {
-            Main[Selected].Select();
+            if(Pause.Length > 0)
+            {
+                Pause[Selected].Select();
+            }
+            else
+            {
+                Pause[0].Select();
+            }
         }
-        
         
     }
 
     IEnumerator ChangeMenu(float val)
     {
-        if(val < 0 && Selected < Main.Length - 1)
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Main Menu"))
         {
-            Selected++;
+            if (mMenu.activeSelf)
+            {
+                if (val < 0 && Selected < Main.Length - 1)
+                {
+                    Selected++;
+                }
+                if (val > 0 && Selected > 0)
+                {
+                    Selected--;
+
+                }
+            }
         }
-        if(val > 0 && Selected > 0 )
+        else
         {
-            Selected--;
-            
+            if (val < 0 && Selected < Pause.Length - 1)
+            {
+                Selected++;
+            }
+            if (val > 0 && Selected > 0)
+            {
+                Selected--;
+            }
         }
         Debug.Log(Selected);
 
-        Main[Selected].Select();
-
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Main Menu"))
+        {
+            Main[Selected].Select();
+        }
+        else
+        {
+            Pause[Selected].Select();
+        }
         yield return new WaitForSeconds(.2f);
 
         canInteract = true;
