@@ -129,7 +129,7 @@ public class MenuScript : MonoBehaviour
 
     private IEnumerator ChangeMenu(float val)
     {
-            if (mMenu.activeSelf)
+            if (mMenu != null)
             {
                 if (val < 0 && Selected < Main.Length - 1)
                 {
