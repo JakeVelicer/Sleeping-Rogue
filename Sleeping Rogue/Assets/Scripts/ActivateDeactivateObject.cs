@@ -12,7 +12,6 @@ public class ActivateDeactivateObject :InteractableObject
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         m_Collider = GetComponent<Collider2D>();
-        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
     }
 
 	// Update is called once per frame

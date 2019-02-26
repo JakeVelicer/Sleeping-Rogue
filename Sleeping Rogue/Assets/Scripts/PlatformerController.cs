@@ -94,6 +94,8 @@ public class PlatformerController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+
+        Debug.Log(wall);
         if (!paused)
         {
             wallJumpForce = new Vector2(650f, wallJumpVert);
