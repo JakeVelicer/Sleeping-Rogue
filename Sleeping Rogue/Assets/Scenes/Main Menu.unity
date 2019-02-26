@@ -1000,7 +1000,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1807004634}
+      - m_Target: {fileID: 1911460397}
         m_MethodName: PlayGame
         m_Mode: 1
         m_Arguments:
@@ -1540,7 +1540,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1807004634}
+      - m_Target: {fileID: 1911460397}
         m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
@@ -1601,7 +1601,6 @@ GameObject:
   - component: {fileID: 1807004633}
   - component: {fileID: 1807004632}
   - component: {fileID: 1807004631}
-  - component: {fileID: 1807004634}
   - component: {fileID: 1807004635}
   m_Layer: 0
   m_Name: EventSystem
@@ -1658,28 +1657,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1807004634
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1807004630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 232f0fff6e5dc7641ba82d4eba1a75ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Main:
-  - {fileID: 1059083668}
-  - {fileID: 1119494567}
-  - {fileID: 1743123901}
-  Options:
-  - {fileID: 1898850818}
-  mMenu: {fileID: 938136576}
-  opMenu: {fileID: 1477476994}
-  Selected: 0
-  canInteract: 1
 --- !u!114 &1807004635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1868,6 +1845,60 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1898850816}
   m_CullTransparentMesh: 0
+--- !u!1 &1911460396
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1911460398}
+  - component: {fileID: 1911460397}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: Manager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1911460397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1911460396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 232f0fff6e5dc7641ba82d4eba1a75ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Main:
+  - {fileID: 1059083668}
+  - {fileID: 1119494567}
+  - {fileID: 1743123901}
+  Options:
+  - {fileID: 1898850818}
+  Pause: []
+  mMenu: {fileID: 938136576}
+  opMenu: {fileID: 1477476994}
+  Selected: 0
+  canInteract: 1
+--- !u!4 &1911460398
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1911460396}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -18.032084, y: -38.063614, z: 4.4296875}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1959625894
 GameObject:
   m_ObjectHideFlags: 0

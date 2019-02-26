@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlatformerController : MonoBehaviour {
 
@@ -403,6 +404,16 @@ public class PlatformerController : MonoBehaviour {
             menuOptions.SetActive(false);
             velocHolder = rb2d.velocity;
             rb2d.bodyType = RigidbodyType2D.Static;
+
+            MenuScript.Pause = FindObjectsOfType<Button>();
+            Button temp = MenuScript.Pause[0];
+            MenuScript.Pause[0] = MenuScript.Pause[1];
+            MenuScript.Pause[1] = temp;
+            for(int i = 0; i < MenuScript.Pause.Length; i++)
+            {
+                Debug.Log(MenuScript.Pause[i]);
+            }
+            MenuScript.Pause[0].Select();
         }
         else
         {

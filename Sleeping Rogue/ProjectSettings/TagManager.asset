@@ -16,6 +16,7 @@ TagManager:
   - Ladder
   - WallCheck
   - SlickWall
+  - Manager
   layers:
   - Default
   - TransparentFX
