@@ -47,7 +47,7 @@ public class LaserScript : InteractableObject {
     private void FixedUpdate()
     {
         LayerMask lasers = ~LayerMask.GetMask("Laser", "Background", "UI");
-        RaycastHit2D ray = Physics2D.Raycast(transform.position, transform.right, length, lasers);
+        RaycastHit2D ray = Physics2D.Raycast(transform.position, transform.right, length, LayerMask.GetMask("Ground"));
         Debug.DrawRay(transform.position, transform.right, Color.black);
 
         if(ray.collider)
