@@ -18,6 +18,8 @@ public class MenuScript : MonoBehaviour
     public static int Selected;
     public bool canInteract = true;
 
+    public int playAdded, menuAdded;
+
     private void Start()
     {
         opMenu = GameObject.Find("Options");
@@ -39,7 +41,7 @@ public class MenuScript : MonoBehaviour
     public void PlayGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-
+        menuAdded = 0;
     }
     public void QuitGame()
     {
@@ -50,6 +52,7 @@ public class MenuScript : MonoBehaviour
     public void MainMenu()
     {
         SceneManager.LoadScene("Main Menu");
+        playAdded = 0;
     }
     public void Resume()
     {
@@ -64,6 +67,7 @@ public class MenuScript : MonoBehaviour
     private void Update()
     {
 
+
         opMenu = GameObject.Find("Options");
         mMenu = GameObject.Find("Main");
 
@@ -72,14 +76,14 @@ public class MenuScript : MonoBehaviour
             canInteract = false;
             StartCoroutine(ChangeMenu(Input.GetAxisRaw("Vertical")));
         }
-        if (mMenu.activeSelf)
+        if (mMenu != null)
         {
             Main = FindObjectsOfType<Button>();
             Main[0] = GameObject.Find("Button 0").GetComponent<Button>();
             Main[1] = GameObject.Find("Button 1").GetComponent<Button>();
             Main[2] = GameObject.Find("Button 2").GetComponent<Button>();
         }
-        if (opMenu.activeSelf)
+        if (opMenu != null)
         {
             Options = FindObjectsOfType<Button>();
         }
@@ -87,26 +91,32 @@ public class MenuScript : MonoBehaviour
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Main Menu"))
         {
 
-            if (mMenu.activeSelf)
+            if (mMenu != null)
             {
-                Main[0].onClick.AddListener(PlayGame);
+                if (playAdded == 0)
+                {
+                    Main[0].onClick.AddListener(PlayGame);
+                    playAdded++;
+                }
                 Main[Selected].Select();
             }
-            else if (opMenu.activeSelf)
+            else if (opMenu != null)
             {
                 Options[0].Select();
             }
         }
         else
         {
-            if (mMenu.activeSelf)
+            if (mMenu != null)
             {
-                if (Pause.Length > 0)
+                if (menuAdded == 0)
                 {
-                    Pause[Selected].Select();
+                    Main[2].onClick.AddListener(MainMenu);
+                    menuAdded++;
                 }
+                Main[Selected].Select();
             }
-            else if (opMenu.activeSelf)
+            else if (opMenu != null)
             {
                 Options[0].Select();
             }
@@ -119,9 +129,7 @@ public class MenuScript : MonoBehaviour
 
     private IEnumerator ChangeMenu(float val)
     {
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Main Menu"))
-        {
-            if (mMenu.activeSelf)
+            if (mMenu != null)
             {
                 if (val < 0 && Selected < Main.Length - 1)
                 {
@@ -133,32 +141,12 @@ public class MenuScript : MonoBehaviour
 
                 }
             }
-        }
-        else
-        {
-            if (val < 0 && Selected < Pause.Length - 1)
-            {
-                Selected++;
-            }
-            if (val > 0 && Selected > 0)
-            {
-                Selected--;
-            }
-        }
         Debug.Log(Selected);
-
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Main Menu"))
-        {
+        
             Main[Selected].Select();
-        }
-        else
-        {
-            Pause[Selected].Select();
-        }
         yield return new WaitForSeconds(.2f);
 
         canInteract = true;
     }
 
 }
-

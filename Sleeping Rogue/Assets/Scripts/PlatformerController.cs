@@ -22,7 +22,6 @@ public class PlatformerController : MonoBehaviour {
     public Transform Left1, Left2;
     public GameObject shadow;
     public GameObject menuMain;
-    public GameObject menu1;
     public GameObject menuOptions;
 
 
@@ -54,6 +53,7 @@ public class PlatformerController : MonoBehaviour {
     private bool climbing;
     [HideInInspector] public bool canMove;
     private bool movingToBody;
+    private bool RoamRight;
 
     [HideInInspector] public bool isMoving;
     float lastMove;
@@ -82,6 +82,14 @@ public class PlatformerController : MonoBehaviour {
         isMoving = false;
         flooring = LayerMask.GetMask("Ground", "Box");
         wallType = LayerMask.GetMask("Ground");
+
+        menuMain = GameObject.Find("Main");
+        menuOptions = GameObject.Find("Options");
+
+        GameObject.Find("Button 0").GetComponent<Button>().onClick.AddListener(Pause);
+
+        menuMain.SetActive(false);
+        menuOptions.SetActive(false);
     }
 
     void Start()
@@ -359,12 +367,18 @@ public class PlatformerController : MonoBehaviour {
             {
                 GameObject ShadowInScene = GameObject.FindGameObjectWithTag("Shadow");
                 transform.position = Vector2.MoveTowards(transform.position, ShadowInScene.transform.position, (ReturnSpeed * Time.deltaTime));
-                ReturnSpeed += 60 * Time.deltaTime;
+                ReturnSpeed += 50 * Time.deltaTime;
+                if (RoamRight) {
+                    rb2d.AddForce(new Vector2(300, 300));
+                }
+                else if (!RoamRight) {
+                    rb2d.AddForce(new Vector2(-300, -300));
+                }
                 returnEffect.transform.LookAt(ShadowInScene.transform.position);
                 returnEffect.Play();
                 if (transform.position == ShadowInScene.transform.position)
                 {
-
+                    rb2d.velocity = Vector3.zero;
                     returnEffect.Stop();
                     returnEffect.Clear();
                     movingToBody = false;
@@ -372,7 +386,6 @@ public class PlatformerController : MonoBehaviour {
                     dreaming = false;
                     playerCollider.enabled = true;
                     rb2d.gravityScale = 1.0f;
-                    rb2d.velocity = Vector3.zero;
                     canMove = true;
                     ReturnSpeed = 5;
                 }
@@ -386,6 +399,16 @@ public class PlatformerController : MonoBehaviour {
 
     }
 
+    private void Wave()
+    {
+        if (RoamRight == true) {
+            RoamRight = false;
+        }
+        else if (RoamRight == false) {
+            RoamRight = true;
+        }
+    }
+
     private void EnterExitDreaming()
     {
         if (dreaming)
@@ -394,10 +417,12 @@ public class PlatformerController : MonoBehaviour {
             movingToBody = true;
             playerCollider.enabled = false;
             canDream = true;
+            //CancelInvoke("Wave");
         }
         else if (!dreaming && canDream == true)
         {
             dreaming = true;
+            InvokeRepeating("Wave",0,0.6f);
             Instantiate(shadow, this.transform.position, Quaternion.identity);
             rb2d.gravityScale = 0.7f;
         }
@@ -410,7 +435,6 @@ public class PlatformerController : MonoBehaviour {
         if (paused)
         {
             menuMain.SetActive(true);
-            menu1.SetActive(true);
             menuOptions.SetActive(false);
             velocHolder = rb2d.velocity;
             rb2d.bodyType = RigidbodyType2D.Static;
@@ -418,7 +442,6 @@ public class PlatformerController : MonoBehaviour {
         else
         {
             menuMain.SetActive(false);
-            menu1.SetActive(false);
             menuOptions.SetActive(false);
             rb2d.bodyType = RigidbodyType2D.Dynamic;
             rb2d.velocity = velocHolder;
