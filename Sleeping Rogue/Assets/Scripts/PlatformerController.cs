@@ -15,6 +15,7 @@ public class PlatformerController : MonoBehaviour {
     public float airSpeed;
     public float JumpForce;
     public float DreamJumpForce;
+    private float ReturnSpeed = 5;
     public Vector2 wallJumpForce;
     public Transform groundCheck1, groundCheck2;
     public Transform Right1, Right2;
@@ -65,6 +66,7 @@ public class PlatformerController : MonoBehaviour {
 
     ParticleSystem jumpEffect;
     ParticleSystem wallEffect;
+    public ParticleSystem returnEffect;
 
     public static bool paused;
     Vector2 velocHolder = Vector2.zero;
@@ -95,7 +97,6 @@ public class PlatformerController : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
-        Debug.Log(wall);
         if (!paused)
         {
             wallJumpForce = new Vector2(650f, wallJumpVert);
@@ -357,9 +358,15 @@ public class PlatformerController : MonoBehaviour {
             if (movingToBody)
             {
                 GameObject ShadowInScene = GameObject.FindGameObjectWithTag("Shadow");
-                transform.position = Vector2.MoveTowards(transform.position, ShadowInScene.transform.position, (30 * Time.deltaTime));
+                transform.position = Vector2.MoveTowards(transform.position, ShadowInScene.transform.position, (ReturnSpeed * Time.deltaTime));
+                ReturnSpeed += 60 * Time.deltaTime;
+                returnEffect.transform.LookAt(ShadowInScene.transform.position);
+                returnEffect.Play();
                 if (transform.position == ShadowInScene.transform.position)
                 {
+
+                    returnEffect.Stop();
+                    returnEffect.Clear();
                     movingToBody = false;
                     Destroy(ShadowInScene);
                     dreaming = false;
@@ -367,9 +374,9 @@ public class PlatformerController : MonoBehaviour {
                     rb2d.gravityScale = 1.0f;
                     rb2d.velocity = Vector3.zero;
                     canMove = true;
+                    ReturnSpeed = 5;
                 }
             }
-
         }
 
         if (Input.GetButtonDown("Pause"))
@@ -386,6 +393,7 @@ public class PlatformerController : MonoBehaviour {
             canMove = false;
             movingToBody = true;
             playerCollider.enabled = false;
+            canDream = true;
         }
         else if (!dreaming && canDream == true)
         {
@@ -406,16 +414,6 @@ public class PlatformerController : MonoBehaviour {
             menuOptions.SetActive(false);
             velocHolder = rb2d.velocity;
             rb2d.bodyType = RigidbodyType2D.Static;
-
-            MenuScript.Pause = FindObjectsOfType<Button>();
-            Button temp = MenuScript.Pause[0];
-            MenuScript.Pause[0] = MenuScript.Pause[1];
-            MenuScript.Pause[1] = temp;
-            for(int i = 0; i < MenuScript.Pause.Length; i++)
-            {
-                Debug.Log(MenuScript.Pause[i]);
-            }
-            MenuScript.Pause[0].Select();
         }
         else
         {
@@ -535,6 +533,7 @@ public class PlatformerController : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Inhibitor")
         {
+            canDream = false;
             if (dreaming) {
                 EnterExitDreaming();
             }

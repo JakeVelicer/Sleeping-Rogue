@@ -93,4 +93,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RealitySprite: {fileID: 21300000, guid: b3fdb1b8963ac46e9bd9e378d5f76df5, type: 3}
-  DreamSprite: {fileID: 21300000, guid: fc93f4754af014c1f95c3917a0893183, type: 3}
+  DreamSprite: {fileID: 21300000, guid: 07d547149e58ce24b9f19184c715070b, type: 3}
