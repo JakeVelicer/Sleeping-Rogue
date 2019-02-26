@@ -96,7 +96,7 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
+  m_UseAutoMass: 1
   m_Mass: 1.25
   m_LinearDrag: 0
   m_AngularDrag: 0
@@ -176,8 +176,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forward1: {fileID: 0}
   forward2: {fileID: 0}
+  left1: {fileID: 0}
+  left2: {fileID: 0}
+  right1: {fileID: 0}
+  right2: {fileID: 0}
   player: {fileID: 0}
-  dragged: {fileID: 0}
 --- !u!1 &7724753626631258636
 GameObject:
   m_ObjectHideFlags: 0
