@@ -15,6 +15,7 @@ public class PlatformerController : MonoBehaviour {
     public float airSpeed;
     public float JumpForce;
     public float DreamJumpForce;
+    private float ReturnSpeed = 5;
     public Vector2 wallJumpForce;
     public Transform groundCheck1, groundCheck2;
     public Transform Right1, Right2;
@@ -95,7 +96,6 @@ public class PlatformerController : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
-        Debug.Log(wall);
         if (!paused)
         {
             wallJumpForce = new Vector2(650f, wallJumpVert);
@@ -357,7 +357,8 @@ public class PlatformerController : MonoBehaviour {
             if (movingToBody)
             {
                 GameObject ShadowInScene = GameObject.FindGameObjectWithTag("Shadow");
-                transform.position = Vector2.MoveTowards(transform.position, ShadowInScene.transform.position, (30 * Time.deltaTime));
+                transform.position = Vector2.MoveTowards(transform.position, ShadowInScene.transform.position, (ReturnSpeed * Time.deltaTime));
+                ReturnSpeed += 60 * Time.deltaTime;
                 if (transform.position == ShadowInScene.transform.position)
                 {
                     movingToBody = false;
@@ -367,9 +368,9 @@ public class PlatformerController : MonoBehaviour {
                     rb2d.gravityScale = 1.0f;
                     rb2d.velocity = Vector3.zero;
                     canMove = true;
+                    ReturnSpeed = 5;
                 }
             }
-
         }
 
         if (Input.GetButtonDown("Pause"))
