@@ -15,20 +15,26 @@ public class MenuScript : MonoBehaviour
 
     public GameObject mMenu, opMenu;
 
-    public int Selected;
+    public static int Selected;
     public bool canInteract = true;
 
     private void Start()
     {
+        opMenu = GameObject.Find("Options");
+        mMenu = GameObject.Find("Main");
+        Main = FindObjectsOfType<Button>();
+
         Main[Selected].Select();
         canInteract = true;
         GameObject[] manage = GameObject.FindGameObjectsWithTag("Manager");
-        if(manage.Length > 1)
+        if (manage.Length > 1)
         {
-            Destroy(manage[1]);
+            Destroy(manage[0]);
         }
         DontDestroyOnLoad(this.gameObject);
+
     }
+
 
     public void PlayGame()
     {
@@ -50,39 +56,68 @@ public class MenuScript : MonoBehaviour
         PlatformerController.paused = false;
     }
 
+    public void resetSelected()
+    {
+        Selected = 0;
+    }
+
     private void Update()
     {
-        if(Input.GetAxisRaw("Vertical") != 0 && canInteract)
+
+        opMenu = GameObject.Find("Options");
+        mMenu = GameObject.Find("Main");
+
+        if (Input.GetAxisRaw("Vertical") != 0 && canInteract)
         {
             canInteract = false;
             StartCoroutine(ChangeMenu(Input.GetAxisRaw("Vertical")));
         }
+        if (mMenu.activeSelf)
+        {
+            Main = FindObjectsOfType<Button>();
+            Main[0] = GameObject.Find("Button 0").GetComponent<Button>();
+            Main[1] = GameObject.Find("Button 1").GetComponent<Button>();
+            Main[2] = GameObject.Find("Button 2").GetComponent<Button>();
+        }
+        if (opMenu.activeSelf)
+        {
+            Options = FindObjectsOfType<Button>();
+        }
+
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Main Menu"))
         {
-            if (opMenu.activeSelf)
-            {
-                Options[0].Select();
-            }
+
             if (mMenu.activeSelf)
             {
+                Main[0].onClick.AddListener(PlayGame);
                 Main[Selected].Select();
+            }
+            else if (opMenu.activeSelf)
+            {
+                Options[0].Select();
             }
         }
         else
         {
-            if(Pause.Length > 0)
+            if (mMenu.activeSelf)
             {
-                Pause[Selected].Select();
+                if (Pause.Length > 0)
+                {
+                    Pause[Selected].Select();
+                }
             }
-            else
+            else if (opMenu.activeSelf)
             {
-                Pause[0].Select();
+                Options[0].Select();
             }
         }
-        
+
+
     }
 
-    IEnumerator ChangeMenu(float val)
+
+
+    private IEnumerator ChangeMenu(float val)
     {
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Main Menu"))
         {
@@ -126,3 +161,4 @@ public class MenuScript : MonoBehaviour
     }
 
 }
+
