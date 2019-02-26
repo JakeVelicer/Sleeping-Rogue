@@ -7976,11 +7976,6 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 11.948107
       objectReference: {fileID: 0}
-    - target: {fileID: 1383921443733414403, guid: 2d2fb4ed0453a49b6bf0a89f06494eb9,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 11.927115
-      objectReference: {fileID: 0}
     - target: {fileID: 8346059947067709565, guid: 2d2fb4ed0453a49b6bf0a89f06494eb9,
         type: 3}
       propertyPath: RayCastCenterPointOffset
@@ -7990,6 +7985,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 2.228
+      objectReference: {fileID: 0}
+    - target: {fileID: 1383921443733414403, guid: 2d2fb4ed0453a49b6bf0a89f06494eb9,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 11.927115
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d2fb4ed0453a49b6bf0a89f06494eb9, type: 3}
@@ -10656,12 +10656,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: You can push boxes by running into them. You can also grab them by holding
-        the X button.
+        the right bumper.
       objectReference: {fileID: 0}
     - target: {fileID: 4343681129051677822, guid: e7d92a72c845945fb88d0782c7aaba03,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 88
+      value: 92
       objectReference: {fileID: 0}
     - target: {fileID: 4343681129051677822, guid: e7d92a72c845945fb88d0782c7aaba03,
         type: 3}
