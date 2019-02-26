@@ -893,6 +893,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1325278372992784086, guid: ddc181011fd904634b5d60dc6e15a7a2,
+        type: 3}
+      propertyPath: DreamJumpForce
+      value: 600
+      objectReference: {fileID: 0}
     - target: {fileID: 1325278372992784083, guid: ddc181011fd904634b5d60dc6e15a7a2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -948,11 +953,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1325278372992784086, guid: ddc181011fd904634b5d60dc6e15a7a2,
-        type: 3}
-      propertyPath: DreamJumpForce
-      value: 600
-      objectReference: {fileID: 0}
     - target: {fileID: 1325278373953638701, guid: ddc181011fd904634b5d60dc6e15a7a2,
         type: 3}
       propertyPath: m_Enabled
@@ -968,9 +968,10 @@ PrefabInstance:
       propertyPath: m_Interpolate
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2094001332, guid: ddc181011fd904634b5d60dc6e15a7a2, type: 3}
-      propertyPath: m_Enabled
-      value: 0
+    - target: {fileID: 1325278373953638703, guid: ddc181011fd904634b5d60dc6e15a7a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 475945733, guid: ddc181011fd904634b5d60dc6e15a7a2, type: 3}
       propertyPath: m_Enabled
@@ -979,6 +980,10 @@ PrefabInstance:
     - target: {fileID: 1202805111, guid: ddc181011fd904634b5d60dc6e15a7a2, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2094001332, guid: ddc181011fd904634b5d60dc6e15a7a2, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5548444093008065904, guid: ddc181011fd904634b5d60dc6e15a7a2,
         type: 3}
