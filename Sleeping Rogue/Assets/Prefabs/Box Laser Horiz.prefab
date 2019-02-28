@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 3467297124020899381}
   - component: {fileID: 235313479076109273}
   - component: {fileID: 7074314679497233061}
-  - component: {fileID: 8422952188620001726}
   m_Layer: 14
   m_Name: Box Laser Horiz
   m_TagString: Box
@@ -154,30 +153,14 @@ FixedJoint2D:
   m_Enabled: 1
   serializedVersion: 4
   m_EnableCollision: 1
-  m_ConnectedRigidBody: {fileID: 0}
+  m_ConnectedRigidBody: {fileID: 3942961751887046107}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: -0, y: 0}
   m_DampingRatio: 0
   m_Frequency: 0
---- !u!114 &8422952188620001726
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5200088444226557830}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 775efd25d90b95546a452bcfcb08470a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  forward1: {fileID: 0}
-  forward2: {fileID: 0}
-  player: {fileID: 0}
-  dragged: {fileID: 0}
 --- !u!1 &7724753626631258636
 GameObject:
   m_ObjectHideFlags: 0

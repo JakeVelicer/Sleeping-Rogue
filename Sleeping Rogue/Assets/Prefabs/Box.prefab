@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 61569740005587990}
   - component: {fileID: 114299848274758464}
   - component: {fileID: 980992500}
-  - component: {fileID: 980992499}
   m_Layer: 14
   m_Name: Box
   m_TagString: Box
@@ -153,27 +152,11 @@ FixedJoint2D:
   m_Enabled: 1
   serializedVersion: 4
   m_EnableCollision: 1
-  m_ConnectedRigidBody: {fileID: 0}
+  m_ConnectedRigidBody: {fileID: 50123766189239672}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 1.588, y: 2.153}
+  m_ConnectedAnchor: {x: 0, y: 0}
   m_DampingRatio: 0
   m_Frequency: 0
---- !u!114 &980992499
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1344580248974500}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 775efd25d90b95546a452bcfcb08470a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  forward1: {fileID: 0}
-  forward2: {fileID: 0}
-  player: {fileID: 0}
-  dragged: {fileID: 0}

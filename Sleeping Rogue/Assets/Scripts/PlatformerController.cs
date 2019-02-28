@@ -29,48 +29,72 @@ public class PlatformerController : MonoBehaviour {
     public bool grounded = false;
     public bool wall, wallBlock = false;
     public bool runInto = false;
+    RaycastHit2D runIntoHit;
 
     [HideInInspector] public Rigidbody2D rb2d;
     private Collider2D playerCollider;
 
+
+    //Layermasks for the different objects players may touch.
     LayerMask collidables;
     LayerMask flooring;
     LayerMask wallType;
 
+    //Variables controlling jumping heights and interactions
     [HideInInspector] public int jumps = 0;
     [HideInInspector] public int maxJumps = 1;
-
     [HideInInspector] public float jumpTimer, wallJumpTimer, heightTime = 0.0f;
-
     public float maxFallSpeed = -2f;
     [HideInInspector] public float lowJumpMultiplier = 0.3f;
     [HideInInspector] public float dreamJumpMultiplier = 2f;
 
+    //Horiz determines players horizontal movement. booleans that control the dream state
     [HideInInspector] public float horiz;
     [HideInInspector] public bool dreaming;
     [HideInInspector] public bool canDream;
+
+    //Determines if the player is climbing or can climb
     public bool canLadder;
     private bool climbing;
+
+
     [HideInInspector] public bool canMove;
     private bool movingToBody;
     private bool RoamRight;
 
+
+    //Determines if the player is currently in motion
     [HideInInspector] public bool isMoving;
+
+    //Checks for new input after wall jumping
     float lastMove;
     [HideInInspector] public float showVert;
 
-    float dragSpeed;
 
+
+    //Stuff used for Decaying Wall Jumps?
     [HideInInspector] public Collider2D lastHit;
     private float wallJumpVert = 600f;
 
+
+    //Particles systems driven by the player
     ParticleSystem jumpEffect;
     ParticleSystem wallEffect;
     public ParticleSystem returnEffect;
 
+
+    //Default variables for the Pausing system
     public static bool paused;
     Vector2 velocHolder = Vector2.zero;
 
+
+    //Variables used for dragging boxes in the scene
+    [HideInInspector] public bool canDrag = true;
+    [HideInInspector] public bool dragging;
+    [HideInInspector] public bool boxTouching;
+    float dragSpeed;
+
+    //Start and Awake defaults all variables that need to be defaulted still. Set up the scene for gameplay.
     private void Awake()
     {
         jumpEffect = GameObject.Find("Ground Effects").GetComponent<ParticleSystem>();
@@ -98,7 +122,7 @@ public class PlatformerController : MonoBehaviour {
         canMove = true;
         dragSpeed = groundSpeed / 2;
         wallJumpForce = new Vector2(650f, 600f);
-        collidables = LayerMask.GetMask("Default", "Wall", "Ground");
+        collidables = LayerMask.GetMask("Default", "Wall", "Ground", "Box");
         paused = false;
     }
 
@@ -115,11 +139,24 @@ public class PlatformerController : MonoBehaviour {
             grounded = Physics2D.Linecast(groundCheck2.position, groundCheck1.position, flooring);
             if (!wallBlock) wall = Physics2D.Linecast(Right1.position, Right2.position, wallType);
 
-            if (!Drag.boxDrag)
+            //Changes the side checked if you are dragging a box
+            if (!dragging)
             {
                 runInto = Physics2D.Linecast(Right1.position, Right2.position, collidables);
             }
-            else runInto = Physics2D.Linecast(Left1.position, Left2.position, collidables);
+            else
+            {
+                runInto = Physics2D.Linecast(Left1.position, Left2.position, collidables);
+            }
+
+            //Checks for if the player has run into a box, then turns on the needed variable if so.
+            runIntoHit = Physics2D.Linecast(Right1.position, Right2.position, LayerMask.GetMask("Box"));
+
+            if (runIntoHit)
+            {
+                boxTouching = true;
+            }
+            else boxTouching = false;
 
 
             if (runInto && isMoving)
@@ -127,7 +164,9 @@ public class PlatformerController : MonoBehaviour {
                 rb2d.velocity = new Vector2(0, rb2d.velocity.y);
             }
 
-            if (Input.GetButtonDown("Jump") && grounded && canMove && !Drag.boxDrag)
+
+            //Controls jumping heights
+            if (Input.GetButtonDown("Jump") && grounded && canMove && !dragging)
             {
                 //jumpTimer = 0;
                 jumpEffect.transform.position = groundCheck1.position;
@@ -170,7 +209,8 @@ public class PlatformerController : MonoBehaviour {
 
             if (Input.GetAxisRaw("Vertical") != -1) wallBlock = false;
 
-            if (Drag.boxTouch)
+            //Cuts movement speed while dragging a box
+            if (dragging)
             {
                 maxSpeed = dragSpeed;
             }
@@ -193,6 +233,7 @@ public class PlatformerController : MonoBehaviour {
                 rb2d.velocity = new Vector2(0, rb2d.velocity.y);
             }
 
+            //Enters or exits the dream state if capable
             if (Input.GetButtonDown("Dream") && canMove)
             {
                 if (!dreaming)
@@ -201,18 +242,25 @@ public class PlatformerController : MonoBehaviour {
                 }
                 else EnterExitDreaming();
             }
+
+
+
+
+            //Checks conditions to allow dragging of boxes
+            if (Input.GetButtonDown("Drag") && canDrag && boxTouching && grounded)
+            {
+                canDrag = false;
+                StartCoroutine(StartStopDrag(runIntoHit.collider.gameObject));
+            }
         }
 	}
 
     private void FixedUpdate()
     {
+        //Blocks most inputs if the game is paused
         if (!paused)
         {
-
-            if (!Input.GetButton("Drag"))
-            {
-                Drag.boxDrag = false;
-            }
+            //If the player is not wall jumping, checks horizontal input and applies forces according to various conditions
             if (!wallJumping && canMove)
             {
                 horiz = Input.GetAxis("Horizontal");
@@ -240,6 +288,7 @@ public class PlatformerController : MonoBehaviour {
                     }
                 }
 
+                //Adds initial speed burst to player
                 if (GetAxisDown("Horizontal"))
                 {
                     if (!isMoving && Mathf.Abs(Input.GetAxis("Horizontal")) > .1 && !runInto)
@@ -318,6 +367,7 @@ public class PlatformerController : MonoBehaviour {
                 rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
             }
 
+            //handles which direction the player faces
             if (horiz > 0 && !facingRight)
             {
                 Flip();
@@ -326,6 +376,7 @@ public class PlatformerController : MonoBehaviour {
             {
                 Flip();
             }
+
 
             if (jumping)
             {
@@ -344,6 +395,7 @@ public class PlatformerController : MonoBehaviour {
 
             if (wallJumpEnabled && !wall) wallJumpEnabled = false;
 
+            //Blocks the input from user until new input is given
             if (wallJumping)
             {
                 if (!wall)
@@ -392,6 +444,7 @@ public class PlatformerController : MonoBehaviour {
             }
         }
 
+        //pauses and unpauses the game
         if (Input.GetButtonDown("Pause"))
         {
             Pause();
@@ -409,6 +462,7 @@ public class PlatformerController : MonoBehaviour {
         }
     }
 
+    //Handles players entering and exiting the dreamworld
     private void EnterExitDreaming()
     {
         if (dreaming)
@@ -428,6 +482,7 @@ public class PlatformerController : MonoBehaviour {
         }
     }
 
+    //Opens the pause menu and stores necessary variables
     public void Pause()
     {
 
@@ -448,6 +503,8 @@ public class PlatformerController : MonoBehaviour {
         }
     }
 
+
+    //Gives players the proper boost when jumping off a wall
     void WallJump()
     {
         wallJumpEnabled = false;
@@ -470,9 +527,10 @@ public class PlatformerController : MonoBehaviour {
         Flip();
     }
 
+    //Flips the player sprite depending on direction moving
     void Flip()
     {
-        if (!Drag.boxDrag)
+        if (!dragging)
         {
             facingRight = !facingRight;
             Vector3 theScale = transform.localScale;
@@ -481,6 +539,30 @@ public class PlatformerController : MonoBehaviour {
         }
     }
 
+    //Starts and Ends the dragging condition
+    public IEnumerator StartStopDrag(GameObject box)
+    {
+        dragging = !dragging;
+
+        Debug.Log(dragging);
+        if (!dragging)
+        {
+            box.GetComponent<FixedJoint2D>().connectedBody = box.GetComponent<Rigidbody2D>();
+            box.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+        }
+        else if (dragging)
+        {
+            box.GetComponent<FixedJoint2D>().connectedBody = GameObject.Find("Player").GetComponent<Rigidbody2D>();
+            box.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
+
+        yield return new WaitForSeconds(.2f);
+
+        canDrag = true;
+    }
+
+
+    //Reloads the player if they die
     private IEnumerator Respawn()
     {
         var Image = GameObject.Find("DeathFade").GetComponent<DeathFade>();
