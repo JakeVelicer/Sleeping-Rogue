@@ -23,7 +23,7 @@ public class CameraBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("CameraZoom")) {
+        if (Input.GetButtonDown("CameraZoom") && Player.GetComponent<PlatformerController>().grounded) {
             if (!Switching) {
                 StartCoroutine(ZoomController());
             }
