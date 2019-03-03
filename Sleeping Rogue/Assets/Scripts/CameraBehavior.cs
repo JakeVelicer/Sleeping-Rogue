@@ -7,6 +7,7 @@ public class CameraBehavior : MonoBehaviour
 {
     private Transform Player;
     private CinemachineVirtualCamera CameraController;
+    private CinemachineFramingTransposer FramingTransposer;
     public GameObject ZoomedOutCameraMover;
     public float NormalZoom;
     public float ZoomOut;
@@ -17,6 +18,7 @@ public class CameraBehavior : MonoBehaviour
     {
         Player = GameObject.FindGameObjectWithTag("Player").transform;
         CameraController = gameObject.GetComponent<CinemachineVirtualCamera>();
+        FramingTransposer = CameraController.GetCinemachineComponent<CinemachineFramingTransposer>();
         CameraController.Follow = Player;
     }
 
@@ -39,6 +41,8 @@ public class CameraBehavior : MonoBehaviour
         // If the camera is zoomed in
         if (CurrentSize <= NormalZoom) {
             Player.GetComponent<PlatformerController>().canMove = false;
+            FramingTransposer.m_DeadZoneWidth = 0;
+            FramingTransposer.m_DeadZoneHeight = 0;
             while (CameraController.m_Lens.OrthographicSize < ZoomOut) {
                 CameraController.m_Lens.OrthographicSize += 1;
                 yield return new WaitForSeconds(0.001f);
@@ -55,6 +59,8 @@ public class CameraBehavior : MonoBehaviour
                 yield return new WaitForSeconds(0.001f);
             }
             CameraController.Follow = Player;
+            FramingTransposer.m_DeadZoneWidth = 0.2f;
+            FramingTransposer.m_DeadZoneHeight = 0.1f;
             Player.GetComponent<PlatformerController>().canMove = true;
             Destroy(GameObject.Find("CameraMoverZoomedOut(Clone)"));
         }
