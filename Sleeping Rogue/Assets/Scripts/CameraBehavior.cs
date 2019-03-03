@@ -7,10 +7,10 @@ public class CameraBehavior : MonoBehaviour
 {
     private Transform Player;
     private CinemachineVirtualCamera CameraController;
+    public GameObject ZoomedOutCameraMover;
     public float NormalZoom;
     public float ZoomOut;
-    private float ZoomAmount;
-    private bool Switching;
+    [HideInInspector] public bool Switching;
 
     // Start is called before the first frame update
     void Start()
@@ -36,21 +36,27 @@ public class CameraBehavior : MonoBehaviour
         var CurrentSize = CameraController.m_Lens.OrthographicSize;
         Switching = true;
 
-        if (CurrentSize >= ZoomOut) {
-            ZoomAmount = NormalZoom;
-            Player.GetComponent<PlatformerController>().canMove = true;
-            while (CameraController.m_Lens.OrthographicSize > ZoomAmount) {
-                CameraController.m_Lens.OrthographicSize -= 1;
-                yield return new WaitForSeconds(0.001f);
-            }
-        }
-        else if (CurrentSize <= NormalZoom) {
-            ZoomAmount = ZoomOut;
+        // If the camera is zoomed in
+        if (CurrentSize <= NormalZoom) {
             Player.GetComponent<PlatformerController>().canMove = false;
-            while (CameraController.m_Lens.OrthographicSize < ZoomAmount) {
+            while (CameraController.m_Lens.OrthographicSize < ZoomOut) {
                 CameraController.m_Lens.OrthographicSize += 1;
                 yield return new WaitForSeconds(0.001f);
             }
+            Instantiate(ZoomedOutCameraMover, Player.position, Quaternion.identity);
+            CameraController.Follow = GameObject.Find("CameraMoverZoomedOut(Clone)").transform;
+        }
+        // If the camera is zoomed out
+        else if (CurrentSize >= ZoomOut) {
+            while (CameraController.m_Lens.OrthographicSize > NormalZoom) {
+                if (GameObject.Find("CameraMoverZoomedOut(Clone)").transform != Player) {
+                    CameraController.m_Lens.OrthographicSize -= 1;
+                }
+                yield return new WaitForSeconds(0.001f);
+            }
+            CameraController.Follow = Player;
+            Player.GetComponent<PlatformerController>().canMove = true;
+            Destroy(GameObject.Find("CameraMoverZoomedOut(Clone)"));
         }
         Switching = false;
     }
