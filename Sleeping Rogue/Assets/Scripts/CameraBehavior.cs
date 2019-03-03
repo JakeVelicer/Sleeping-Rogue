@@ -43,6 +43,7 @@ public class CameraBehavior : MonoBehaviour
             Player.GetComponent<PlatformerController>().canMove = false;
             FramingTransposer.m_DeadZoneWidth = 0;
             FramingTransposer.m_DeadZoneHeight = 0;
+            FramingTransposer.m_LookaheadTime = 0;
             while (CameraController.m_Lens.OrthographicSize < ZoomOut) {
                 CameraController.m_Lens.OrthographicSize += 1;
                 yield return new WaitForSeconds(0.001f);
@@ -61,6 +62,7 @@ public class CameraBehavior : MonoBehaviour
             CameraController.Follow = Player;
             FramingTransposer.m_DeadZoneWidth = 0.2f;
             FramingTransposer.m_DeadZoneHeight = 0.1f;
+            FramingTransposer.m_LookaheadTime = 0.1f;
             Player.GetComponent<PlatformerController>().canMove = true;
             Destroy(GameObject.Find("CameraMoverZoomedOut(Clone)"));
         }
