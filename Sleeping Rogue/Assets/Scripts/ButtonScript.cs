@@ -6,8 +6,8 @@ public class ButtonScript : MonoBehaviour {
 
 
     public GameObject[] connected;
-
-    
+    public Sprite Normal;
+    public Sprite Clicked;
     public bool touch = false;
 
     bool pressed;
@@ -52,9 +52,9 @@ public class ButtonScript : MonoBehaviour {
 
         if (pressed)
         {
-            spr.color = Color.blue;
+            spr.sprite = Clicked;
         }
-        else spr.color = Color.yellow;
+        else spr.sprite = Normal;
     }
 
     private void OnTriggerStay2D(Collider2D collision)

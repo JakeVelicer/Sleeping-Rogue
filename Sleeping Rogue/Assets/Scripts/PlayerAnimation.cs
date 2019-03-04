@@ -36,12 +36,12 @@ public class PlayerAnimation : MonoBehaviour
         
         // Activates jumping anim and falling anim
         if (rb2d.velocity.y > 0 && PlayerScript.jumping == true
-        && PlayerScript.canMove && !PlayerScript.grounded && !Drag.boxDrag)
+        && PlayerScript.canMove && !PlayerScript.grounded && !PlayerScript.dragging)
         {
             anim.Play("PlayerJumpIni");
         }
         if (rb2d.velocity.y > 0 && PlayerScript.wallJumping == true
-        && PlayerScript.canMove && !PlayerScript.grounded && !Drag.boxDrag)
+        && PlayerScript.canMove && !PlayerScript.grounded && !PlayerScript.dragging)
         {
             anim.Play("PlayerJumpIni");
         }

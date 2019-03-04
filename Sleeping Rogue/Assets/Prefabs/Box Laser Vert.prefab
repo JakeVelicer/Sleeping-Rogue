@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 3963672945067874320}
   - component: {fileID: 314015619736817148}
   - component: {fileID: 7292058345612280960}
-  - component: {fileID: 8357499713434175387}
   m_Layer: 14
   m_Name: Box Laser Vert
   m_TagString: Box
@@ -31,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 5707739912214397347}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children:
   - {fileID: 5627453949494144330}
   m_Father: {fileID: 0}
@@ -74,8 +73,8 @@ SpriteRenderer:
   m_SortingLayerID: -799166687
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ed98f0fbe518c294895f72efcd31a801, type: 3}
-  m_Color: {r: 0.4716981, g: 0.27383104, b: 0.14017443, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 5428754ba5b1e483fb5c3b4d02dcf936, type: 3}
+  m_Color: {r: 0.9254902, g: 0.91764706, b: 0.9098039, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -123,14 +122,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.28, y: 1.28}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.28, y: 1.28}
   m_EdgeRadius: 0
 --- !u!114 &314015619736817148
 MonoBehaviour:
@@ -154,7 +153,7 @@ FixedJoint2D:
   m_Enabled: 1
   serializedVersion: 4
   m_EnableCollision: 1
-  m_ConnectedRigidBody: {fileID: 0}
+  m_ConnectedRigidBody: {fileID: 3578018664064676862}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
@@ -162,22 +161,6 @@ FixedJoint2D:
   m_ConnectedAnchor: {x: 0, y: 0}
   m_DampingRatio: 0
   m_Frequency: 0
---- !u!114 &8357499713434175387
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5707739912214397347}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 775efd25d90b95546a452bcfcb08470a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  forward1: {fileID: 0}
-  forward2: {fileID: 0}
-  player: {fileID: 0}
-  dragged: {fileID: 0}
 --- !u!1 &7794690442840462377
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,7 +190,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7794690442840462377}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.01, y: 0.74, z: 0}
+  m_LocalPosition: {x: 0, y: 0.77, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1074381039004885957}
