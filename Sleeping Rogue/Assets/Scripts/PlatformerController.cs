@@ -419,12 +419,12 @@ public class PlatformerController : MonoBehaviour {
             {
                 GameObject ShadowInScene = GameObject.FindGameObjectWithTag("Shadow");
                 transform.position = Vector2.MoveTowards(transform.position, ShadowInScene.transform.position, (ReturnSpeed * Time.deltaTime));
-                ReturnSpeed += 50 * Time.deltaTime;
+                ReturnSpeed += 40 * Time.deltaTime;
                 if (RoamRight) {
-                    rb2d.AddForce(new Vector2(300, 300));
+                    rb2d.AddForce(new Vector2(150, 150));
                 }
                 else if (!RoamRight) {
-                    rb2d.AddForce(new Vector2(-300, -300));
+                    rb2d.AddForce(new Vector2(-150, -150));
                 }
                 returnEffect.transform.LookAt(ShadowInScene.transform.position);
                 returnEffect.Play();
@@ -476,9 +476,9 @@ public class PlatformerController : MonoBehaviour {
         else if (!dreaming && canDream == true)
         {
             dreaming = true;
-            InvokeRepeating("Wave",0,0.6f);
+            InvokeRepeating("Wave",0,0.8f);
             Instantiate(shadow, this.transform.position, Quaternion.identity);
-            rb2d.gravityScale = 0.7f;
+            rb2d.gravityScale = 0.8f;
         }
     }
 
