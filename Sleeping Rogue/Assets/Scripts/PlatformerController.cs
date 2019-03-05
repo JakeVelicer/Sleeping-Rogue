@@ -614,7 +614,24 @@ public class PlatformerController : MonoBehaviour {
         //}
         //lasthit = collision.gameobject.getcomponent<boxcollider2d>();
     }
+
+        // Unchilds the player from the object
     
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Floor")
+        {
+            collision.collider.transform.SetParent(null);
+        }
+        if (collision.gameObject.tag == "Kill")
+        {
+            collision.collider.transform.SetParent(null);
+        }
+        if (collision.gameObject.tag == "Wall")
+        {
+            collision.collider.transform.SetParent(null);
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
