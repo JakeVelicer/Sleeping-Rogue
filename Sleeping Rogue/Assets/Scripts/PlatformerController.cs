@@ -314,17 +314,24 @@ public class PlatformerController : MonoBehaviour {
                 {
                     if (Mathf.Abs(rb2d.velocity.x) > 0)
                     {
-                        if (grounded)
+                        if (!jumpHeld)
                         {
                             float xVal = rb2d.velocity.x;
-                            xVal *= .9f;
+                            if (grounded)
+                            {
+                                xVal *= .9f;
+                            }
+                            else
+                            {
+                                xVal *= .99f;
+                            }
                             rb2d.velocity = new Vector2(xVal, rb2d.velocity.y);
                         }
                     }
                     else isMoving = false;
                 }
 
-                if (rb2d.velocity.x < maxSpeed && (Mathf.Abs(Input.GetAxis("Horizontal")) > .25f) && GetAxisDown("Horizontal"))
+                if (Mathf.Sign(horiz) * rb2d.velocity.x < maxSpeed && (Mathf.Abs(Input.GetAxis("Horizontal")) > .25f) && GetAxisDown("Horizontal"))
                 {
                     if (!runInto)
                     {
