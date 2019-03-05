@@ -28,8 +28,6 @@ public class ActivateDeactivateObject :InteractableObject
 
 	// Update is called once per frame
 	void Update () {
-
-        Debug.Log(m_meshRenderer);
         
         if (isActive)
         {
