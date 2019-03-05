@@ -94,6 +94,10 @@ public class PlatformerController : MonoBehaviour {
     [HideInInspector] public bool boxTouching;
     float dragSpeed;
 
+    //AudioManager to play sounds
+    private AudioManager audioManager;
+
+
     //Start and Awake defaults all variables that need to be defaulted still. Set up the scene for gameplay.
     private void Awake()
     {
@@ -124,6 +128,12 @@ public class PlatformerController : MonoBehaviour {
         wallJumpForce = new Vector2(650f, 600f);
         collidables = LayerMask.GetMask("Default", "Wall", "Ground", "Box");
         paused = false;
+
+        audioManager = AudioManager.instance;
+        if(audioManager == null)
+        {
+            Debug.LogError("No AudioManager found in the scene.");
+        }
     }
 
     // Update is called once per frame
