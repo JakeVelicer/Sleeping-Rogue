@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 769902980253023051}
   - component: {fileID: 769902980253023061}
   - component: {fileID: 769902980253023048}
-  - component: {fileID: 769902980253023050}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Manager
@@ -148,22 +147,3 @@ MonoBehaviour:
   canInteract: 1
   playAdded: 0
   menuAdded: 0
---- !u!114 &769902980253023050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 769902980253023049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20572c547ec544f05a0fc295cf7b7b4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sounds:
-  - name: 
-    clip: {fileID: 0}
-    volume: 0
-    pitch: 0
-    randomVolume: 0.1
-    randomPitch: 0.1

@@ -32,6 +32,10 @@ public class Sound
         source.Play();
     }
 
+    public void Stop()
+    {
+        source.Stop();
+    }
 }
 
 
@@ -47,10 +51,15 @@ public class AudioManager : MonoBehaviour
     {
         if(instance != null)
         {
-            Debug.LogError("More than one AudioManager in the scene.");
-        }else
+            if(instance != this)
+            {
+                Destroy(this.gameObject);
+            }
+        }
+        else
         {
             instance = this;
+            DontDestroyOnLoad(this);
         }
     }
     private void Start()
@@ -77,4 +86,17 @@ public class AudioManager : MonoBehaviour
         Debug.LogWarning("AudioManager: Sound not found in list. " + _name);
     }
 
+    public void StopSound(string _name)
+    {
+        for (int i = 0; i < sounds.Length; i++)
+        {
+            if (sounds[i].name == _name)
+            {
+                sounds[i].Stop();
+                return;
+            }
+        }
+        //no sound with name
+        Debug.LogWarning("AudioManager: Sound not found in list. " + _name);
+    }
 }
