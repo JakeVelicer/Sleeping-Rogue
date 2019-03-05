@@ -1000,7 +1000,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1911460397}
+      - m_Target: {fileID: 0}
         m_MethodName: PlayGame
         m_Mode: 1
         m_Arguments:
@@ -1551,7 +1551,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1911460397}
+      - m_Target: {fileID: 0}
         m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
@@ -1878,18 +1878,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1898850816}
   m_CullTransparentMesh: 0
---- !u!114 &1911460397 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 769902980253023048, guid: 8295b6e17ce9a447cace5eae186a01c7,
-    type: 3}
-  m_PrefabInstance: {fileID: 769902978358339941}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d25fd9b9d9504740be2a1f2e7205d82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1959625894
 GameObject:
   m_ObjectHideFlags: 0
@@ -2138,6 +2126,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 769902980253023048, guid: 8295b6e17ce9a447cace5eae186a01c7,
+        type: 3}
+      propertyPath: Main.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 769902980253023051, guid: 8295b6e17ce9a447cace5eae186a01c7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2193,11 +2186,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 769902980253023048, guid: 8295b6e17ce9a447cace5eae186a01c7,
-        type: 3}
-      propertyPath: Main.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8295b6e17ce9a447cace5eae186a01c7, type: 3}
 --- !u!1001 &7669059948175181255
@@ -2215,7 +2203,7 @@ PrefabInstance:
     - target: {fileID: 2555396483430339290, guid: 998e4eacfc9454da198be1baa4a070f8,
         type: 3}
       propertyPath: m_TagString
-      value: Manager
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 3090159554452828037, guid: 998e4eacfc9454da198be1baa4a070f8,
         type: 3}

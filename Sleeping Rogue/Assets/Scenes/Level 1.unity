@@ -5712,11 +5712,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -10
       objectReference: {fileID: 0}
-    - target: {fileID: 791975777053560225, guid: 5955bef404da64c699be663ccecaa88b,
-        type: 3}
-      propertyPath: m_Follow
-      value: 
-      objectReference: {fileID: 569833568}
     - target: {fileID: 6664326012405376606, guid: 5955bef404da64c699be663ccecaa88b,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -5737,6 +5732,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -1.1
       objectReference: {fileID: 0}
+    - target: {fileID: 791975777053560225, guid: 5955bef404da64c699be663ccecaa88b,
+        type: 3}
+      propertyPath: m_Follow
+      value: 
+      objectReference: {fileID: 569833568}
     - target: {fileID: 9098766218251156024, guid: 5955bef404da64c699be663ccecaa88b,
         type: 3}
       propertyPath: m_IsActive

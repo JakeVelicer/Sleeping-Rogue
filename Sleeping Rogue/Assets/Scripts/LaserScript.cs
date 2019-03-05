@@ -30,6 +30,11 @@ public class LaserScript : InteractableObject {
                 line.enabled = true;
                 GetComponent<BoxCollider2D>().enabled = true;
             }
+
+        if (!ray && !extending)
+        {
+            StartCoroutine(drawLaser());
+        }
         if (PlayerScript.dreaming == true)
         {
             this.gameObject.layer = 9;
@@ -39,6 +44,8 @@ public class LaserScript : InteractableObject {
         line.startWidth = width;
         line.endWidth = width;
         float pos = line.GetPosition(1).x - line.GetPosition(0).x;
+        length = pos;
+
         GetComponent<BoxCollider2D>().size = new Vector2(pos, width);
         GetComponent<BoxCollider2D>().offset = new Vector2(pos/2, 0);
 
@@ -47,17 +54,23 @@ public class LaserScript : InteractableObject {
     private void FixedUpdate()
     {
         LayerMask lasers = ~LayerMask.GetMask("Laser", "Background", "UI");
-        RaycastHit2D ray = Physics2D.Raycast(transform.position, transform.right, length, LayerMask.GetMask("Ground"));
-        Debug.DrawRay(transform.position, transform.right, Color.black);
+        Debug.Log(ray);
+    }
 
-        if(ray.collider)
-        {
-            Debug.Log(ray.collider.name);
-            line.SetPosition(1, new Vector3(ray.distance, 0, 0));
-        } else
-        {
-            line.SetPosition(1, new Vector3(length, 0, 0));
-        }
+    RaycastHit2D ray;
+    bool extending = false;
+    IEnumerator drawLaser()
+    {
+        extending = true;
         
+        while (!ray)
+        {
+            ray = Physics2D.Raycast(transform.position, transform.right, (line.GetPosition(1).x - line.GetPosition(0).x), LayerMask.GetMask("Ground"));
+            float lineLength = line.GetPosition(1).x + .25f;
+            line.SetPosition(1, new Vector3(lineLength, 0, 0));
+            yield return null;
+        }
+
+        extending = false;
     }
 }

@@ -257,7 +257,7 @@ public class PlatformerController : MonoBehaviour {
 
 
             //Checks conditions to allow dragging of boxes
-            if (Input.GetButtonDown("Drag") && canDrag && boxTouching && grounded)
+            if (GetAxisDown("Drag") && canDrag && boxTouching && grounded)
             {
                 canDrag = false;
                 StartCoroutine(StartStopDrag(runIntoHit.collider.gameObject));
@@ -304,9 +304,9 @@ public class PlatformerController : MonoBehaviour {
                     if (!isMoving && Mathf.Abs(Input.GetAxis("Horizontal")) > .1 && !runInto)
                     {
                         isMoving = true;
-                        if (Mathf.Abs(rb2d.velocity.x) < maxSpeed)
+                        if (Mathf.Abs(rb2d.velocity.x) < maxSpeed && grounded)
                         {
-                            rb2d.AddForce(Mathf.Sign(horiz) * (moveForce * 2f) * Vector2.right);
+                            rb2d.AddForce(Mathf.Sign(horiz) * (moveForce * 1.5f) * Vector2.right);
                         }
                     }
                 }
@@ -314,16 +314,28 @@ public class PlatformerController : MonoBehaviour {
                 {
                     if (Mathf.Abs(rb2d.velocity.x) > 0)
                     {
-                        rb2d.AddForce(Vector2.left * horiz * moveForce);
+                        if (grounded)
+                        {
+                            float xVal = rb2d.velocity.x;
+                            xVal *= .9f;
+                            rb2d.velocity = new Vector2(xVal, rb2d.velocity.y);
+                        }
                     }
                     else isMoving = false;
                 }
 
-                if (horiz * rb2d.velocity.x < maxSpeed && (Mathf.Abs(Input.GetAxis("Horizontal")) > .25f))
+                if (rb2d.velocity.x < maxSpeed && (Mathf.Abs(Input.GetAxis("Horizontal")) > .25f) && GetAxisDown("Horizontal"))
                 {
                     if (!runInto)
                     {
-                        rb2d.AddForce(Vector2.right * horiz * moveForce);
+                        if (!grounded)
+                        {
+                            rb2d.AddForce(Vector2.right * horiz * (moveForce / 2));
+                        }
+                        else
+                        {
+                            rb2d.AddForce(Vector2.right * horiz * moveForce);
+                        }
                     }
                 }
 
