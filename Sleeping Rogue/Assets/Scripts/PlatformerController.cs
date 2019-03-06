@@ -621,15 +621,15 @@ public class PlatformerController : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Floor")
         {
-            collision.collider.transform.SetParent(null);
+            this.transform.SetParent(null);
         }
         if (collision.gameObject.tag == "Kill")
         {
-            collision.collider.transform.SetParent(null);
+            this.transform.SetParent(null);
         }
         if (collision.gameObject.tag == "Wall")
         {
-            collision.collider.transform.SetParent(null);
+            this.transform.SetParent(null);
         }
     }
 
