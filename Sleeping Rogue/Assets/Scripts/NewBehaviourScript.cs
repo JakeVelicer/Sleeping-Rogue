@@ -1,11 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class CollectiblesText : MonoBehaviour
+public class NewBehaviourScript : MonoBehaviour
 {
-    public Text txt;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +13,6 @@ public class CollectiblesText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        txt.text = "Collectibles: " + MenuScript.collectibles;
-
+        
     }
 }
