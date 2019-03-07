@@ -330,26 +330,13 @@ public class PlatformerController : MonoBehaviour {
                 // Climbing up ladder
                 if (canLadder)
                 {
-                    /*if (Input.GetAxis("Vertical") > .25) {
-                        Debug.Log("Player is climbing ladder");
-                        rb2d.velocity = new Vector2(0, rb2d.velocity.y);
-                        rb2d.gravityScale = 0;
-                        rb2d.velocity = Vector2.up * 10;
-                    }
-                    else if (Input.GetAxis("Vertical") < -.25) {
-                        rb2d.velocity = new Vector2(0, rb2d.velocity.y);
-                        rb2d.gravityScale = 0;
-                        rb2d.velocity = Vector2.down * 10;
-                    }
-                    else if (Input.GetAxisRaw("Vertical") == 0) {
-                        rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
-                    }*/
                     if (Mathf.Abs(Input.GetAxis("Vertical")) > .25)
                     {
                         rb2d.velocity = Vector2.up * 10 * Mathf.Sign(Input.GetAxis("Vertical"));
+                        if (this.transform.parent != null)
+                            gameObject.transform.position = new Vector3(transform.parent.position.x, transform.position.y, 0);
                         climbing = true;
                     }
-
                     if (grounded)
                     {
                         climbing = false;
@@ -619,15 +606,9 @@ public class PlatformerController : MonoBehaviour {
     
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Floor")
-        {
-            this.transform.SetParent(null);
-        }
-        if (collision.gameObject.tag == "Kill")
-        {
-            this.transform.SetParent(null);
-        }
-        if (collision.gameObject.tag == "Wall")
+        if (collision.gameObject.tag == "Floor" ||
+        collision.gameObject.tag == "Kill" ||
+        collision.gameObject.tag == "Wall")
         {
             this.transform.SetParent(null);
         }
@@ -689,6 +670,7 @@ public class PlatformerController : MonoBehaviour {
         }
         if (collision.gameObject.tag == "Ladder")
         {
+            this.transform.SetParent(null);
             if (!dreaming)
             {
                 canLadder = false;

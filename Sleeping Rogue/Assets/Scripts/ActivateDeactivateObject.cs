@@ -19,14 +19,16 @@ public class ActivateDeactivateObject :InteractableObject
         if (GetComponent<Collider2D>() != null) {
             m_Collider1 = GetComponent<Collider2D>();
         }
-        if (gameObject.transform.GetChild(0).GetComponent<MeshRenderer>() != null) {
-            m_meshRenderer = gameObject.transform.GetChild(0).GetComponent<MeshRenderer>();
-        }
-        if (gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>() != null) {
-           spriteRenderer2 = gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
-        }
-        if (gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>() != null) {
-           m_Collider2 = gameObject.transform.GetChild(0).GetComponent<Collider2D>();
+        if (transform.childCount > 0) {
+            if (gameObject.transform.GetChild(0).GetComponent<MeshRenderer>() != null) {
+                m_meshRenderer = gameObject.transform.GetChild(0).GetComponent<MeshRenderer>();
+            }
+            if (gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>() != null) {
+                spriteRenderer2 = gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
+            }
+            if (gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>() != null) {
+                m_Collider2 = gameObject.transform.GetChild(0).GetComponent<Collider2D>();
+            }
         }
     }
 
