@@ -12,7 +12,7 @@ public class MenuScript : MonoBehaviour
     public Button[] Options;
 
     public static Button[] Pause;
-
+    public static int collectibles;
     public GameObject mMenu, opMenu;
 
     public static int Selected;
@@ -22,6 +22,7 @@ public class MenuScript : MonoBehaviour
 
     private void Start()
     {
+        collectibles = 0;
         opMenu = GameObject.Find("Options");
         mMenu = GameObject.Find("Main");
         Main = FindObjectsOfType<Button>();
