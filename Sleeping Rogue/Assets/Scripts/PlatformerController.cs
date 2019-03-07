@@ -24,8 +24,7 @@ public class PlatformerController : MonoBehaviour {
     public GameObject menuMain;
     public GameObject menuOptions;
 
-
-
+    
     public bool grounded = false;
     public bool wall, wallBlock = false;
     public bool runInto = false;
@@ -265,6 +264,8 @@ public class PlatformerController : MonoBehaviour {
         }
 	}
 
+    float movementTimer = 0.35f;
+
     private void FixedUpdate()
     {
         //Blocks most inputs if the game is paused
@@ -301,17 +302,24 @@ public class PlatformerController : MonoBehaviour {
                 //Adds initial speed burst to player
                 if (GetAxisDown("Horizontal"))
                 {
-                    if (!isMoving && Mathf.Abs(Input.GetAxis("Horizontal")) > .1 && !runInto)
+                    if (!isMoving && Mathf.Abs(Input.GetAxis("Horizontal")) > .1f && !runInto)
                     {
                         isMoving = true;
-                        if (Mathf.Abs(rb2d.velocity.x) < maxSpeed && grounded)
+                        /*if (Mathf.Abs(rb2d.velocity.x) < maxSpeed && grounded)
                         {
                             rb2d.AddForce(Mathf.Sign(horiz) * (moveForce * 1.5f) * Vector2.right);
-                        }
+                        }*/
+
+                    }
+                    if (movementTimer < 1.0f)
+                    {
+                        movementTimer += Time.deltaTime;
                     }
                 }
                 else
                 {
+
+                    movementTimer = 0.35f;
                     if (Mathf.Abs(rb2d.velocity.x) > 0)
                     {
                         if (!jumpHeld)
@@ -328,20 +336,28 @@ public class PlatformerController : MonoBehaviour {
                             rb2d.velocity = new Vector2(xVal, rb2d.velocity.y);
                         }
                     }
-                    else isMoving = false;
+                    else
+                    {
+                        isMoving = false;
+                    }
                 }
 
-                if (Mathf.Sign(horiz) * rb2d.velocity.x < maxSpeed && (Mathf.Abs(Input.GetAxis("Horizontal")) > .25f) && GetAxisDown("Horizontal"))
+                if (Input.GetButtonDown("Jump"))
+                {
+                    movementTimer = .35f;
+                }
+
+                if (Mathf.Sign(horiz) * rb2d.velocity.x < maxSpeed && (Mathf.Abs(Input.GetAxis("Horizontal")) > .1f) && GetAxisDown("Horizontal"))
                 {
                     if (!runInto)
                     {
                         if (!grounded)
                         {
-                            rb2d.AddForce(Vector2.right * horiz * (moveForce / 2));
+                            rb2d.AddForce(Vector2.right * horiz * (moveForce / 2) * movementTimer);
                         }
                         else
                         {
-                            rb2d.AddForce(Vector2.right * horiz * moveForce);
+                            rb2d.AddForce(Vector2.right * horiz * moveForce * movementTimer);
                         }
                     }
                 }
@@ -564,6 +580,7 @@ public class PlatformerController : MonoBehaviour {
             facingRight = !facingRight;
             Vector3 theScale = transform.localScale;
             theScale.x *= -1;
+            movementTimer = .35f;
             transform.localScale = theScale;
         }
     }
