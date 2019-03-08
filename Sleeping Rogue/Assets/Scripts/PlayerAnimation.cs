@@ -36,7 +36,7 @@ public class PlayerAnimation : MonoBehaviour
         
         // Activates jumping anim and falling anim
         if (rb2d.velocity.y > 0 && PlayerScript.jumping == true
-        && PlayerScript.canMove && !PlayerScript.grounded && !PlayerScript.dragging)
+        && PlayerScript.canMove && !PlayerScript.grounded && !PlayerScript.dragging && !PlayerScript.climbing)
         {
             anim.Play("PlayerJumpIni");
         }
@@ -53,7 +53,7 @@ public class PlayerAnimation : MonoBehaviour
                 anim.SetTrigger("Falling");
             }
             else if (!anim.GetCurrentAnimatorStateInfo(0).IsName("PlayerJumpIni")
-            && FallingTimer <= 0 && !PlayerScript.grounded)
+            && FallingTimer <= 0 && !PlayerScript.grounded && !PlayerScript.climbing)
             {
                 anim.Play("PlayerJumpFall");
             }
@@ -69,7 +69,22 @@ public class PlayerAnimation : MonoBehaviour
         {
             anim.SetBool("AnimGrounded", false);
         }
-        //Debug.Log("Grounded?: " + PlayerScript.grounded);
-        //Debug.Log("FallingTimer: " + FallingTimer);
+
+        // Activates and controls climbing on ladder animation
+        if (PlayerScript.climbing == true && PlayerScript.canMove && !PlayerScript.grounded && !PlayerScript.dragging)
+        {
+            anim.Play("PlayerClimb");
+        }
+        if (Mathf.Abs(Input.GetAxis("Vertical")) > 0.7f && PlayerScript.climbing == true)
+        {
+            anim.speed = 1;
+        }
+        else if (Input.GetAxis("Vertical") < 0.6f && PlayerScript.climbing == true)
+        {
+            anim.speed = 0;
+        }
+        else {
+            anim.speed = 1;
+        }
     }
 }

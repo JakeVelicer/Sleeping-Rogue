@@ -54,7 +54,7 @@ public class PlatformerController : MonoBehaviour {
 
     //Determines if the player is climbing or can climb
     public bool canLadder;
-    private bool climbing;
+    [HideInInspector] public bool climbing;
 
 
     [HideInInspector] public bool canMove;
@@ -251,9 +251,6 @@ public class PlatformerController : MonoBehaviour {
                 }
                 else EnterExitDreaming();
             }
-
-
-
 
             //Checks conditions to allow dragging of boxes
             if (GetAxisDown("Drag") && canDrag && boxTouching && grounded)
