@@ -24,7 +24,7 @@ public class PlatformerController : MonoBehaviour {
     public GameObject menuMain;
     public GameObject menuOptions;
 
-    
+
     public bool grounded = false;
     public bool wall, wallBlock = false;
     public bool runInto = false;
