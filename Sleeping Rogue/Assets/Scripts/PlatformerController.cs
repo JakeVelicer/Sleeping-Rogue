@@ -48,7 +48,7 @@ public class PlatformerController : MonoBehaviour {
     [HideInInspector] public float dreamJumpMultiplier = 2f;
 
     //Horiz determines players horizontal movement. booleans that control the dream state
-    [HideInInspector] public float horiz;
+     public float horiz;
     [HideInInspector] public bool dreaming;
     [HideInInspector] public bool canDream;
 
@@ -271,8 +271,10 @@ public class PlatformerController : MonoBehaviour {
             //If the player is not wall jumping, checks horizontal input and applies forces according to various conditions
             if (!wallJumping && canMove)
             {
-                horiz = Input.GetAxis("Horizontal");
-
+                if (Mathf.Abs(horiz) <= 1)
+                {
+                    horiz += Input.GetAxis("Horizontal");
+                }
                 if (wallJumpEnabled)
                 {
                     if (rb2d.velocity.y <= 0 && !wallBlock)
