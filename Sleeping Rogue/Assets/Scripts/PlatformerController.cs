@@ -195,6 +195,7 @@ public class PlatformerController : MonoBehaviour {
             if (wall && !grounded && !dreaming && !wallBlock && !jumpHeld)
             {
                 wallJumpEnabled = true;
+                wallJumping = false;
                 lastMove = Input.GetAxisRaw("Horizontal");
                 jumping = false;
                 wallJumpTimer = 0;
@@ -437,6 +438,7 @@ public class PlatformerController : MonoBehaviour {
                         Mathf.Abs(Input.GetAxis("Vertical")) >= .2f)
                     {
                         wallJumping = false;
+                        lastMove = Mathf.Infinity;
                     }
 
                 }
