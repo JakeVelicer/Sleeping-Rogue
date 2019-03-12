@@ -6,7 +6,6 @@ public class LadderBehavior : MonoBehaviour
 {
     public Collider2D Collider;
     public LayerMask PlayerLayer;
-
     public float RayCastCenterPointOffset;
 
 
@@ -35,4 +34,13 @@ public class LadderBehavior : MonoBehaviour
             Collider.enabled = false;
         }
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            collision.transform.SetParent(gameObject.transform);
+        }
+    }
+
 }
