@@ -9,6 +9,7 @@ public class CameraMoverZoomedOut : MonoBehaviour
     private CameraBehavior Camera;
     private Rigidbody2D Rigidbody;
     private GameObject Player;
+    public int speed;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +28,7 @@ public class CameraMoverZoomedOut : MonoBehaviour
 
             Vector3 movement = new Vector3 (moveHorizontal, moveVertical, 0);
 
-            Rigidbody.velocity = movement * 10;
+            Rigidbody.velocity = movement * speed;
         }
         else if (Camera.Switching) {
             transform.position = Vector2.MoveTowards(transform.position, Player.transform.position, (200 * Time.deltaTime));
