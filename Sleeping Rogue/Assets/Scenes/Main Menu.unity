@@ -1082,7 +1082,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 938136577}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1241,9 +1241,9 @@ RectTransform:
   m_Children:
   - {fileID: 1059083667}
   - {fileID: 1119494566}
+  - {fileID: 1116615531}
   - {fileID: 1743123900}
   - {fileID: 853616855}
-  - {fileID: 1116615531}
   m_Father: {fileID: 741953875}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1635,7 +1635,7 @@ GameObject:
   - component: {fileID: 1116615533}
   - component: {fileID: 1116615532}
   m_Layer: 5
-  m_Name: Button 1 (1)
+  m_Name: Button 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1654,7 +1654,7 @@ RectTransform:
   m_Children:
   - {fileID: 1462473121}
   m_Father: {fileID: 938136577}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2353,7 +2353,7 @@ GameObject:
   - component: {fileID: 1743123902}
   - component: {fileID: 1743123901}
   m_Layer: 5
-  m_Name: Button 2
+  m_Name: Button 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2372,7 +2372,7 @@ RectTransform:
   m_Children:
   - {fileID: 361762863}
   m_Father: {fileID: 938136577}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

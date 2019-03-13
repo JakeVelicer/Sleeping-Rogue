@@ -79,9 +79,10 @@ public class MenuScript : MonoBehaviour
         if (mMenu != null)
         {
             Main = FindObjectsOfType<Button>();
-            Main[0] = GameObject.Find("Button 0").GetComponent<Button>();
-            Main[1] = GameObject.Find("Button 1").GetComponent<Button>();
-            Main[2] = GameObject.Find("Button 2").GetComponent<Button>();
+            for(int i = 0; i < Main.Length; i++)
+            {
+                Main[i] = GameObject.Find("Button " + i).GetComponent<Button>();
+            }
         }
         if (opMenu != null)
         {
@@ -100,9 +101,9 @@ public class MenuScript : MonoBehaviour
                 }
                 Main[Selected].Select();
             }
-            else if (opMenu != null)
+            else 
             {
-                Options[0].Select();
+                FindObjectOfType<Button>().Select();
             }
         }
         else
@@ -111,7 +112,7 @@ public class MenuScript : MonoBehaviour
             {
                 if (menuAdded == 0)
                 {
-                    Main[2].onClick.AddListener(MainMenu);
+                    Main[2].onClick.AddListener(() => MainMenu());
                     menuAdded++;
                 }
                 Main[Selected].Select();
@@ -131,14 +132,21 @@ public class MenuScript : MonoBehaviour
     {
             if (mMenu != null)
             {
-                if (val < 0 && Selected < Main.Length - 1)
+                if (val < 0)
                 {
                     Selected++;
+                    if(Selected > Main.Length - 1)
+                    {
+                        Selected = 0;
+                    }
                 }
-                if (val > 0 && Selected > 0)
+                if (val > 0 )
                 {
                     Selected--;
-
+                    if(Selected < 0)
+                    {
+                        Selected = Main.Length - 1;
+                    }
                 }
             }
         Debug.Log(Selected);
