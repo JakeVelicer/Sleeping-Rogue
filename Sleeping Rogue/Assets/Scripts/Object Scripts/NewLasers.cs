@@ -26,17 +26,21 @@ public class NewLasers : InteractableObject
     }
 
     RaycastHit2D ray;
+    bool extending = false;
     // Update is called once per frame
     void Update()
     {
+
         ray = Physics2D.Raycast(transform.position, transform.up, length, collides);
         Debug.DrawRay(transform.position, transform.up, Color.blue);
+        Debug.DrawLine(transform.position, hit.position, Color.blue);
        if(ray.collider != null)
         {
             hit.position = ray.point;
             length = hit.localPosition.y;
+            extending = false;
         }
-       else if(length < maxLength)
+       if(length < maxLength && !extending && ray.collider == null)
         {
             StartCoroutine(drawLaser());
         }
@@ -51,8 +55,7 @@ public class NewLasers : InteractableObject
         {
             line.GetComponent<SpriteRenderer>().enabled = true;
             GetComponent<BoxCollider2D>().enabled = true;
-
-            StartCoroutine(drawLaser());
+            
         }
 
         if (playerScript.dreaming == true)
@@ -74,11 +77,19 @@ public class NewLasers : InteractableObject
         GetComponent<BoxCollider2D>().offset = new Vector2(0, length/2);
     }
 
+    private void FixedUpdate()
+    {
+    }
+
     IEnumerator drawLaser()
     {
-        while(length < maxLength && ray.collider == null)
+
+        Debug.Log("hit");
+        extending = true;
+        while (length < maxLength && ray.collider == null)
         {
-            length += .25f * Time.deltaTime;
+            
+            length += 5.0f * Time.deltaTime;
             hit.localPosition = new Vector3(0, length, 0);
             yield return null;
         }
