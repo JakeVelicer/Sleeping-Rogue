@@ -6,11 +6,12 @@ using Cinemachine;
 public class CameraBehavior : MonoBehaviour
 {
     private Transform Player;
-    private CinemachineVirtualCamera CameraController;
+    [HideInInspector] public CinemachineVirtualCamera CameraController;
     private CinemachineFramingTransposer FramingTransposer;
     public GameObject ZoomedOutCameraMover;
     public float NormalZoom;
     public float ZoomOut;
+    [HideInInspector] public bool OnDialogueTrigger;
     [HideInInspector] public bool Switching;
 
     // Start is called before the first frame update
@@ -25,12 +26,13 @@ public class CameraBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("CameraZoom") && Player.GetComponent<PlatformerController>().grounded) {
-            if (!Switching) {
-                StartCoroutine(ZoomController());
+        if (!OnDialogueTrigger) {
+            if (Input.GetButtonDown("CameraZoom") && Player.GetComponent<PlatformerController>().grounded) {
+                if (!Switching) {
+                    StartCoroutine(ZoomController());
+                }
             }
         }
-
     }
 
     private IEnumerator ZoomController() {
