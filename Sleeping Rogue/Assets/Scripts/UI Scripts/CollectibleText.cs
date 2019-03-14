@@ -16,6 +16,6 @@ public class CollectibleText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        txt.text = "Collectibles: " + MenuScript.collectibles;
+        txt.text = "Dream Shards: " + MenuScript.collectibles;
     }
 }
