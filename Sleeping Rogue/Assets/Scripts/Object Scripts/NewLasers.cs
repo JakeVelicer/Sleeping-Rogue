@@ -34,28 +34,28 @@ public class NewLasers : InteractableObject
         ray = Physics2D.Raycast(transform.position, transform.up, length, collides);
         Debug.DrawRay(transform.position, transform.up, Color.blue);
         Debug.DrawLine(transform.position, hit.position, Color.blue);
-       if(ray.collider != null)
-        {
-            hit.position = ray.point;
-            length = hit.localPosition.y;
-            extending = false;
-        }
-       if(length < maxLength && !extending && ray.collider == null)
-        {
-            StartCoroutine(drawLaser());
-        }
+      
 
         if (!isActive)
         {
             line.GetComponent<SpriteRenderer>().enabled = false;
             GetComponent<BoxCollider2D>().enabled = false;
-            length = 0.1f;
+            length = 0.5f;
         }
         else
         {
             line.GetComponent<SpriteRenderer>().enabled = true;
             GetComponent<BoxCollider2D>().enabled = true;
-            
+            if (ray.collider != null)
+            {
+                hit.position = ray.point;
+                length = hit.localPosition.y;
+                extending = false;
+            }
+            if (length < maxLength && !extending && ray.collider == null)
+            {
+                StartCoroutine(drawLaser());
+            }
         }
 
         if (playerScript.dreaming == true)
