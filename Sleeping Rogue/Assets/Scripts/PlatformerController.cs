@@ -9,6 +9,8 @@ public class PlatformerController : MonoBehaviour {
 
     [HideInInspector] public bool wallJumpEnabled, wallJumping, jumping, jumpHeld = false;
     private Vector3 checkPointSave;
+
+    [Header("Movement Settings")]
     public float moveForce;
     float maxSpeed;
     public float groundSpeed;
@@ -17,6 +19,8 @@ public class PlatformerController : MonoBehaviour {
     public float DreamJumpForce;
     private float ReturnSpeed = 5;
     public Vector2 wallJumpForce;
+
+    [Header("Position Checks")]
     public Transform groundCheck1, groundCheck2;
     public Transform Right1, Right2;
     public Transform Left1, Left2;
@@ -24,7 +28,16 @@ public class PlatformerController : MonoBehaviour {
     public GameObject menuMain;
     public GameObject menuOptions;
 
+    [Header("Audio Settings")]
+    public AudioClip footStep;
+    public AudioClip jump;
+    public AudioClip dream;
+    public AudioClip death;
 
+    public AudioSource audioSource;
+
+    [Header("Performance Checks")]
+    public bool step = true;
     public bool grounded = false;
     public bool wall, wallBlock = false;
     public bool runInto = false;
@@ -127,6 +140,7 @@ public class PlatformerController : MonoBehaviour {
         wallJumpForce = new Vector2(650f, 600f);
         collidables = LayerMask.GetMask("Default", "Wall", "Ground", "Box");
         paused = false;
+        step = true;
 
         audioManager = AudioManager.instance;
         if(audioManager == null)
@@ -178,6 +192,7 @@ public class PlatformerController : MonoBehaviour {
             if (Input.GetButtonDown("Jump") && grounded && canMove && !dragging)
             {
                 //jumpTimer = 0;
+                audioSource.PlayOneShot(jump);
                 jumpEffect.transform.position = groundCheck1.position;
                 jumpEffect.Play();
                 jumpHeld = true;
@@ -269,6 +284,13 @@ public class PlatformerController : MonoBehaviour {
         //Blocks most inputs if the game is paused
         if (!paused)
         {
+            // footstep noise while walking on the ground
+            if(isMoving && grounded && step)
+            {
+                step = false;
+                audioSource.PlayOneShot(footStep);
+                StartCoroutine(FootStep());
+            }
             //If the player is not wall jumping, checks horizontal input and applies forces according to various conditions
             if (!wallJumping && canMove)
             {
@@ -546,6 +568,7 @@ public class PlatformerController : MonoBehaviour {
         wallJumping = true;
 
         wallEffect.transform.position = Right2.position;
+        audioSource.PlayOneShot(jump);
         wallEffect.Play();
 
         rb2d.velocity = Vector2.zero;
@@ -621,6 +644,7 @@ public class PlatformerController : MonoBehaviour {
         {
             if (!dreaming)
             {
+                audioSource.PlayOneShot(death);
                 StartCoroutine(Respawn());
             }
             else if (dreaming)
@@ -748,5 +772,10 @@ public class PlatformerController : MonoBehaviour {
         {
             Debug.Log("capping velocity");
         }
+    }
+    private IEnumerator FootStep()
+    {
+        yield return new WaitForSeconds(.2f);
+        step = true;
     }
 }

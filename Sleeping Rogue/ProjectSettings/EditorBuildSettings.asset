@@ -11,10 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tutorial Level.unity
     guid: f1120748ebd456747a3f2bca5ebfbe5b
-  - enabled: 1
-    path: Assets/Scenes/Level 1.unity
+  - enabled: 0
+    path: Assets/Scenes/Blake's Level.unity
     guid: 12273689ea78926469e23f2cfa538aad
   - enabled: 1
-    path: Assets/Scenes/Level 2.unity
+    path: Assets/Scenes/Level 1.unity
     guid: 25f5b5a57e7b242d2be1bd05957c98a0
+  - enabled: 1
+    path: Assets/Scenes/Level 2.unity
+    guid: e50c6b5a55ca7469287ce4e787296261
   m_configObjects: {}

@@ -10,6 +10,9 @@ public class ButtonScript : MonoBehaviour {
     public Sprite Clicked;
     public bool touch = false;
 
+    public AudioClip button;
+    public AudioSource audioSource;
+
     bool pressed;
     SpriteRenderer spr;
 
@@ -46,6 +49,7 @@ public class ButtonScript : MonoBehaviour {
                         i.GetComponent<InteractableObject>().isActive = true;
                     }
                 }
+                audioSource.PlayOneShot(button);
                 pressed = !pressed;
             }
         }
