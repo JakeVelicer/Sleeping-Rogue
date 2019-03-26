@@ -57,8 +57,8 @@ public class PlatformerController : MonoBehaviour {
     [HideInInspector] public int maxJumps = 1;
     [HideInInspector] public float jumpTimer, wallJumpTimer, heightTime = 0.0f;
     public float maxFallSpeed = -2f;
-    [HideInInspector] public float lowJumpMultiplier = 0.3f;
-    [HideInInspector] public float dreamJumpMultiplier = 2f;
+    public float lowJumpMultiplier = 0.3f;
+    public float dreamJumpMultiplier = 2f;
 
     //Horiz determines players horizontal movement. booleans that control the dream state
      public float horiz;
@@ -522,6 +522,10 @@ public class PlatformerController : MonoBehaviour {
     //Handles players entering and exiting the dreamworld
     private void EnterExitDreaming()
     {
+        if (dragging)
+        {
+            //StartCoroutine(StartStopDrag());
+        }
         if (dreaming)
         {
             canMove = false;
