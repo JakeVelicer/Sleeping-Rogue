@@ -11,7 +11,6 @@ public class CameraBehavior : MonoBehaviour
     public GameObject ZoomedOutCameraMover;
     public float NormalZoom;
     public float ZoomOut;
-    [HideInInspector] public bool OnDialogueTrigger;
     [HideInInspector] public bool Switching;
 
     // Start is called before the first frame update
@@ -26,11 +25,9 @@ public class CameraBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!OnDialogueTrigger) {
-            if (Input.GetButtonDown("CameraZoom") && Player.GetComponent<PlatformerController>().grounded) {
-                if (!Switching) {
-                    StartCoroutine(ZoomController());
-                }
+        if (Input.GetButtonDown("CameraZoom") && Player.GetComponent<PlatformerController>().grounded) {
+            if (!Switching) {
+                StartCoroutine(ZoomController());
             }
         }
     }
