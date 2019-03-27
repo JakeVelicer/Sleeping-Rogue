@@ -7,7 +7,7 @@ public class laserBase : MonoBehaviour
 
     public float rotateRange;
 
-    public bool right, left;
+    bool right, left;
 
     float startRot;
 
@@ -15,7 +15,7 @@ public class laserBase : MonoBehaviour
 
     float rot = 0.0f;
 
-    public bool rotating;
+    bool rotating;
 
     // Start is called before the first frame update
     void Start()
@@ -31,28 +31,54 @@ public class laserBase : MonoBehaviour
         rotating = true;
         do
         {
-            if (transform.rotation.z != leftRot && left)
+            //    if (transform.eulerAngles.z != leftRot && left)
+            //    {
+            //        float newRot = Mathf.SmoothDamp(transform.rotation.z, leftRot, ref rot, 0.5f);
+            //        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, newRot);
+            //    }
+            //    else if(transform.eulerAngles.z == leftRot)
+            //    {
+            //        left = false;
+            //        right = true;
+            //    }
+            //    if (transform.eulerAngles.z != rightRot && right)
+            //    {
+            //        float newRot = Mathf.SmoothDamp(transform.rotation.z, rightRot, ref rot, 0.5f);
+            //        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, newRot);
+            //    }
+            //    else if (transform.eulerAngles.z == rightRot)
+            //    {
+            //        right = false;
+            //        left = true;
+            //    }
+            
+            while (left)
             {
-                float newRot = Mathf.SmoothDamp(transform.rotation.z, leftRot, ref rot, 0.5f);
-                transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, newRot);
+                //transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, newRot);
+                Quaternion targ = Quaternion.Euler(0, 0, leftRot);
+                transform.rotation = Quaternion.Lerp(transform.rotation, targ, Time.deltaTime * 1.5f);
+                if (transform.rotation == targ) 
+                {
+                    left = false;
+                    right = true;
+                    Debug.Log("Right Now");
+                }
+                yield return null;
             }
-            else
+            while (right)
             {
-                left = false;
-                right = true;
-            }
-            if (transform.rotation.z != rightRot && right)
-            {
-                float newRot = Mathf.SmoothDamp(transform.rotation.z, rightRot, ref rot, 0.5f);
-                transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, newRot);
-            }
-            else
-            {
-                right = false;
-                left = true;
-            }
+                //transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, newRot);
+                Quaternion targ = Quaternion.Euler(0, 0, rightRot);
+                transform.rotation = Quaternion.Lerp(transform.rotation, targ, Time.deltaTime * 1.5f);
+                if (transform.rotation == targ)
+                {
+                    left = true;
+                    right = false;
+                    Debug.Log("LEft Now");
+                }
 
-
+                yield return null;
+            }
             yield return null;
         } while (rotating);
     }
