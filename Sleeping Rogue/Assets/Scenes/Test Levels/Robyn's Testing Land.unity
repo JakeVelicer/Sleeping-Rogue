@@ -685,9 +685,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29c283b706112304db50e6e3f830f0f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateRange: 10
+  rotateRange: 45
   right: 0
   left: 1
+  leftRot: 0
+  rightRot: 0
   rotating: 0
 --- !u!4 &1442236533 stripped
 Transform:
@@ -734,11 +736,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4940093728611514, guid: 97019cfe509b32040ad2cc360a21630f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.08193856
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4940093728611514, guid: 97019cfe509b32040ad2cc360a21630f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9966374
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4940093728611514, guid: 97019cfe509b32040ad2cc360a21630f, type: 3}
       propertyPath: m_RootOrder
@@ -754,7 +756,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4940093728611514, guid: 97019cfe509b32040ad2cc360a21630f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -9.4
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97019cfe509b32040ad2cc360a21630f, type: 3}

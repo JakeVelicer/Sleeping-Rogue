@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 61365408983601056}
   - component: {fileID: 212307951616439528}
   m_Layer: 14
-  m_Name: Laser
+  m_Name: LaserBase
   m_TagString: Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -188,6 +188,7 @@ MonoBehaviour:
   width: 0.5
   maxLength: 10
   length: 0
+  drawSpeed: 5
 --- !u!61 &843966977850151027
 BoxCollider2D:
   m_ObjectHideFlags: 0
