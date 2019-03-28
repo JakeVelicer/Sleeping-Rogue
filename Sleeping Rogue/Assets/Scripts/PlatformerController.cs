@@ -522,6 +522,10 @@ public class PlatformerController : MonoBehaviour {
     //Handles players entering and exiting the dreamworld
     private void EnterExitDreaming()
     {
+        if (dragging)
+        {
+            //StartCoroutine(StartStopDrag());
+        }
         if (dreaming)
         {
             canMove = false;

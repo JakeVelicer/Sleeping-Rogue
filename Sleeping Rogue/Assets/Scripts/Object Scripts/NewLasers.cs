@@ -12,6 +12,8 @@ public class NewLasers : InteractableObject
     public float maxLength = 10.0f;
     public float length;
 
+    public float drawSpeed = 5.0f;
+
     private PlatformerController playerScript;
 
     LayerMask collides;
@@ -89,7 +91,7 @@ public class NewLasers : InteractableObject
         while (length < maxLength && ray.collider == null)
         {
             
-            length += 5.0f * Time.deltaTime;
+            length += drawSpeed * Time.deltaTime;
             hit.localPosition = new Vector3(0, length, 0);
             yield return null;
         }
