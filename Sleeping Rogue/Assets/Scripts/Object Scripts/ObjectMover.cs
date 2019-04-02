@@ -5,7 +5,7 @@ using UnityEngine;
 public class ObjectMover : MonoBehaviour
 {
     public GameObject current;
-    public int roamSpeed;
+    public float roamSpeed;
 
 	// Use this for initialization
 	void Start () {
