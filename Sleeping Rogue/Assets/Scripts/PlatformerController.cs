@@ -105,6 +105,7 @@ public class PlatformerController : MonoBehaviour {
     [HideInInspector] public bool dragging;
     [HideInInspector] public bool boxTouching;
     float dragSpeed;
+    bool dragHit = false;
 
     //AudioManager to play sounds
     private AudioManager audioManager;
@@ -269,10 +270,16 @@ public class PlatformerController : MonoBehaviour {
             }
 
             //Checks conditions to allow dragging of boxes
-            if (GetAxisDown("Drag") && canDrag && boxTouching && grounded)
+            if (GetAxisDown("Drag") && canDrag && boxTouching && grounded && !dragHit)
             {
                 canDrag = false;
+                dragHit = true;
+                Debug.Log("DragHit");
                 StartCoroutine(StartStopDrag(runIntoHit.collider.gameObject));
+            }
+            else if (!GetAxisDown("Drag"))
+            {
+                dragHit = false;
             }
         }
 	}
