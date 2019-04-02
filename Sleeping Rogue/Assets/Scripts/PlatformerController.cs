@@ -150,6 +150,8 @@ public class PlatformerController : MonoBehaviour {
         }
     }
 
+    float leftGround;
+
     // Update is called once per frame
     void Update() {
 
@@ -188,9 +190,10 @@ public class PlatformerController : MonoBehaviour {
                 rb2d.velocity = new Vector2(0, rb2d.velocity.y);
             }
 
+            
 
             //Controls jumping heights
-            if (Input.GetButtonDown("Jump") && grounded && canMove && !dragging)
+            if (Input.GetButtonDown("Jump") && leftGround < .1f && canMove && !dragging)
             {
                 //jumpTimer = 0;
                 audioSource.PlayOneShot(jump);
@@ -231,6 +234,11 @@ public class PlatformerController : MonoBehaviour {
              if (grounded)
             {
                 wallJumping = false;
+                leftGround = 0.0f;
+            }
+            else
+            {
+                leftGround += Time.deltaTime;
             }
 
             if (Input.GetAxisRaw("Vertical") != -1) wallBlock = false;
