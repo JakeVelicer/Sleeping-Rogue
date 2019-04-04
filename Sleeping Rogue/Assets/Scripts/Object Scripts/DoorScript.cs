@@ -8,8 +8,12 @@ public class DoorScript : InteractableObject {
     public float MoveDistance;
     private  bool CanMove;
 
-	// Update is called once per frame
-	void Update () {
+    public AudioClip door;
+    public AudioSource audioSource;
+
+
+    // Update is called once per frame
+    void Update () {
         if (isActive && !CanMove)
         {
             StartCoroutine(Activation());
@@ -32,6 +36,7 @@ public class DoorScript : InteractableObject {
 
     private void Movement() {
         if (CanMove) {
+            audioSource.PlayOneShot(door);
             if (MoveUp) {
                 transform.Translate(Vector3.up * 0.5f, Space.World);
             }
