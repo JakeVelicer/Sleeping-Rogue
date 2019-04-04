@@ -188,7 +188,7 @@ MonoBehaviour:
   width: 0.5
   maxLength: 10
   length: 0
-  drawSpeed: 5
+  drawSpeed: 25
 --- !u!61 &843966977850151027
 BoxCollider2D:
   m_ObjectHideFlags: 0
