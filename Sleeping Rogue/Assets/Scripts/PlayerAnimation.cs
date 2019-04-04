@@ -52,6 +52,10 @@ public class PlayerAnimation : MonoBehaviour
             {
                 anim.SetTrigger("Falling");
             }
+            else if (PlayerScript.wall && !PlayerScript.grounded && !PlayerScript.dreaming)
+            {
+                anim.Play("Wallslide");
+            }
             else if (!anim.GetCurrentAnimatorStateInfo(0).IsName("PlayerJumpIni")
             && FallingTimer <= 0 && !PlayerScript.grounded && !PlayerScript.climbing)
             {
