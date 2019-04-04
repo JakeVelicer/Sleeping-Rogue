@@ -19,7 +19,7 @@ public class LaserReceptor : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Kill")
+        if (collision.gameObject.tag == "Laser")
         {
             Debug.Log("hit receptor");
             foreach (GameObject i in connected)
@@ -37,7 +37,7 @@ public class LaserReceptor : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Kill")
+        if (collision.gameObject.tag == "Laser")
         {
             Debug.Log("left receptor");
             foreach (GameObject i in connected)

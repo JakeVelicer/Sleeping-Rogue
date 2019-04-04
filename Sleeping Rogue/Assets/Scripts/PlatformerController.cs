@@ -144,10 +144,6 @@ public class PlatformerController : MonoBehaviour {
         step = true;
 
         audioManager = AudioManager.instance;
-        if(audioManager == null)
-        {
-            Debug.LogError("No AudioManager found in the scene.");
-        }
     }
 
     float leftGround;
@@ -713,6 +709,13 @@ public class PlatformerController : MonoBehaviour {
             else if (dreaming)
             {
                 EnterExitDreaming();
+            }
+        }
+        if (collision.gameObject.tag == "Laser")
+        {
+            if (!dreaming)
+            {
+                StartCoroutine(Respawn());
             }
         }
         if (collision.gameObject.tag == "Ladder")
