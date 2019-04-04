@@ -24,6 +24,12 @@ public class LevelEnd : MonoBehaviour {
             else {
                 SceneManager.LoadScene(0);
             }
+            /*
+            else if (SceneManager.GetActiveScene().name != "In-Between Level" &&
+            SceneManager.GetActiveScene().buildIndex > 1) {
+                SceneManager.LoadScene("In-Between Level");
+            }
+            */
         }
     }
     
