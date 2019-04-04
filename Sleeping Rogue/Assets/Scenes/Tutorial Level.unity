@@ -14371,6 +14371,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 2.9048572
       objectReference: {fileID: 0}
+    - target: {fileID: 2963470235840564123, guid: e469ad48930764e58942f03b3897569e,
+        type: 3}
+      propertyPath: MoveDistance
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e469ad48930764e58942f03b3897569e, type: 3}
 --- !u!4 &1712444856 stripped
@@ -17556,7 +17561,7 @@ PrefabInstance:
     - target: {fileID: 2963470235840564119, guid: e469ad48930764e58942f03b3897569e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -22.366625
+      value: -16.79
       objectReference: {fileID: 0}
     - target: {fileID: 2963470235840564119, guid: e469ad48930764e58942f03b3897569e,
         type: 3}
@@ -17607,6 +17612,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 2.7218997
+      objectReference: {fileID: 0}
+    - target: {fileID: 2963470235840564123, guid: e469ad48930764e58942f03b3897569e,
+        type: 3}
+      propertyPath: MoveUp
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2963470235840564123, guid: e469ad48930764e58942f03b3897569e,
+        type: 3}
+      propertyPath: MoveDistance
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e469ad48930764e58942f03b3897569e, type: 3}
@@ -19058,7 +19073,7 @@ PrefabInstance:
     - target: {fileID: 5923824831374410246, guid: c6f662d20bc644ea2b34147220ed8612,
         type: 3}
       propertyPath: maxLength
-      value: 2.69
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 4591674637397782019, guid: c6f662d20bc644ea2b34147220ed8612,
         type: 3}
