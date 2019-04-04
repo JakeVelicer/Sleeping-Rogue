@@ -41,7 +41,8 @@ GameObject:
   - component: {fileID: 4940093728611514}
   - component: {fileID: 61365408983601056}
   - component: {fileID: 212307951616439528}
-  m_Layer: 14
+  - component: {fileID: 1272555551}
+  m_Layer: 11
   m_Name: LaserBase
   m_TagString: Box
   m_Icon: {fileID: 0}
@@ -138,6 +139,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1272555551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359120327765138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29c283b706112304db50e6e3f830f0f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateRange: 0
+  smooth: 0
+  rotating: 0
 --- !u!1 &843966977850151037
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,7 +168,7 @@ GameObject:
   - component: {fileID: 843966977850151038}
   m_Layer: 8
   m_Name: Laser
-  m_TagString: Kill
+  m_TagString: Laser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

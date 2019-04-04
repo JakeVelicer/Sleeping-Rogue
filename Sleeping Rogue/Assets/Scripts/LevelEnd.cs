@@ -3,13 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LevelEnd : MonoBehaviour
-{
+public class LevelEnd : MonoBehaviour {
+
+    private Scene[] AllScenes;
+    private int SceneCount;
+
+    void Start() {
+
+        SceneCount = SceneManager.sceneCountInBuildSettings;
+
+    }
+
     private void OnTriggerEnter2D(Collider2D collision) {
 
         if (collision.gameObject.tag == "Player") {
 
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            if (SceneManager.GetActiveScene().buildIndex + 1 < SceneCount) {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
+            else {
+                SceneManager.LoadScene(0);
+            }
         }
     }
     

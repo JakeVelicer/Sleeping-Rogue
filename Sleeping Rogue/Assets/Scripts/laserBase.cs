@@ -11,11 +11,13 @@ public class laserBase : MonoBehaviour
 
     float startRot;
 
+    public bool smooth;
+
     float leftRot, rightRot;
 
     float rot = 0.0f;
 
-    bool rotating;
+    public bool rotating;
 
     // Start is called before the first frame update
     void Start()
@@ -23,12 +25,15 @@ public class laserBase : MonoBehaviour
         startRot = transform.eulerAngles.z;
         leftRot = startRot + rotateRange;
         rightRot = startRot - rotateRange;
-        StartCoroutine(Rotate());
+        if (rotating)
+        {
+            StartCoroutine(Rotate());
+        }
     }
     
     IEnumerator Rotate()
     {
-        rotating = true;
+        left = true;
         do
         {
             //    if (transform.eulerAngles.z != leftRot && left)
@@ -56,8 +61,19 @@ public class laserBase : MonoBehaviour
             {
                 //transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, newRot);
                 Quaternion targ = Quaternion.Euler(0, 0, leftRot);
-                transform.rotation = Quaternion.Lerp(transform.rotation, targ, Time.deltaTime * 1.5f);
-                if (transform.rotation == targ) 
+                if (smooth)
+                {
+                    transform.rotation = Quaternion.Lerp(transform.rotation, targ, Time.deltaTime * 1.5f);
+                }
+                else transform.Rotate(new Vector3(0, 0, leftRot) * Time.deltaTime * 1.5f);
+
+                if (transform.eulerAngles.z >= leftRot && transform.eulerAngles.z < 100) 
+                {
+                    left = false;
+                    right = true;
+                    Debug.Log("Right Now");
+                }
+                if(transform.rotation == targ)
                 {
                     left = false;
                     right = true;
@@ -69,8 +85,19 @@ public class laserBase : MonoBehaviour
             {
                 //transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, newRot);
                 Quaternion targ = Quaternion.Euler(0, 0, rightRot);
-                transform.rotation = Quaternion.Lerp(transform.rotation, targ, Time.deltaTime * 1.5f);
-                if (transform.rotation == targ)
+                Debug.Log(rightRot);
+                if (smooth)
+                {
+                    transform.rotation = Quaternion.Lerp(transform.rotation, targ, Time.deltaTime * 1.5f);
+                }
+                else transform.Rotate(new Vector3(0, 0, rightRot) * Time.deltaTime * 1.5f);
+                if (transform.eulerAngles.z <= (360 + rightRot) && transform.eulerAngles.z > 300)
+                {
+                    left = true;
+                    right = false;
+                    Debug.Log("LEft Now");
+                }
+                if(transform.rotation == targ)
                 {
                     left = true;
                     right = false;

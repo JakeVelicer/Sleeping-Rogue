@@ -62,13 +62,13 @@ public class NewLasers : InteractableObject
 
         if (playerScript.dreaming == true)
         {
-            this.gameObject.layer = 9;
+            //this.gameObject.layer = 9;
 
             collides = ~LayerMask.GetMask("Laser", "Background", "UI", "Sleep", "Player");
         }
         else
         {
-            this.gameObject.layer = 8;
+            //this.gameObject.layer = 8;
 
             collides = ~LayerMask.GetMask("Laser", "Background", "UI", "Sleep");
         }

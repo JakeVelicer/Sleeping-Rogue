@@ -144,11 +144,9 @@ public class PlatformerController : MonoBehaviour {
         step = true;
 
         audioManager = AudioManager.instance;
-        if(audioManager == null)
-        {
-            Debug.LogError("No AudioManager found in the scene.");
-        }
     }
+
+    float leftGround;
 
     // Update is called once per frame
     void Update() {
@@ -188,9 +186,10 @@ public class PlatformerController : MonoBehaviour {
                 rb2d.velocity = new Vector2(0, rb2d.velocity.y);
             }
 
+            
 
             //Controls jumping heights
-            if (Input.GetButtonDown("Jump") && grounded && canMove && !dragging)
+            if (Input.GetButtonDown("Jump") && leftGround < .1f && canMove && !dragging)
             {
                 //jumpTimer = 0;
                 audioSource.PlayOneShot(jump);
@@ -231,6 +230,11 @@ public class PlatformerController : MonoBehaviour {
              if (grounded)
             {
                 wallJumping = false;
+                leftGround = 0.0f;
+            }
+            else
+            {
+                leftGround += Time.deltaTime;
             }
 
             if (Input.GetAxisRaw("Vertical") != -1) wallBlock = false;
@@ -705,6 +709,13 @@ public class PlatformerController : MonoBehaviour {
             else if (dreaming)
             {
                 EnterExitDreaming();
+            }
+        }
+        if (collision.gameObject.tag == "Laser")
+        {
+            if (!dreaming)
+            {
+                StartCoroutine(Respawn());
             }
         }
         if (collision.gameObject.tag == "Ladder")
