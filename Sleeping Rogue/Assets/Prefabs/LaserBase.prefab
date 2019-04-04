@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 1272555551}
   m_Layer: 11
   m_Name: LaserBase
-  m_TagString: Box
+  m_TagString: Laser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

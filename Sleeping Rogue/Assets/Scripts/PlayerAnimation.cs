@@ -34,7 +34,7 @@ public class PlayerAnimation : MonoBehaviour
             anim.SetInteger("BasicAnimSwitch", 0);
         }
         
-        // Activates jumping anim and falling anim
+        // Activates jumping anim, falling anim, and slide fall anim
         if (rb2d.velocity.y > 0 && PlayerScript.jumping == true
         && PlayerScript.canMove && !PlayerScript.grounded && !PlayerScript.dragging && !PlayerScript.climbing)
         {
@@ -52,14 +52,14 @@ public class PlayerAnimation : MonoBehaviour
             {
                 anim.SetTrigger("Falling");
             }
+            else if (!anim.GetCurrentAnimatorStateInfo(0).IsName("PlayerJumpIni")
+            && FallingTimer <= 0 && !PlayerScript.grounded && !PlayerScript.climbing && !PlayerScript.wall)
+            {
+                anim.Play("PlayerJumpFall");
+            }
             else if (PlayerScript.wall && !PlayerScript.grounded && !PlayerScript.dreaming)
             {
                 anim.Play("Wallslide");
-            }
-            else if (!anim.GetCurrentAnimatorStateInfo(0).IsName("PlayerJumpIni")
-            && FallingTimer <= 0 && !PlayerScript.grounded && !PlayerScript.climbing)
-            {
-                anim.Play("PlayerJumpFall");
             }
         }
 
@@ -87,8 +87,31 @@ public class PlayerAnimation : MonoBehaviour
         {
             anim.speed = 0;
         }
-        else {
+        
+        // Controls animation for dragging boxes
+        if (PlayerScript.dragging && !anim.GetCurrentAnimatorStateInfo(0).IsName("PlayerPush"))
+        {
+            anim.Play("PlayerPush");
+        }
+        else if (!PlayerScript.dragging && anim.GetCurrentAnimatorStateInfo(0).IsName("PlayerPush"))
+        {
+             anim.SetTrigger("LeaveDrag");
+        }
+        if (Mathf.Abs(Input.GetAxis("Horizontal")) > .1f && PlayerScript.dragging)
+        {
             anim.speed = 1;
         }
+        else if (Mathf.Abs(Input.GetAxis("Horizontal")) <= 0 && PlayerScript.dragging)
+        {
+            anim.speed = 0;
+        }
+
+        // Sets the anim speed back to 1 if needed
+        if (!PlayerScript.climbing && !PlayerScript.dragging)
+        {
+            anim.speed = 1;
+        }
+
+
     }
 }
