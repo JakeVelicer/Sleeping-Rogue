@@ -264,8 +264,9 @@ public class PlatformerController : MonoBehaviour {
             }
 
             //Enters or exits the dream state if capable
-            if (Input.GetButtonDown("Dream") && canMove)
+            if (Input.GetButtonDown("Dream") && canMove && !dragging)
             {
+
                 if (!dreaming)
                 {
                     if (grounded) EnterExitDreaming();
@@ -539,6 +540,7 @@ public class PlatformerController : MonoBehaviour {
         }
         if (dreaming)
         {
+            audioSource.PlayOneShot(dream);
             canMove = false;
             movingToBody = true;
             playerCollider.enabled = false;
@@ -547,6 +549,7 @@ public class PlatformerController : MonoBehaviour {
         }
         else if (!dreaming && canDream == true)
         {
+            audioSource.PlayOneShot(dream);
             dreaming = true;
             InvokeRepeating("Wave",0,0.8f);
             Instantiate(shadow, this.transform.position, Quaternion.identity);
