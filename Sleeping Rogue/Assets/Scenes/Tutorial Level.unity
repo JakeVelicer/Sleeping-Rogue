@@ -1368,6 +1368,11 @@ PrefabInstance:
       propertyPath: MoveUp
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2963470235840564123, guid: e469ad48930764e58942f03b3897569e,
+        type: 3}
+      propertyPath: MoveDistance
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e469ad48930764e58942f03b3897569e, type: 3}
 --- !u!4 &145247980 stripped
@@ -3646,7 +3651,7 @@ PrefabInstance:
     - target: {fileID: 2963470235840564123, guid: e469ad48930764e58942f03b3897569e,
         type: 3}
       propertyPath: MoveDistance
-      value: 0.25
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e469ad48930764e58942f03b3897569e, type: 3}
@@ -13467,6 +13472,11 @@ PrefabInstance:
       propertyPath: MoveUp
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2963470235840564123, guid: e469ad48930764e58942f03b3897569e,
+        type: 3}
+      propertyPath: MoveDistance
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e469ad48930764e58942f03b3897569e, type: 3}
 --- !u!1 &1647880916 stripped
@@ -13979,7 +13989,7 @@ PrefabInstance:
     - target: {fileID: 2963470235840564123, guid: e469ad48930764e58942f03b3897569e,
         type: 3}
       propertyPath: MoveDistance
-      value: 0.25
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 2963470235840564123, guid: e469ad48930764e58942f03b3897569e,
         type: 3}
@@ -14878,7 +14888,7 @@ PrefabInstance:
     - target: {fileID: 2963470235840564123, guid: e469ad48930764e58942f03b3897569e,
         type: 3}
       propertyPath: MoveDistance
-      value: 0.25
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e469ad48930764e58942f03b3897569e, type: 3}
@@ -17078,7 +17088,7 @@ PrefabInstance:
     - target: {fileID: 2963470235840564123, guid: e469ad48930764e58942f03b3897569e,
         type: 3}
       propertyPath: MoveDistance
-      value: 0.25
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e469ad48930764e58942f03b3897569e, type: 3}
@@ -18910,6 +18920,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1772725474188841307, guid: 5955bef404da64c699be663ccecaa88b,
+        type: 3}
+      propertyPath: orthographic size
+      value: 6.5
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7417342128255887346, guid: 5955bef404da64c699be663ccecaa88b, type: 3}
