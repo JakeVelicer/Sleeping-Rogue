@@ -145,8 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 0
-  MoveUp: 0
-  MoveDistance: 10
+  MoveUp: 1
   door: {fileID: 8300000, guid: 9c44bd0a60895410b82c091d8f031b24, type: 3}
   audioSource: {fileID: 2058891570}
 --- !u!95 &2963470235840564122
