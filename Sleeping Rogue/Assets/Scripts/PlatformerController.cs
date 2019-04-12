@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -114,6 +116,9 @@ public class PlatformerController : MonoBehaviour {
     //Start and Awake defaults all variables that need to be defaulted still. Set up the scene for gameplay.
     private void Awake()
     {
+        Application.targetFrameRate = 60;
+        QualitySettings.vSyncCount = 0;
+        Debug.Log(Application.targetFrameRate);
         jumpEffect = GameObject.Find("Ground Effects").GetComponent<ParticleSystem>();
         wallEffect = GameObject.Find("Wall Effects").GetComponent<ParticleSystem>();
         rb2d = GetComponent<Rigidbody2D>();
@@ -146,7 +151,7 @@ public class PlatformerController : MonoBehaviour {
         audioManager = AudioManager.instance;
     }
 
-    float leftGround;
+    public float leftGround;
 
     // Update is called once per frame
     void Update() {
@@ -189,7 +194,7 @@ public class PlatformerController : MonoBehaviour {
             
 
             //Controls jumping heights
-            if (Input.GetButtonDown("Jump") && leftGround < .1f && canMove && !dragging)
+            if (Input.GetButtonDown("Jump") && leftGround < .25f && canMove && !dragging)
             {
                 //jumpTimer = 0;
                 audioSource.PlayOneShot(jump);
@@ -229,8 +234,16 @@ public class PlatformerController : MonoBehaviour {
 
              if (grounded)
             {
+                if (!Input.GetButton("Jump"))
+                {
+                    jumping = false;
+                }
                 wallJumping = false;
                 leftGround = 0.0f;
+            }
+            else if (jumping)
+            {
+                leftGround = .5f;
             }
             else
             {
@@ -264,7 +277,7 @@ public class PlatformerController : MonoBehaviour {
             }
 
             //Enters or exits the dream state if capable
-            if (Input.GetButtonDown("Dream") && canMove && !dragging)
+            if (Input.GetButtonDown("Dream") && canMove)
             {
 
                 if (!dreaming)
@@ -536,7 +549,7 @@ public class PlatformerController : MonoBehaviour {
     {
         if (dragging)
         {
-            //StartCoroutine(StartStopDrag());
+            StartCoroutine(StartStopDrag(runIntoHit.collider.gameObject));
         }
         if (dreaming)
         {
@@ -644,10 +657,12 @@ public class PlatformerController : MonoBehaviour {
     {
         var Image = GameObject.Find("DeathFade").GetComponent<DeathFade>();
         Image.FadeIn();
+        if(dragging) StartCoroutine(StartStopDrag(runIntoHit.collider.gameObject));
         canMove = false;
         yield return new WaitForSeconds(0.75f);
         Image.FadeOut();
-        this.transform.position = checkPointSave;
+        //this.transform.position = checkPointSave;
+        LoadGame();
         yield return new WaitForSeconds(0.3f);
         canMove = true;
     }
@@ -700,7 +715,8 @@ public class PlatformerController : MonoBehaviour {
         if (collision.gameObject.tag == "Checkpoint")
         {
             if (!dreaming) {
-                checkPointSave = this.transform.position;
+                checkPointSave = transform.position;
+                currSave = SaveGame();
             }
         }
         if (collision.gameObject.tag == "Kill")
@@ -802,5 +818,47 @@ public class PlatformerController : MonoBehaviour {
     {
         yield return new WaitForSeconds(.2f);
         step = true;
+    }
+
+
+    Save currSave;
+
+    private Save SaveGame()
+    {
+        GameObject[] all = FindObjectsOfType<GameObject>();
+        Save save = new Save();
+
+
+        foreach (GameObject objects in all)
+        {
+            if (objects.tag != "DreamShards")
+            {
+                save.objects.Add(objects);
+            }
+        }
+
+        foreach(GameObject i in save.objects)
+        {
+            save.objectStates.Add(i.transform.localPosition);
+            save.objectRot.Add(i.transform.localRotation);
+        }
+
+        Debug.Log(save.objectStates.Count);
+
+        return save;
+    }
+
+    private void LoadGame()
+    {
+        GameObject[] all = FindObjectsOfType<GameObject>();
+
+        for(int i = 0; i < currSave.objectStates.Count; i++)
+        {
+            Debug.Log(currSave.objects[i]);
+            currSave.objects[i].transform.localPosition = currSave.objectStates[i];
+            currSave.objects[i].transform.localRotation = currSave.objectRot[i];
+        }
+
+
     }
 }

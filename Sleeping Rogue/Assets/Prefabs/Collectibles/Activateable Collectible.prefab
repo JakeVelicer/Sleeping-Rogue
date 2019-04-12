@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5964444870340937739}
   m_Layer: 5
   m_Name: Activateable Collectible
-  m_TagString: Untagged
+  m_TagString: DreamShards
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
