@@ -7212,7 +7212,7 @@ PrefabInstance:
     - target: {fileID: 520173777566704197, guid: a3cabe4381752cb47854994345cdf0ed,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 21.47
+      value: 20.3
       objectReference: {fileID: 0}
     - target: {fileID: 520173777566704197, guid: a3cabe4381752cb47854994345cdf0ed,
         type: 3}
@@ -12431,7 +12431,7 @@ PrefabInstance:
     - target: {fileID: 520173777566704197, guid: a3cabe4381752cb47854994345cdf0ed,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 29.03
+      value: 27.77
       objectReference: {fileID: 0}
     - target: {fileID: 520173777566704197, guid: a3cabe4381752cb47854994345cdf0ed,
         type: 3}
@@ -12591,7 +12591,7 @@ PrefabInstance:
     - target: {fileID: 520173777566704197, guid: a3cabe4381752cb47854994345cdf0ed,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 24.32
+      value: 23.4
       objectReference: {fileID: 0}
     - target: {fileID: 520173777566704197, guid: a3cabe4381752cb47854994345cdf0ed,
         type: 3}
@@ -14578,8 +14578,8 @@ Transform:
   - {fileID: 2145299910}
   - {fileID: 1897536546}
   - {fileID: 699728381}
-  - {fileID: 774364388}
   - {fileID: 2140181420}
+  - {fileID: 774364388}
   - {fileID: 14202290}
   m_Father: {fileID: 0}
   m_RootOrder: 29
@@ -19128,7 +19128,7 @@ PrefabInstance:
     - target: {fileID: 1772725474188841307, guid: 5955bef404da64c699be663ccecaa88b,
         type: 3}
       propertyPath: orthographic size
-      value: 6.5
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7417342128255887346, guid: 5955bef404da64c699be663ccecaa88b, type: 3}
