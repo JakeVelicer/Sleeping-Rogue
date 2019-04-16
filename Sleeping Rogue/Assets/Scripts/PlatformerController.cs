@@ -540,7 +540,7 @@ public class PlatformerController : MonoBehaviour {
         }
         if (dreaming)
         {
-            audioSource.PlayOneShot(dream);
+
             canMove = false;
             movingToBody = true;
             playerCollider.enabled = false;
