@@ -8,8 +8,8 @@ public class CameraBehavior : MonoBehaviour
     private Transform Player;
     [HideInInspector] public CinemachineVirtualCamera CameraController;
     private CinemachineFramingTransposer FramingTransposer;
+    private float NormalZoom;
     public GameObject ZoomedOutCameraMover;
-    public float NormalZoom;
     public float ZoomOut;
     [HideInInspector] public bool Switching;
 
@@ -19,6 +19,7 @@ public class CameraBehavior : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("Player").transform;
         CameraController = gameObject.GetComponent<CinemachineVirtualCamera>();
         FramingTransposer = CameraController.GetCinemachineComponent<CinemachineFramingTransposer>();
+        NormalZoom = CameraController.m_Lens.OrthographicSize;
         CameraController.Follow = Player;
     }
 
