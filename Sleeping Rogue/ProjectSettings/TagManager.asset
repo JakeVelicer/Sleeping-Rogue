@@ -18,6 +18,7 @@ TagManager:
   - SlickWall
   - Manager
   - Laser
+  - DreamShards
   layers:
   - Default
   - TransparentFX

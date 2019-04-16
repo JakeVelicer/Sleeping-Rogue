@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 520173777566704197}
   m_Layer: 0
   m_Name: Dream Triplet
-  m_TagString: Untagged
+  m_TagString: DreamShards
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,12 +53,12 @@ PrefabInstance:
     - target: {fileID: 5298105595693147196, guid: 13168dbb4519bb84e92deedabf56514f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.5428543
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5298105595693147196, guid: 13168dbb4519bb84e92deedabf56514f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.253993
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5298105595693147196, guid: 13168dbb4519bb84e92deedabf56514f,
         type: 3}
@@ -128,12 +128,12 @@ PrefabInstance:
     - target: {fileID: 5298105595693147196, guid: 13168dbb4519bb84e92deedabf56514f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.5428543
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5298105595693147196, guid: 13168dbb4519bb84e92deedabf56514f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.253993
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5298105595693147196, guid: 13168dbb4519bb84e92deedabf56514f,
         type: 3}
@@ -203,12 +203,12 @@ PrefabInstance:
     - target: {fileID: 5298105595693147196, guid: 13168dbb4519bb84e92deedabf56514f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.5428543
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5298105595693147196, guid: 13168dbb4519bb84e92deedabf56514f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.253993
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5298105595693147196, guid: 13168dbb4519bb84e92deedabf56514f,
         type: 3}

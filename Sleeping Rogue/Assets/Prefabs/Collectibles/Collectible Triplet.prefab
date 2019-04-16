@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2141268928343350270}
   m_Layer: 0
   m_Name: Collectible Triplet
-  m_TagString: Untagged
+  m_TagString: DreamShards
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,17 +48,17 @@ PrefabInstance:
     - target: {fileID: 4884074198954199206, guid: a2b633cf12198d2478a3a86a3151e4b8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.8961816
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4884074198954199206, guid: a2b633cf12198d2478a3a86a3151e4b8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.35863876
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4884074198954199206, guid: a2b633cf12198d2478a3a86a3151e4b8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.559592
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4884074198954199206, guid: a2b633cf12198d2478a3a86a3151e4b8,
         type: 3}
@@ -124,17 +124,17 @@ PrefabInstance:
     - target: {fileID: 4884074198954199206, guid: a2b633cf12198d2478a3a86a3151e4b8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.8961816
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4884074198954199206, guid: a2b633cf12198d2478a3a86a3151e4b8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.35863876
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4884074198954199206, guid: a2b633cf12198d2478a3a86a3151e4b8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.559592
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4884074198954199206, guid: a2b633cf12198d2478a3a86a3151e4b8,
         type: 3}
@@ -200,17 +200,17 @@ PrefabInstance:
     - target: {fileID: 4884074198954199206, guid: a2b633cf12198d2478a3a86a3151e4b8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.8961816
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4884074198954199206, guid: a2b633cf12198d2478a3a86a3151e4b8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.35863876
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4884074198954199206, guid: a2b633cf12198d2478a3a86a3151e4b8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.559592
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4884074198954199206, guid: a2b633cf12198d2478a3a86a3151e4b8,
         type: 3}
