@@ -15,6 +15,8 @@ public class MenuScript : MonoBehaviour
 
     public GameObject mMenu, opMenu;
 
+    public float Volume = 100;
+
     public static int Selected;
     public bool canInteract = true;
 
@@ -101,10 +103,6 @@ public class MenuScript : MonoBehaviour
                 }
                 Main[Selected].Select();
             }
-            else 
-            {
-                FindObjectOfType<Button>().Select();
-            }
         }
         else
         {
@@ -117,26 +115,25 @@ public class MenuScript : MonoBehaviour
                 }
                 Main[Selected].Select();
             }
-            else if (opMenu != null)
-            {
-                Options[0].Select();
-            }
         }
 
 
     }
-
+    
 
 
     private IEnumerator ChangeMenu(float val)
     {
         if (val < 0)
         {
+
             Selected++;
             if(Selected > Main.Length - 1)
             {
                 Selected = 0;
             }
+
+            
         }
         if (val > 0 )
         {
@@ -147,8 +144,21 @@ public class MenuScript : MonoBehaviour
             }
         }
         Debug.Log(Selected);
-        
-            Main[Selected].Select();
+
+
+        if (opMenu != null)
+        {
+            if(Selected == 0)
+            {
+                FindObjectOfType<Button>().Select();
+            }
+            else
+            {
+                FindObjectOfType<Slider>().Select();
+            }
+        }
+
+           // Main[Selected].Select();
         yield return new WaitForSeconds(.2f);
 
         canInteract = true;
