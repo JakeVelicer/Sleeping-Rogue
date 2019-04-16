@@ -596,6 +596,7 @@ GameObject:
   m_Component:
   - component: {fileID: 515985851}
   - component: {fileID: 515985852}
+  - component: {fileID: 515985853}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -666,14 +667,26 @@ MonoBehaviour:
   m_HandleRect: {fileID: 709752785}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
-  m_Value: 0
+  m_MaxValue: 100
+  m_WholeNumbers: 1
+  m_Value: 30
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &515985853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515985850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d682a660df05d74d980b3202ac95e73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &682226831
 GameObject:
   m_ObjectHideFlags: 0
@@ -1861,6 +1874,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1933565038}
+        m_MethodName: resetSelected
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1116615533
@@ -2003,6 +2027,17 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1898850818}
         m_MethodName: Select
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1933565038}
+        m_MethodName: resetSelected
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2793,7 +2828,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1933565038}
         m_MethodName: resetSelected
         m_Mode: 1
         m_Arguments:
@@ -3269,6 +3304,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 769902980253023048, guid: 8295b6e17ce9a447cace5eae186a01c7,
+        type: 3}
+      propertyPath: Main.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 769902980253023051, guid: 8295b6e17ce9a447cace5eae186a01c7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3322,11 +3362,6 @@ PrefabInstance:
     - target: {fileID: 769902980253023051, guid: 8295b6e17ce9a447cace5eae186a01c7,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 769902980253023048, guid: 8295b6e17ce9a447cace5eae186a01c7,
-        type: 3}
-      propertyPath: Main.Array.size
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
