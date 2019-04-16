@@ -661,7 +661,7 @@ public class PlatformerController : MonoBehaviour {
         canMove = false;
         yield return new WaitForSeconds(0.75f);
         Image.FadeOut();
-        //this.transform.position = checkPointSave;
+        this.transform.position = checkPointSave;
         LoadGame();
         yield return new WaitForSeconds(0.3f);
         canMove = true;
@@ -714,9 +714,15 @@ public class PlatformerController : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Checkpoint")
         {
-            if (!dreaming) {
-                checkPointSave = transform.position;
-                currSave = SaveGame();
+            if (!dreaming)
+            {
+                if (!collision.gameObject.GetComponent<checkPoint>().isHit)
+                {
+                    Debug.Log("Save");
+                    collision.gameObject.GetComponent<checkPoint>().isHit = true;
+                    checkPointSave = collision.gameObject.transform.position;
+                    currSave = SaveGame();
+                }
             }
         }
         if (collision.gameObject.tag == "Kill")
@@ -831,7 +837,7 @@ public class PlatformerController : MonoBehaviour {
 
         foreach (GameObject objects in all)
         {
-            if (objects.tag != "DreamShards")
+            if (objects.tag != "DreamShards" && objects.tag != "Player")
             {
                 save.objects.Add(objects);
             }
@@ -842,8 +848,7 @@ public class PlatformerController : MonoBehaviour {
             save.objectStates.Add(i.transform.localPosition);
             save.objectRot.Add(i.transform.localRotation);
         }
-
-        Debug.Log(save.objectStates.Count);
+        
 
         return save;
     }
@@ -856,8 +861,10 @@ public class PlatformerController : MonoBehaviour {
         {
             Debug.Log(currSave.objects[i]);
             currSave.objects[i].transform.localPosition = currSave.objectStates[i];
+            
             currSave.objects[i].transform.localRotation = currSave.objectRot[i];
         }
+
 
 
     }

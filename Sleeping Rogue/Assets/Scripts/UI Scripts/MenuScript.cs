@@ -130,25 +130,22 @@ public class MenuScript : MonoBehaviour
 
     private IEnumerator ChangeMenu(float val)
     {
-            if (mMenu != null)
+        if (val < 0)
+        {
+            Selected++;
+            if(Selected > Main.Length - 1)
             {
-                if (val < 0)
-                {
-                    Selected++;
-                    if(Selected > Main.Length - 1)
-                    {
-                        Selected = 0;
-                    }
-                }
-                if (val > 0 )
-                {
-                    Selected--;
-                    if(Selected < 0)
-                    {
-                        Selected = Main.Length - 1;
-                    }
-                }
+                Selected = 0;
             }
+        }
+        if (val > 0 )
+        {
+            Selected--;
+            if(Selected < 0)
+            {
+                Selected = Main.Length - 1;
+            }
+        }
         Debug.Log(Selected);
         
             Main[Selected].Select();
