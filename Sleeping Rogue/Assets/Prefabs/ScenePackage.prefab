@@ -451,7 +451,7 @@ MonoBehaviour:
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 40
-    OrthographicSize: 6.5
+    OrthographicSize: 8
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
@@ -481,9 +481,7 @@ MonoBehaviour:
   CameraController: {fileID: 0}
   ZoomedOutCameraMover: {fileID: 5140650686321083873, guid: fc988d7225264468891e39438e41b08c,
     type: 3}
-  NormalZoom: 6.5
   ZoomOut: 20
-  OnDialogueTrigger: 0
   Switching: 0
 --- !u!1 &1387613913144876515
 GameObject:
@@ -663,7 +661,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1772725474188841381}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -42.3, y: -38.510002, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1241378705702304475}
@@ -695,7 +693,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 6.5
+  orthographic size: 8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1047,7 +1045,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaa3348da29cc4cdf8dbdd4ecd271f23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Backgrounds: []
+  Backgrounds:
+  - {fileID: 0}
   Smoothing: 0.1
 --- !u!1 &4051544369125845321
 GameObject:
