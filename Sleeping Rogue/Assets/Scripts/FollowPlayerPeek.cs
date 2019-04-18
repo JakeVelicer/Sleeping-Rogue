@@ -1,22 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class FollowPlayerPeek : MonoBehaviour
 {
 
     private Transform Player;
     private Rigidbody2D Rigidbody;
+    public CinemachineVirtualCamera CameraController;
+    private CinemachineFramingTransposer FramingTransposer;
     private float horizontalInput;
     private float verticalInput;
     private float Distance;
-    private float speed = 60;
+    private float speed = 50;
 
     // Start is called before the first frame update
     void Start()
     {
         Rigidbody = GetComponent<Rigidbody2D>();
         Player = GameObject.FindGameObjectWithTag("Player").transform;
+        FramingTransposer = CameraController.GetCinemachineComponent<CinemachineFramingTransposer>();
     }
 
     // Update is called once per frame
@@ -33,12 +37,13 @@ public class FollowPlayerPeek : MonoBehaviour
             Rigidbody.velocity = movement * speed;
         }
         else if (Distance > 8f) {
-            transform.position = Vector2.MoveTowards(transform.position, Player.transform.position, (100 * Time.deltaTime));
+            transform.position = Vector2.MoveTowards(transform.position, Player.transform.position, (100 * Time.fixedDeltaTime));
         }
 
         if (Mathf.Abs(horizontalInput) <= 0.5 && Mathf.Abs(verticalInput) <= 0.5) {
-            transform.position = Vector2.MoveTowards(transform.position, Player.transform.position, (200 * Time.deltaTime));
+            transform.position = Player.transform.position;
         }
+
     }
 
 }
