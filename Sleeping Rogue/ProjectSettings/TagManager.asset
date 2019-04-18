@@ -20,6 +20,7 @@ TagManager:
   - Laser
   - DreamShards
   - DreamFloor
+  - PlayerFollower
   layers:
   - Default
   - TransparentFX
