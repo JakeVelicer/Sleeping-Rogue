@@ -16,7 +16,7 @@ public class CameraMoverZoomedOut : MonoBehaviour
     {
         CameraMachine = GameObject.Find("CM vcam1").gameObject.GetComponent<CinemachineVirtualCamera>();
         Camera = GameObject.Find("CM vcam1").gameObject.GetComponent<CameraBehavior>();
-        Player = GameObject.FindGameObjectWithTag("Player");
+        Player = GameObject.FindGameObjectWithTag("PlayerFollower");
         Rigidbody = gameObject.GetComponent<Rigidbody2D>();
     }
 

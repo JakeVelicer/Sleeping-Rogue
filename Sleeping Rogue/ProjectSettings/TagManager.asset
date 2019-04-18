@@ -19,6 +19,7 @@ TagManager:
   - Manager
   - Laser
   - DreamShards
+  - PlayerFollower
   layers:
   - Default
   - TransparentFX
@@ -37,7 +38,7 @@ TagManager:
   - Box
   - 
   - 
-  - 
+  - CameraCollide
   - 
   - 
   - 
