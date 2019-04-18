@@ -10,6 +10,8 @@ public class InBetweenLevel : MonoBehaviour
     public int DetermineTime;
     public Text TimerText;
     private int Timer;
+    private PlatformerController Player;
+    private bool CountingDown = true;
 
     // Start is called before the first frame update
     void Start() {
@@ -25,12 +27,21 @@ public class InBetweenLevel : MonoBehaviour
 
     private IEnumerator CountDown() {
 
-        for (int Timer = DetermineTime; Timer >= 0; Timer--) {
+        int Timer = DetermineTime;
 
+        while (CountingDown) {
+
+            if (!PlatformerController.paused) {
+                Timer--;
+            }
             TimerText.text = "Countdown: " + Timer;
+            if (Timer <= 0) {
+                CountingDown = false;
+            }
             yield return new WaitForSeconds(1);
         }
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        
     }
 
 }
