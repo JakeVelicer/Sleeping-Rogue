@@ -14,6 +14,11 @@ public class NewLasers : InteractableObject
 
     public float drawSpeed = 5.0f;
 
+    public AudioClip death;
+    public AudioClip hum;
+
+    public AudioSource audioSource;
+
     private PlatformerController playerScript;
 
     LayerMask collides;
@@ -78,6 +83,13 @@ public class NewLasers : InteractableObject
         GetComponent<BoxCollider2D>().size = new Vector2(width, length);
         GetComponent<BoxCollider2D>().offset = new Vector2(0, length/2);
     }
+    private void OnTriggerEnter2D(Collision2D col)
+    {
+        if(col.gameObject.tag == "Player")
+        {
+            audioSource.PlayOneShot(death);
+        }
+    }
 
     private void FixedUpdate()
     {
@@ -96,4 +108,5 @@ public class NewLasers : InteractableObject
             yield return null;
         }
     }
+
 }
