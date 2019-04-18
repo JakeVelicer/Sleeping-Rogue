@@ -389,8 +389,8 @@ MonoBehaviour:
   m_ScreenX: 0.5
   m_ScreenY: 0.52
   m_CameraDistance: 10
-  m_DeadZoneWidth: 0.2
-  m_DeadZoneHeight: 0.1
+  m_DeadZoneWidth: 0.15
+  m_DeadZoneHeight: 0.09
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
   m_SoftZoneWidth: 0.6
@@ -435,7 +435,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 791975777053560224}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 791975775675469885}
@@ -674,7 +674,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1772725474188841381}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1241378705702304475}
@@ -11721,6 +11721,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25809ec07be6f48e794a1413fb2b0c32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CameraController: {fileID: 791975777053560225}
 --- !u!50 &7858329514306521856
 Rigidbody2D:
   serializedVersion: 4
