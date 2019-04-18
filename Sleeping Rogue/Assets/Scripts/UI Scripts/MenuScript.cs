@@ -103,6 +103,11 @@ public class MenuScript : MonoBehaviour
                 }
                 Main[Selected].Select();
             }
+
+            if (GameObject.Find("Credits") != null)
+            {
+                FindObjectOfType<Button>().Select();
+            }
         }
         else
         {
