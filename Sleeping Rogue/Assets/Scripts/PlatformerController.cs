@@ -890,9 +890,9 @@ public class PlatformerController : MonoBehaviour {
 
         for(int i = 0; i < currSave.buttons.Count; i++)
         {
-            foreach (GameObject j in currSave.buttons[i].GetComponent<ButtonScript>().connected)
+            if (currSave.buttons[i].GetComponent<ButtonScript>().pressed != currSave.buttonStates[i])
             {
-                if (currSave.buttons[i].GetComponent<ButtonScript>().pressed)
+                foreach (GameObject j in currSave.buttons[i].GetComponent<ButtonScript>().connected)
                 {
                     Debug.Log("Swapping");
                     if (j.GetComponent<InteractableObject>().isActive)
