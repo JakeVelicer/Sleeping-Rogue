@@ -16,7 +16,7 @@ public class CameraBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Player = GameObject.FindGameObjectWithTag("Player").transform;
+        Player = GameObject.FindGameObjectWithTag("PlayerFollower").transform;
         CameraController = gameObject.GetComponent<CinemachineVirtualCamera>();
         FramingTransposer = CameraController.GetCinemachineComponent<CinemachineFramingTransposer>();
         NormalZoom = CameraController.m_Lens.OrthographicSize;
@@ -26,11 +26,13 @@ public class CameraBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if (Input.GetButtonDown("CameraZoom") && Player.GetComponent<PlatformerController>().grounded) {
             if (!Switching) {
                 StartCoroutine(ZoomController());
             }
         }
+        */
     }
 
     private IEnumerator ZoomController() {

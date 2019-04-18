@@ -19,6 +19,8 @@ TagManager:
   - Manager
   - Laser
   - DreamShards
+  - DreamFloor
+  - PlayerFollower
   layers:
   - Default
   - TransparentFX
@@ -35,7 +37,7 @@ TagManager:
   - Wall
   - Player
   - Box
-  - 
+  - DreamFloor
   - 
   - 
   - 
