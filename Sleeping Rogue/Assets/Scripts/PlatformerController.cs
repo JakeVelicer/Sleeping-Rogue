@@ -418,7 +418,7 @@ public class PlatformerController : MonoBehaviour {
                 {
                     if (Mathf.Abs(Input.GetAxis("Vertical")) > .25)
                     {
-                        rb2d.velocity = Vector2.up * 10 * Mathf.Sign(Input.GetAxis("Vertical"));
+                        rb2d.velocity = Vector2.up * 5 * Mathf.Sign(Input.GetAxis("Vertical"));
                         if (this.transform.parent != null)
                             gameObject.transform.position = new Vector3(transform.parent.position.x, transform.position.y, 0);
                         climbing = true;

@@ -119,4 +119,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efa4ee8a7926c2e44aa249fc4778a629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Unactivated: {fileID: 21300000, guid: f9b1dd35e41d640d5ae8cd41fa866d59, type: 3}
+  Activated: {fileID: 21300000, guid: 1de40427e648240f5964e3d0f3993f37, type: 3}
   isHit: 0
