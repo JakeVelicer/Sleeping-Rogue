@@ -8776,6 +8776,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Button (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1180845386847494, guid: 81158549275a8fb4e96c43f9df33dcfe, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4429342913582750, guid: 81158549275a8fb4e96c43f9df33dcfe, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.030410767
@@ -25337,7 +25341,7 @@ PrefabInstance:
     - target: {fileID: 5909443301092767458, guid: 40237f542e4f6224b9d0d4b89156ba28,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -46.960007
+      value: -46.569
       objectReference: {fileID: 0}
     - target: {fileID: 5909443301092767458, guid: 40237f542e4f6224b9d0d4b89156ba28,
         type: 3}
@@ -25392,7 +25396,7 @@ PrefabInstance:
     - target: {fileID: 841157996554756237, guid: 40237f542e4f6224b9d0d4b89156ba28,
         type: 3}
       propertyPath: m_Size.x
-      value: 6.875387
+      value: 7.6577272
       objectReference: {fileID: 0}
     - target: {fileID: 841157996554756237, guid: 40237f542e4f6224b9d0d4b89156ba28,
         type: 3}
