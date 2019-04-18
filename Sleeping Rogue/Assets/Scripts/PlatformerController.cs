@@ -313,7 +313,7 @@ public class PlatformerController : MonoBehaviour {
             if(isMoving && grounded && step)
             {
                 step = false;
-                audioSource.PlayOneShot(footStep);
+                audioSource.PlayOneShot(footStep, .2f);
                 StartCoroutine(FootStep());
             }
             //If the player is not wall jumping, checks horizontal input and applies forces according to various conditions
