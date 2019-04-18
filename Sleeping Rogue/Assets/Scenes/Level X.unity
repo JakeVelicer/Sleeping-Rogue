@@ -8846,7 +8846,7 @@ PrefabInstance:
         type: 3}
       propertyPath: connected.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1735547725}
     - target: {fileID: 114836102036886712, guid: 81158549275a8fb4e96c43f9df33dcfe,
         type: 3}
       propertyPath: connected.Array.data[2]
@@ -22257,12 +22257,12 @@ PrefabInstance:
     - target: {fileID: 1325278372992784083, guid: ddc181011fd904634b5d60dc6e15a7a2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -81.13
+      value: -73.14
       objectReference: {fileID: 0}
     - target: {fileID: 1325278372992784083, guid: ddc181011fd904634b5d60dc6e15a7a2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -14.53
+      value: -6.33
       objectReference: {fileID: 0}
     - target: {fileID: 1325278372992784083, guid: ddc181011fd904634b5d60dc6e15a7a2,
         type: 3}
@@ -28929,7 +28929,7 @@ PrefabInstance:
     - target: {fileID: 114836102036886712, guid: 81158549275a8fb4e96c43f9df33dcfe,
         type: 3}
       propertyPath: connected.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114836102036886712, guid: 81158549275a8fb4e96c43f9df33dcfe,
         type: 3}
