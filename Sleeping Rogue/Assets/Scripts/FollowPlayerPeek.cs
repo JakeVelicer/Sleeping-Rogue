@@ -10,12 +10,11 @@ public class FollowPlayerPeek : MonoBehaviour
     private float horizontalInput;
     private float verticalInput;
     private float Distance;
-    private float speed;
+    private float speed = 60;
 
     // Start is called before the first frame update
     void Start()
     {
-        speed = 50;
         Rigidbody = GetComponent<Rigidbody2D>();
         Player = GameObject.FindGameObjectWithTag("Player").transform;
     }
@@ -26,16 +25,16 @@ public class FollowPlayerPeek : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("RightStickHor");
         verticalInput = Input.GetAxisRaw("LeftStickVert");
 
-        Distance = Vector3.Distance(Player.position, transform.position);
-        
-        speed = Mathf.Clamp (Distance, 10f, 0f);
-
-        if (Vector3.Distance(Player.position, transform.position) >= 10 ) {
-            //transform.position = new Vector2((Mathf.Abs(parent.position.x - transform.position.x) + 1), (Mathf.Abs(parent.position.y - transform.position.y) + 1));
-        }
-
         Vector3 movement = new Vector3 (horizontalInput, verticalInput, 0);
-        Rigidbody.velocity = movement * speed;
+        
+        Distance = Mathf.Abs(Vector3.Distance(Player.position, transform.position));
+
+        if (Distance <= 8f) {
+            Rigidbody.velocity = movement * speed;
+        }
+        else if (Distance > 8f) {
+            transform.position = Vector2.MoveTowards(transform.position, Player.transform.position, (100 * Time.deltaTime));
+        }
 
         if (Mathf.Abs(horizontalInput) <= 0.5 && Mathf.Abs(verticalInput) <= 0.5) {
             transform.position = Vector2.MoveTowards(transform.position, Player.transform.position, (200 * Time.deltaTime));
