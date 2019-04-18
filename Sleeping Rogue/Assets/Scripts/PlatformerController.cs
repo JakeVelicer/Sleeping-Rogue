@@ -511,7 +511,9 @@ public class PlatformerController : MonoBehaviour {
                 }
                 returnEffect.transform.LookAt(ShadowInScene.transform.position);
                 returnEffect.Play();
-                if (transform.position == ShadowInScene.transform.position)
+                float Distance = 
+                Mathf.Abs(Vector3.Distance(ShadowInScene.transform.position, transform.position));
+                if (Distance <= 0.1f)
                 {
                     rb2d.velocity = Vector3.zero;
                     returnEffect.Stop();
