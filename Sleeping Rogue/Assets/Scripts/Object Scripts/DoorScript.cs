@@ -11,6 +11,8 @@ public class DoorScript : InteractableObject {
     public AudioClip door;
     public AudioSource audioSource;
 
+    public bool moved;
+
     void Start() {
 
         render = gameObject.GetComponent<SpriteRenderer>();
@@ -25,7 +27,7 @@ public class DoorScript : InteractableObject {
         }
 	}
 
-    private IEnumerator Activation() {
+    public IEnumerator Activation() {
         isActive = false;
         CanMove = true;
         for (int i = 0; i < (render.bounds.size.y * 2); i++) {
@@ -45,6 +47,7 @@ public class DoorScript : InteractableObject {
             MoveUp = true;
         }
         CanMove = false;
+        moved = true;
     }
 
 }

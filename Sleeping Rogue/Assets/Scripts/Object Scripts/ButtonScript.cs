@@ -13,7 +13,7 @@ public class ButtonScript : MonoBehaviour {
     public AudioClip button;
     public AudioSource audioSource;
 
-    bool pressed;
+    public bool pressed;
     SpriteRenderer spr;
 
     void OnDrawGizmos()

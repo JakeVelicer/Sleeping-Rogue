@@ -837,9 +837,19 @@ public class PlatformerController : MonoBehaviour {
 
         foreach (GameObject objects in all)
         {
-            if (objects.tag != "DreamShards" && objects.tag != "Player")
+            if (objects.tag != "DreamShards" && objects.tag != "Player" && objects.GetComponent<DoorScript>() == null)
             {
                 save.objects.Add(objects);
+            }
+            if (objects.GetComponent<ButtonScript>() != null)
+            {
+                save.buttonStates.Add(objects.GetComponent<ButtonScript>().pressed);
+                save.buttons.Add(objects);
+            }
+            if(objects.GetComponent<DoorScript>() != null)
+            {
+                save.interactables.Add(objects);
+                save.interactableStates.Add(objects.GetComponent<DoorScript>().isActive);
             }
         }
 
@@ -849,6 +859,7 @@ public class PlatformerController : MonoBehaviour {
             save.objectRot.Add(i.transform.localRotation);
         }
         
+        
 
         return save;
     }
@@ -857,15 +868,49 @@ public class PlatformerController : MonoBehaviour {
     {
         GameObject[] all = FindObjectsOfType<GameObject>();
 
+        List<GameObject> doors = new List<GameObject>();
+
+        foreach(GameObject i in all)
+        {
+            if(i.GetComponent<DoorScript>() != null)
+            {
+                doors.Add(i);
+            }
+        }
+
         for(int i = 0; i < currSave.objectStates.Count; i++)
         {
             Debug.Log(currSave.objects[i]);
             currSave.objects[i].transform.localPosition = currSave.objectStates[i];
+
+           
             
             currSave.objects[i].transform.localRotation = currSave.objectRot[i];
         }
 
+        for(int i = 0; i < currSave.buttons.Count; i++)
+        {
+            if (currSave.buttons[i].GetComponent<ButtonScript>().pressed != currSave.buttonStates[i])
+            {
+                foreach (GameObject j in currSave.buttons[i].GetComponent<ButtonScript>().connected)
+                {
+                    Debug.Log("Swapping");
+                    if (j.GetComponent<InteractableObject>().isActive)
+                    {
+                        j.GetComponent<InteractableObject>().isActive = false;
+                    }
+                    else
+                    {
+                        j.GetComponent<InteractableObject>().isActive = true;
+                    }
+                }
+            }
 
+
+            currSave.buttons[i].GetComponent<ButtonScript>().pressed = currSave.buttonStates[i];
+
+        }
+        
 
     }
 }
