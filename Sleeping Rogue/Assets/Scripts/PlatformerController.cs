@@ -35,6 +35,7 @@ public class PlatformerController : MonoBehaviour {
     public AudioClip jump;
     public AudioClip dream;
     public AudioClip death;
+    public AudioClip landing;
 
     public AudioSource audioSource;
 
@@ -671,6 +672,7 @@ public class PlatformerController : MonoBehaviour {
     {
         if (collision.gameObject.layer == 11)
         {
+            audioSource.PlayOneShot(landing);
             jumpTimer = 0;
         }
         if (collision.gameObject.tag == "Kill")
