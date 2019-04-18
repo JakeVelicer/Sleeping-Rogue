@@ -71,9 +71,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -195897727
-  m_SortingLayer: 1
-  m_SortingOrder: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 20
   m_Sprite: {fileID: 21300000, guid: 772ec9ad77e25ac48ba7030ef86cd3d6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -148,6 +148,7 @@ MonoBehaviour:
   MoveUp: 1
   door: {fileID: 8300000, guid: 9c44bd0a60895410b82c091d8f031b24, type: 3}
   audioSource: {fileID: 2058891570}
+  moved: 0
 --- !u!95 &2963470235840564122
 Animator:
   serializedVersion: 3
