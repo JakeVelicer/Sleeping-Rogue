@@ -126,7 +126,7 @@ public class PlatformerController : MonoBehaviour {
         horiz = 0;
         dreaming = false;
         isMoving = false;
-        flooring = LayerMask.GetMask("Ground", "Box");
+        flooring = LayerMask.GetMask("Ground", "Box", "DreamFloor");
         wallType = LayerMask.GetMask("Ground");
 
         menuMain = GameObject.Find("Main");
