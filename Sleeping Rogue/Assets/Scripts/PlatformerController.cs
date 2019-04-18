@@ -36,6 +36,7 @@ public class PlatformerController : MonoBehaviour {
     public AudioClip dream;
     public AudioClip death;
     public AudioClip landing;
+    public AudioClip sizzle;
 
     public AudioSource audioSource;
 
@@ -658,6 +659,7 @@ public class PlatformerController : MonoBehaviour {
     //Reloads the player if they die
     private IEnumerator Respawn()
     {
+        audioSource.PlayOneShot(death);
         var Image = GameObject.Find("DeathFade").GetComponent<DeathFade>();
         Image.FadeIn();
         if(dragging) StartCoroutine(StartStopDrag(runIntoHit.collider.gameObject));
@@ -681,7 +683,6 @@ public class PlatformerController : MonoBehaviour {
         {
             if (!dreaming)
             {
-                audioSource.PlayOneShot(death);
                 StartCoroutine(Respawn());
             }
             else if (dreaming)
@@ -731,8 +732,10 @@ public class PlatformerController : MonoBehaviour {
         }
         if (collision.gameObject.tag == "Kill")
         {
+            audioSource.PlayOneShot(sizzle, .75f);
             if (!dreaming)
             {
+
                 StartCoroutine(Respawn());
             }
             else if (dreaming)
