@@ -12521,7 +12521,8 @@ PrefabInstance:
       propertyPath: m_UseAutoMass
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2294049205377060852, guid: a9b164837612c864789fdc4fc6a95823, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a9b164837612c864789fdc4fc6a95823, type: 3}
 --- !u!4 &1590142557 stripped
 Transform:
