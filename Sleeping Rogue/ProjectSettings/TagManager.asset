@@ -21,6 +21,7 @@ TagManager:
   - DreamShards
   - DreamFloor
   - PlayerFollower
+  - Text
   layers:
   - Default
   - TransparentFX
