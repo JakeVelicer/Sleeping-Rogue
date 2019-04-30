@@ -37,6 +37,7 @@ public class LevelEnd : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision) {
 
         if (collision.gameObject.tag == "Player") {
+            
             StartCoroutine(Fade());
             /*
             else if (SceneManager.GetActiveScene().name != "In-Between Level" &&
