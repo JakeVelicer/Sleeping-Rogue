@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActivateDeactivateObject :InteractableObject
+public class ActivateDeactivateObject : InteractableObject
 {
 
     private SpriteRenderer spriteRenderer1;
@@ -10,66 +10,141 @@ public class ActivateDeactivateObject :InteractableObject
     private Collider2D m_Collider1;
     private Collider2D m_Collider2;
     private MeshRenderer m_meshRenderer;
+    private bool isText = false;
+    public float showDistance = 7.5f;
 
     void Start()
     {
-        if (GetComponent<SpriteRenderer>() != null) {
+        if (this.gameObject.tag == "Text")
+        {
+            isText = true;
+        }
+        if (GetComponent<SpriteRenderer>() != null)
+        {
             spriteRenderer1 = GetComponent<SpriteRenderer>();
         }
-        if (GetComponent<Collider2D>() != null) {
+        if (GetComponent<Collider2D>() != null)
+        {
             m_Collider1 = GetComponent<Collider2D>();
         }
-        if (transform.childCount > 0) {
-            if (gameObject.transform.GetChild(0).GetComponent<MeshRenderer>() != null) {
+        if (transform.childCount > 0)
+        {
+            if (gameObject.transform.GetChild(0).GetComponent<MeshRenderer>() != null)
+            {
                 m_meshRenderer = gameObject.transform.GetChild(0).GetComponent<MeshRenderer>();
             }
-            if (gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>() != null) {
+            if (gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>() != null)
+            {
                 spriteRenderer2 = gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
             }
-            if (gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>() != null) {
+            if (gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>() != null)
+            {
                 m_Collider2 = gameObject.transform.GetChild(0).GetComponent<Collider2D>();
             }
         }
     }
 
-	// Update is called once per frame
-	void Update () {
-        
-        if (isActive)
+    // Update is called once per frame
+    void Update()
+    {
+        if (isText == false)
         {
-            if (spriteRenderer1 != null) {
-                this.spriteRenderer1.enabled = true;
+            if (isActive)
+            {
+                if (spriteRenderer1 != null)
+                {
+                    this.spriteRenderer1.enabled = true;
+                }
+                if (spriteRenderer2 != null)
+                {
+                    this.spriteRenderer2.enabled = true;
+                }
+                if (m_Collider1 != null)
+                {
+                    this.m_Collider1.enabled = true;
+                }
+                if (m_Collider2 != null)
+                {
+                    this.m_Collider2.enabled = true;
+                }
+                if (m_meshRenderer != null)
+                {
+                    this.m_meshRenderer.enabled = true;
+                }
             }
-            if (spriteRenderer2 != null) {
-                this.spriteRenderer2.enabled = true;
-            }
-            if (m_Collider1 != null) {
-                this.m_Collider1.enabled = true;
-            }
-            if (m_Collider2 != null) {
-                this.m_Collider2.enabled = true;
-            }
-            if (m_meshRenderer != null) {
-                this.m_meshRenderer.enabled = true;
+            else
+            {
+                if (spriteRenderer1 != null)
+                {
+                    this.spriteRenderer1.enabled = false;
+                }
+                if (spriteRenderer2 != null)
+                {
+                    this.spriteRenderer2.enabled = false;
+                }
+                if (m_Collider1 != null)
+                {
+                    this.m_Collider1.enabled = false;
+                }
+                if (m_Collider2 != null)
+                {
+                    this.m_Collider2.enabled = false;
+                }
+                if (m_meshRenderer != null)
+                {
+                    this.m_meshRenderer.enabled = false;
+                }
             }
         }
         else
         {
-            if (spriteRenderer1 != null) {
-                this.spriteRenderer1.enabled = false;
+            if (isActive && (Vector2.Distance(this.transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) < showDistance))
+            {
+                if (spriteRenderer1 != null)
+                {
+                    this.spriteRenderer1.enabled = true;
+                }
+                if (spriteRenderer2 != null)
+                {
+                    this.spriteRenderer2.enabled = true;
+                }
+                if (m_Collider1 != null)
+                {
+                    this.m_Collider1.enabled = true;
+                }
+                if (m_Collider2 != null)
+                {
+                    this.m_Collider2.enabled = true;
+                }
+                if (m_meshRenderer != null)
+                {
+                    this.m_meshRenderer.enabled = true;
+                }
             }
-            if (spriteRenderer2 != null) {
-                this.spriteRenderer2.enabled = false;
+            else
+            {
+                if (spriteRenderer1 != null)
+                {
+                    this.spriteRenderer1.enabled = false;
+                }
+                if (spriteRenderer2 != null)
+                {
+                    this.spriteRenderer2.enabled = false;
+                }
+                if (m_Collider1 != null)
+                {
+                    this.m_Collider1.enabled = false;
+                }
+                if (m_Collider2 != null)
+                {
+                    this.m_Collider2.enabled = false;
+                }
+                if (m_meshRenderer != null)
+                {
+                    this.m_meshRenderer.enabled = false;
+                }
             }
-            if (m_Collider1 != null) {
-                this.m_Collider1.enabled = false;
-            }
-            if (m_Collider2 != null) {
-                this.m_Collider2.enabled = false;
-            }
-            if (m_meshRenderer != null) {
-                this.m_meshRenderer.enabled = false;
-            }
+
         }
-	}
+    }
 }
