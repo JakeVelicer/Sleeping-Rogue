@@ -9,6 +9,7 @@ public class InBetweenLevel : MonoBehaviour
 
     public int DetermineTime;
     public Text TimerText;
+    private DeathFade fade;
     private int Timer;
     private PlatformerController Player;
     private bool CountingDown = true;
@@ -16,6 +17,7 @@ public class InBetweenLevel : MonoBehaviour
     // Start is called before the first frame update
     void Start() {
 
+        fade = GameObject.Find("DeathFade").GetComponent<DeathFade>();
         StartCoroutine(CountDown());
     }
 
@@ -40,6 +42,8 @@ public class InBetweenLevel : MonoBehaviour
             }
             yield return new WaitForSeconds(1);
         }
+        fade.FadeOut();
+        yield return new WaitForSeconds(2f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         
     }

@@ -6524,6 +6524,7 @@ GameObject:
   - component: {fileID: 6664326011590664197}
   - component: {fileID: 6664326011590664196}
   - component: {fileID: 6664326011590664194}
+  - component: {fileID: 1771993066}
   m_Layer: 5
   m_Name: DeathFade
   m_TagString: Untagged
@@ -6600,6 +6601,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FadeRate: 7
+--- !u!95 &1771993066
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6664326011590664198}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9ca6a20af777f4cc7830e56a537aa4e9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6664326012405376594
 GameObject:
   m_ObjectHideFlags: 0

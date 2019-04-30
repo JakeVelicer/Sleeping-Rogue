@@ -661,11 +661,11 @@ public class PlatformerController : MonoBehaviour {
     {
         audioSource.PlayOneShot(death);
         var Image = GameObject.Find("DeathFade").GetComponent<DeathFade>();
-        Image.FadeIn();
+        Image.FadeOut();
         if(dragging) StartCoroutine(StartStopDrag(runIntoHit.collider.gameObject));
         canMove = false;
         yield return new WaitForSeconds(0.75f);
-        Image.FadeOut();
+        Image.FadeIn();
         this.transform.position = checkPointSave;
         LoadGame();
         yield return new WaitForSeconds(0.3f);

@@ -7,34 +7,29 @@ public class DeathFade : MonoBehaviour
 {
     public float FadeRate;
     private Image image;
-    private float targetAlpha;
+    private Animator anim;
     
     // Use this for initialization
     void Start () {
-        image = this.GetComponent<Image>();
+        
+        image = GetComponent<Image>();
         image.enabled = true;
-        targetAlpha = image.color.a;
-        FadeOut();
+        anim = GetComponent<Animator>();
+        FadeIn();
     }
     
     // Update is called once per frame
     void Update () {
-        Color curColor = this.image.color;
-        float alphaDiff = Mathf.Abs(curColor.a-this.targetAlpha);
-        if (alphaDiff>0.0001f)
-        {
-            curColor.a = Mathf.Lerp(curColor.a,targetAlpha,this.FadeRate*Time.deltaTime);
-            image.color = curColor;
-        }
+
     }
 
     public void FadeOut()
     {
-        this.targetAlpha = 0.0f;
+        anim.Play("FadeOut");
     }
 
     public void FadeIn()
     {
-        this.targetAlpha = 1.0f;
+        anim.Play("FadeIn");
     }
 }
