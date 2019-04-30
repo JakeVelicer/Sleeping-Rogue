@@ -9,16 +9,20 @@ public class LevelEnd : MonoBehaviour {
     private Scene[] AllScenes;
     private int SceneCount;
     private DeathFade fade;
+    private PlatformerController Player;
 
     void Start() {
 
         SceneCount = SceneManager.sceneCountInBuildSettings;
+        Player = GameObject.Find("Player").GetComponent<PlatformerController>();
         fade = GameObject.Find("DeathFade").GetComponent<DeathFade>();
 
     }
 
     private IEnumerator Fade() {
 
+        Player.Freeze = true;
+        Player.rb2d.velocity = Vector2.zero;
         yield return new WaitForSeconds(1f);
         fade.FadeOut();
         yield return new WaitForSeconds(2f);

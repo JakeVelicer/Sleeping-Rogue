@@ -45,6 +45,7 @@ public class PlatformerController : MonoBehaviour {
     public bool grounded = false;
     public bool wall, wallBlock = false;
     public bool runInto = false;
+    public bool Freeze;
     RaycastHit2D runIntoHit;
 
     [HideInInspector] public Rigidbody2D rb2d;
@@ -158,7 +159,7 @@ public class PlatformerController : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
-        if (!paused)
+        if (!paused && !Freeze)
         {
             wallJumpForce = new Vector2(650f, wallJumpVert);
 
@@ -309,7 +310,7 @@ public class PlatformerController : MonoBehaviour {
     private void FixedUpdate()
     {
         //Blocks most inputs if the game is paused
-        if (!paused)
+        if (!paused && !Freeze)
         {
             // footstep noise while walking on the ground
             if(isMoving && grounded && step)
