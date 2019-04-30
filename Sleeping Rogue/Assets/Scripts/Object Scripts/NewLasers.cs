@@ -83,7 +83,7 @@ public class NewLasers : InteractableObject
         GetComponent<BoxCollider2D>().size = new Vector2(width, length);
         GetComponent<BoxCollider2D>().offset = new Vector2(0, length/2);
     }
-    private void OnTriggerEnter2D(Collision2D col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
         if(col.gameObject.tag == "Player")
         {
