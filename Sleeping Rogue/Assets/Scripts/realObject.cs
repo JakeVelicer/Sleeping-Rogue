@@ -13,7 +13,9 @@ public class realObject : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        m_Collider = GetComponent<Collider2D>();
+        if (gameObject.GetComponent<Collider2D>() != null) {
+            m_Collider = GetComponent<Collider2D>();
+        }
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlatformerController>();
         //GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
     }
@@ -24,12 +26,16 @@ public class realObject : MonoBehaviour
         if (!Player.dreaming)
         {
             this.spriteRenderer.enabled = true;
-            this.m_Collider.enabled = true;
+            if (m_Collider != null) {
+                this.m_Collider.enabled = true;
+            }
         }
         else
         {
             this.spriteRenderer.enabled = false;
-            this.m_Collider.enabled = false;
+            if (m_Collider != null) {
+                this.m_Collider.enabled = false;
+            }
         }
     }
 }

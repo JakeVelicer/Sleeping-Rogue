@@ -235,7 +235,7 @@ public class PlatformerController : MonoBehaviour {
                 CapVelocity();
             }
 
-             if (grounded)
+            if (grounded)
             {
                 if (!Input.GetButton("Jump"))
                 {
