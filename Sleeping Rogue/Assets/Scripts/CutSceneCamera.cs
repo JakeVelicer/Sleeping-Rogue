@@ -27,23 +27,26 @@ public class CutSceneCamera : MonoBehaviour
 
         audioManager.Play(0);
         for (int i = 0; i <= Dialogue.Length; i++) {
-            yield return new WaitForSeconds(7);
             if (i == 0) {
+                yield return new WaitForSeconds(2);
                 Dialogue[i].SetActive(true);
             }
-            else if (i == Dialogue.Length) {
-                Dialogue[i - 1].SetActive(false);
-            }
-            else {
-                Dialogue[i - 1].SetActive(false);
-                Dialogue[i].SetActive(true);
+            else if (i != 0) {
+                yield return new WaitForSeconds(8);
+                if (i == Dialogue.Length) {
+                    Dialogue[i - 1].SetActive(false);
+                }
+                else {
+                    Dialogue[i - 1].SetActive(false);
+                    Dialogue[i].SetActive(true);
+                }
             }
         }
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(2);
         GameObject.Find("PlayerAnim").GetComponent<Animator>().enabled = true;
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(4);
         fade.FadeOut();
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
     }
