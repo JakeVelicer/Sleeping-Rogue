@@ -775,7 +775,7 @@ public class PlatformerController : MonoBehaviour {
             if (dreaming)
             {
                 canLadder = false;
-                rb2d.gravityScale = .7f;
+                rb2d.gravityScale = .8f;
             }
         }
     }
@@ -798,7 +798,7 @@ public class PlatformerController : MonoBehaviour {
             }
             else if (dreaming)
             {
-                rb2d.gravityScale = .7f;
+                rb2d.gravityScale = .8f;
             }
         }
     }
