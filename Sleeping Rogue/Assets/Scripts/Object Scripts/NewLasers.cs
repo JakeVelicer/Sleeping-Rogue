@@ -48,6 +48,7 @@ public class NewLasers : InteractableObject
             line.GetComponent<SpriteRenderer>().enabled = false;
             GetComponent<BoxCollider2D>().enabled = false;
             length = 0.5f;
+            laserPulse = false;
         }
         else
         {
@@ -62,6 +63,11 @@ public class NewLasers : InteractableObject
             if (length < maxLength && !extending && ray.collider == null)
             {
                 StartCoroutine(drawLaser());
+            }
+            if (!laserPulse)
+            {
+
+                StartCoroutine(pulsing());
             }
         }
 
@@ -109,4 +115,37 @@ public class NewLasers : InteractableObject
         }
     }
 
+    bool laserPulse = false;
+
+    [Header("0-1 values")]
+    public float pulseAmount = .4f;
+    [Header("how often lasers pulse")]
+    public float pulseTimer = .5f;
+    IEnumerator pulsing()
+    {
+        bool pulse = true;
+        laserPulse = true;
+
+        float pulseWidth = width;
+        while (laserPulse)
+        {
+            pulseWidth = width;
+            while (pulse)
+            {
+                pulseWidth += (width / 20);
+                transform.localScale = new Vector3(pulseWidth, transform.localScale.y, 1);
+                if(pulseWidth >= (width + (width * pulseAmount)))
+                {
+                    pulse = false;
+                    transform.localScale = new Vector3(width, transform.localScale.y, 1);
+                }
+                yield return null;
+            }
+
+            yield return new WaitForSeconds(pulseTimer);
+
+            pulse = true;
+            yield return null;
+        }
+    }
 }
