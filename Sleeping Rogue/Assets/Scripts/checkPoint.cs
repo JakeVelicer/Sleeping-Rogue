@@ -5,8 +5,6 @@ using UnityEngine;
 public class checkPoint : MonoBehaviour
 {
     private SpriteRenderer Render;
-    public Sprite Unactivated;
-    public Sprite Activated;
 
     public bool isHit = false;
 
