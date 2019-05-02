@@ -85,10 +85,26 @@ public class MenuScript : MonoBehaviour
             {
                 Main[i] = GameObject.Find("Button " + i).GetComponent<Button>();
             }
+            if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Main Menu"))
+            {
+                if (Input.GetButtonDown("Cancel"))
+                {
+                    Main[0].onClick.Invoke();
+                }
+            }
         }
         if (opMenu != null)
         {
             Options = FindObjectsOfType<Button>();
+            if (Input.GetButtonDown("Cancel"))
+            {
+                FindObjectOfType<Button>().onClick.Invoke();
+            }
+            if (EventSystem.current.currentSelectedGameObject == FindObjectOfType<Slider>())
+            {
+
+                FindObjectOfType<Slider>().transform.GetChild(2).GetComponentInChildren<Image>().color = FindObjectOfType<Slider>().colors.highlightedColor;
+            }
         }
 
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Main Menu"))
@@ -107,6 +123,10 @@ public class MenuScript : MonoBehaviour
             if (GameObject.Find("Credits") != null)
             {
                 FindObjectOfType<Button>().Select();
+                if (Input.GetButtonDown("Cancel"))
+                {
+                    FindObjectOfType<Button>().onClick.Invoke();
+                }
             }
         }
         else
@@ -129,23 +149,26 @@ public class MenuScript : MonoBehaviour
 
     private IEnumerator ChangeMenu(float val)
     {
-        if (val < 0)
+        if (mMenu != null)
         {
-
-            Selected++;
-            if(Selected > Main.Length - 1)
+            if (val < 0)
             {
-                Selected = 0;
+
+                Selected++;
+                if (Selected > Main.Length - 1)
+                {
+                    Selected = 0;
+                }
+
+
             }
-
-            
-        }
-        if (val > 0 )
-        {
-            Selected--;
-            if(Selected < 0)
+            if (val > 0)
             {
-                Selected = Main.Length - 1;
+                Selected--;
+                if (Selected < 0)
+                {
+                    Selected = Main.Length - 1;
+                }
             }
         }
         Debug.Log(Selected);
@@ -153,13 +176,23 @@ public class MenuScript : MonoBehaviour
 
         if (opMenu != null)
         {
-            if(Selected == 0)
+            /*if(Selected == 0)
             {
                 FindObjectOfType<Button>().Select();
             }
             else
             {
                 FindObjectOfType<Slider>().Select();
+            }*/
+            Debug.Log(EventSystem.current.currentSelectedGameObject);
+            if(EventSystem.current.currentSelectedGameObject == FindObjectOfType<Button>())
+            {
+                FindObjectOfType<Slider>().GetComponent<Slider>().Select();
+            }
+            if (EventSystem.current.currentSelectedGameObject == FindObjectOfType<Slider>())
+            {
+                
+                FindObjectOfType<Button>().GetComponent<Button>().Select();
             }
         }
 

@@ -44,7 +44,7 @@ public class Volume : MonoBehaviour
         {
             if(allSound[i] != null)
             {
-                allSound[i].volume = initVolumes[i] * (GetComponent<Slider>().value / 100);
+                allSound[i].volume = initVolumes[i] * (GetComponent<Slider>().value / GetComponent<Slider>().maxValue);
             }
         }
         
