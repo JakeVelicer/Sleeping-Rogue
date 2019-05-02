@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 public class MenuScript : MonoBehaviour
 {
+    public AudioSource audioSource;
+    public AudioClip choice;
+    public AudioClip select;
 
     public Button[] Main;
     public Button[] Options;
@@ -19,6 +22,8 @@ public class MenuScript : MonoBehaviour
 
     public static int Selected;
     public bool canInteract = true;
+
+    public bool canSelect = true;
 
     public int playAdded, menuAdded;
 
@@ -44,11 +49,14 @@ public class MenuScript : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         menuAdded = 0;
+        audioSource.PlayOneShot(select);
+        canSelect = false;
     }
     public void QuitGame()
     {
         Debug.Log("Quit");
         Application.Quit();
+        audioSource.PlayOneShot(select);
     }
 
     public void MainMenu()
@@ -76,6 +84,11 @@ public class MenuScript : MonoBehaviour
         if (Input.GetAxisRaw("Vertical") != 0 && canInteract)
         {
             canInteract = false;
+            if (canSelect==true)
+            {
+                audioSource.PlayOneShot(choice);
+            }
+
             StartCoroutine(ChangeMenu(Input.GetAxisRaw("Vertical")));
         }
         if (mMenu != null)
@@ -95,6 +108,7 @@ public class MenuScript : MonoBehaviour
         }
         if (opMenu != null)
         {
+
             Options = FindObjectsOfType<Button>();
             if (Input.GetButtonDown("Cancel"))
             {
@@ -151,6 +165,7 @@ public class MenuScript : MonoBehaviour
     {
         if (mMenu != null)
         {
+         
             if (val < 0)
             {
 

@@ -2953,6 +2953,12 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 1
+--- !u!82 &1999012266 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 769902980253023061, guid: 8295b6e17ce9a447cace5eae186a01c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 769902978358339941}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2039234418
 GameObject:
   m_ObjectHideFlags: 0
@@ -3127,6 +3133,21 @@ PrefabInstance:
       propertyPath: Main.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 769902980253023048, guid: 8295b6e17ce9a447cace5eae186a01c7,
+        type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 1999012266}
+    - target: {fileID: 769902980253023048, guid: 8295b6e17ce9a447cace5eae186a01c7,
+        type: 3}
+      propertyPath: choice
+      value: 
+      objectReference: {fileID: 8300000, guid: c8639aac29bde4f5e8a15f2b78a8ef2d, type: 3}
+    - target: {fileID: 769902980253023048, guid: 8295b6e17ce9a447cace5eae186a01c7,
+        type: 3}
+      propertyPath: select
+      value: 
+      objectReference: {fileID: 8300000, guid: 4c2b6c228254a4f7890679f6c733d83c, type: 3}
     - target: {fileID: 769902980253023051, guid: 8295b6e17ce9a447cace5eae186a01c7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3181,6 +3202,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 769902980253023061, guid: 8295b6e17ce9a447cace5eae186a01c7,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.302
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8295b6e17ce9a447cace5eae186a01c7, type: 3}
