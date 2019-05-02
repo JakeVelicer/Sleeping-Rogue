@@ -6,7 +6,7 @@ public class boxNoise : MonoBehaviour
 {
     public AudioSource audioSource;
 
-    public AudioClip sliding;
+   
 
     public Rigidbody2D rb;
 
@@ -16,9 +16,12 @@ public class boxNoise : MonoBehaviour
 
         if (rb.velocity.magnitude > 0)
         {
-           audioSource.PlayOneShot(sliding, 1f);
+           audioSource.Play();
         }
 
-
+        else if(rb.velocity.magnitude == 0)
+        {
+            audioSource.Stop();
+        }
     }
 }

@@ -37,8 +37,10 @@ public class PlatformerController : MonoBehaviour {
     public AudioClip death;
     public AudioClip landing;
     public AudioClip sizzle;
+    public AudioClip collect;
 
     public AudioSource audioSource;
+    public AudioSource externals;
 
     [Header("Performance Checks")]
     public bool step = true;
@@ -660,7 +662,7 @@ public class PlatformerController : MonoBehaviour {
     //Reloads the player if they die
     private IEnumerator Respawn()
     {
-        audioSource.PlayOneShot(death);
+        externals.PlayOneShot(death);
         var Image = GameObject.Find("DeathFade").GetComponent<DeathFade>();
         Image.FadeOut();
         if(dragging) StartCoroutine(StartStopDrag(runIntoHit.collider.gameObject));
@@ -733,10 +735,8 @@ public class PlatformerController : MonoBehaviour {
         }
         if (collision.gameObject.tag == "Kill")
         {
-            audioSource.PlayOneShot(sizzle, .75f);
             if (!dreaming)
             {
-
                 StartCoroutine(Respawn());
             }
             else if (dreaming)
@@ -748,6 +748,7 @@ public class PlatformerController : MonoBehaviour {
         {
             if (!dreaming)
             {
+                externals.PlayOneShot(sizzle);
                 StartCoroutine(Respawn());
             }
         }
@@ -757,6 +758,10 @@ public class PlatformerController : MonoBehaviour {
             {
                 canLadder = true;
             }
+        }
+        if ( collision.gameObject.tag == "DreamShards")
+        {
+            externals.PlayOneShot(collect,.5f);
         }
     }
 
