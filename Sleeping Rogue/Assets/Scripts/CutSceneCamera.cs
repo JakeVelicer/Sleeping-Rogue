@@ -32,7 +32,7 @@ public class CutSceneCamera : MonoBehaviour
                 Dialogue[i].SetActive(true);
             }
             else if (i != 0) {
-                yield return new WaitForSeconds(7);
+                yield return new WaitForSeconds(8);
                 if (i == Dialogue.Length) {
                     Dialogue[i - 1].SetActive(false);
                 }
@@ -42,9 +42,9 @@ public class CutSceneCamera : MonoBehaviour
                 }
             }
         }
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(2);
         GameObject.Find("PlayerAnim").GetComponent<Animator>().enabled = true;
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(4);
         fade.FadeOut();
         yield return new WaitForSeconds(2);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
