@@ -20,7 +20,9 @@ public class CutSceneCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    
+        if (Input.GetButtonDown("Submit")) {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
 
     private IEnumerator CameraMovement() {

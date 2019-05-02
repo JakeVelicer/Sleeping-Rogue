@@ -101,50 +101,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1500010818920528374, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
+    - target: {fileID: 1500010818920528368, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1500010818920528374, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
+      propertyPath: m_Offset.x
+      value: -0.306041
       objectReference: {fileID: 0}
     - target: {fileID: 1500010818920528368, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
         type: 3}
       propertyPath: m_Size.x
-      value: 4.7
+      value: 5.312082
       objectReference: {fileID: 0}
     - target: {fileID: 1500010818920528368, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
         type: 3}
       propertyPath: m_Size.y
       value: 3.06
-      objectReference: {fileID: 0}
-    - target: {fileID: 1500010818920528368, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.drawMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1500010818920528368, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1500010818920528368, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.adaptiveTiling
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1500010818920528368, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.newSize.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1500010818920528368, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48bb3ab6b2563fd43b9a37a45b521a09, type: 3}
@@ -221,16 +191,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1500010818920528374, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1500010818920528374, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1500010818920528368, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
         type: 3}
       propertyPath: m_Size.x
@@ -240,31 +200,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Size.y
       value: 3.06
-      objectReference: {fileID: 0}
-    - target: {fileID: 1500010818920528368, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.drawMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1500010818920528368, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1500010818920528368, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.adaptiveTiling
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1500010818920528368, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.newSize.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1500010818920528368, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48bb3ab6b2563fd43b9a37a45b521a09, type: 3}
@@ -341,16 +276,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1500010818920528374, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1500010818920528374, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1500010818920528368, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
         type: 3}
       propertyPath: m_Size.x
@@ -360,31 +285,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Size.y
       value: 3.06
-      objectReference: {fileID: 0}
-    - target: {fileID: 1500010818920528368, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.drawMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1500010818920528368, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1500010818920528368, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.adaptiveTiling
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1500010818920528368, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.newSize.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1500010818920528368, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48bb3ab6b2563fd43b9a37a45b521a09, type: 3}
@@ -461,16 +361,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1500010818920528374, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1500010818920528374, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1500010818920528368, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
         type: 3}
       propertyPath: m_Size.x
@@ -480,31 +370,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Size.y
       value: 3.06
-      objectReference: {fileID: 0}
-    - target: {fileID: 1500010818920528368, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.drawMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1500010818920528368, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1500010818920528368, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.adaptiveTiling
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1500010818920528368, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.newSize.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1500010818920528368, guid: 48bb3ab6b2563fd43b9a37a45b521a09,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48bb3ab6b2563fd43b9a37a45b521a09, type: 3}
