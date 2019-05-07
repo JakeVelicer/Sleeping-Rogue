@@ -445,6 +445,10 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 402746631}
+    - target: {fileID: 468485138, guid: 5955bef404da64c699be663ccecaa88b, type: 3}
+      propertyPath: Backgrounds.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5955bef404da64c699be663ccecaa88b, type: 3}
 --- !u!1001 &822424222
@@ -462,7 +466,7 @@ PrefabInstance:
     - target: {fileID: 6970427765656331190, guid: df00385a80da844a18282a8af9fb0124,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.551636
+      value: 24.206
       objectReference: {fileID: 0}
     - target: {fileID: 6970427765656331190, guid: df00385a80da844a18282a8af9fb0124,
         type: 3}
@@ -513,6 +517,20 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6970427765656331191, guid: df00385a80da844a18282a8af9fb0124,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 15.309259
+      objectReference: {fileID: 0}
+    - target: {fileID: 6970427765656331189, guid: df00385a80da844a18282a8af9fb0124,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 15.309259
+      objectReference: {fileID: 0}
+    - target: {fileID: 633848092, guid: df00385a80da844a18282a8af9fb0124, type: 3}
+      propertyPath: m_SurfaceArc
+      value: 170
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df00385a80da844a18282a8af9fb0124, type: 3}
@@ -904,9 +922,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 843966977850151036, guid: 97019cfe509b32040ad2cc360a21630f,
+    - target: {fileID: 843966977850151025, guid: 97019cfe509b32040ad2cc360a21630f,
         type: 3}
-      propertyPath: width
+      propertyPath: m_LocalScale.x
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1272555551, guid: 97019cfe509b32040ad2cc360a21630f, type: 3}
@@ -921,9 +939,9 @@ PrefabInstance:
       propertyPath: rotating
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 843966977850151025, guid: 97019cfe509b32040ad2cc360a21630f,
+    - target: {fileID: 843966977850151036, guid: 97019cfe509b32040ad2cc360a21630f,
         type: 3}
-      propertyPath: m_LocalScale.x
+      propertyPath: width
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
