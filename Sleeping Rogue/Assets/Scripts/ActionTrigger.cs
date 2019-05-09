@@ -25,6 +25,24 @@ public class ActionTrigger : MonoBehaviour
                 }
             }
         }
+        if (other.gameObject.tag == "Box")
+        {
+            if (!Triggered)
+            {
+                Triggered = true;
+                foreach (GameObject i in connected)
+                {
+                    if (i.GetComponent<InteractableObject>().isActive)
+                    {
+                        i.GetComponent<InteractableObject>().isActive = false;
+                    }
+                    else
+                    {
+                        i.GetComponent<InteractableObject>().isActive = true;
+                    }
+                }
+            }
+        }
     }
 
 }
