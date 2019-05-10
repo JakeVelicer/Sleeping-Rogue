@@ -95,9 +95,12 @@ public class MenuScript : MonoBehaviour
         if (mMenu != null)
         {
             Main = FindObjectsOfType<Button>();
-            for(int i = 0; i < Main.Length; i++)
+            for (int i = 0; i < Main.Length; i++)
             {
-                Main[i] = GameObject.Find("Button " + i).GetComponent<Button>();
+                if (GameObject.Find("Button " + i) != null)
+                {
+                    Main[i] = GameObject.Find("Button " + i).GetComponent<Button>();
+                }
             }
             if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Main Menu"))
             {
