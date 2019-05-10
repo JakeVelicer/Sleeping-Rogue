@@ -8,6 +8,8 @@ public class ButtonScript : MonoBehaviour {
     public GameObject[] connected;
     public Sprite Normal;
     public Sprite Clicked;
+    public Sprite NearNormal;
+    public Sprite NearClicked;
     public bool touch = false;
 
     public AudioClip button;
@@ -38,7 +40,7 @@ public class ButtonScript : MonoBehaviour {
         {
             if (touch)
             {
-                foreach(GameObject i in connected)
+                foreach (GameObject i in connected)
                 {
                     if (i.GetComponent<InteractableObject>().isActive)
                     {
@@ -54,11 +56,22 @@ public class ButtonScript : MonoBehaviour {
             }
         }
 
-        if (pressed)
+        if (pressed && !touch)
         {
             spr.sprite = Clicked;
         }
-        else spr.sprite = Normal;
+        else if (!pressed && !touch)
+        {
+            spr.sprite = Normal;
+        }
+        else if (pressed && touch)
+        {
+            spr.sprite = NearClicked;
+        }
+        else if (!pressed && touch)
+        {
+            spr.sprite = NearNormal;
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)

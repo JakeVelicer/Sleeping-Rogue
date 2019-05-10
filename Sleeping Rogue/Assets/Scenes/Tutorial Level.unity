@@ -3118,20 +3118,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2077403287}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &361992668
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 361992664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7815a05fd3d047f1894045b5874179f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isActive: 0
-  showDistance: 5
 --- !u!1001 &380266835
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19132,12 +19118,12 @@ PrefabInstance:
     - target: {fileID: 2605802771949119122, guid: e7d92a72c845945fb88d0782c7aaba03,
         type: 3}
       propertyPath: isActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2605802771949119122, guid: e7d92a72c845945fb88d0782c7aaba03,
         type: 3}
       propertyPath: showDistance
-      value: 7.5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4343681129051677809, guid: e7d92a72c845945fb88d0782c7aaba03,
         type: 3}
