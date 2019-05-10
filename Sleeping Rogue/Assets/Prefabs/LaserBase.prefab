@@ -203,7 +203,7 @@ MonoBehaviour:
   isActive: 1
   hit: {fileID: 905100818}
   width: 0.5
-  maxLength: 10
+  maxLength: 200
   length: 0
   drawSpeed: 25
   death: {fileID: 0}

@@ -38,9 +38,12 @@ public class PlatformerController : MonoBehaviour {
     public AudioClip landing;
     public AudioClip sizzle;
     public AudioClip collect;
+    public AudioClip twinkle;
+    public AudioClip dreamEnd;
 
     public AudioSource audioSource;
     public AudioSource externals;
+    public AudioSource returnToDream;
 
     [Header("Performance Checks")]
     public bool step = true;
@@ -515,12 +518,15 @@ public class PlatformerController : MonoBehaviour {
                 }
                 returnEffect.transform.LookAt(ShadowInScene.transform.position);
                 returnEffect.Play();
+               
                 float Distance = 
                 Mathf.Abs(Vector3.Distance(ShadowInScene.transform.position, transform.position));
                 if (Distance <= 0.1f)
                 {
                     rb2d.velocity = Vector3.zero;
                     returnEffect.Stop();
+                    returnToDream.Stop();
+                    returnToDream.PlayOneShot(dreamEnd,.7f);
                     returnEffect.Clear();
                     movingToBody = false;
                     Destroy(ShadowInScene);
@@ -563,6 +569,8 @@ public class PlatformerController : MonoBehaviour {
 
             canMove = false;
             movingToBody = true;
+            returnToDream.Play();
+
             playerCollider.enabled = false;
             canDream = true;
             //CancelInvoke("Wave");
@@ -838,7 +846,16 @@ public class PlatformerController : MonoBehaviour {
         yield return new WaitForSeconds(.2f);
         step = true;
     }
+    private IEnumerator flyingSound()
+    {
+        audioSource.PlayOneShot(twinkle);
 
+        while (movingToBody == true)
+        {
+            yield return new WaitForSeconds(2f);
+            audioSource.PlayOneShot(twinkle);
+        }
+    }
 
     Save currSave;
 
