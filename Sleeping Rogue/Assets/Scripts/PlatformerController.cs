@@ -68,7 +68,7 @@ public class PlatformerController : MonoBehaviour {
     [HideInInspector] public float dreamJumpMultiplier = 2.5f;
 
     //Horiz determines players horizontal movement. booleans that control the dream state
-     public float horiz;
+    public float horiz;
     [HideInInspector] public bool dreaming;
     [HideInInspector] public bool canDream;
 
@@ -80,6 +80,7 @@ public class PlatformerController : MonoBehaviour {
     [HideInInspector] public bool canMove;
     private bool movingToBody;
     private bool RoamRight;
+    private GameObject lastHitCheckPoint;
 
 
     //Determines if the player is currently in motion
@@ -588,6 +589,8 @@ public class PlatformerController : MonoBehaviour {
             menuOptions.SetActive(false);
             velocHolder = rb2d.velocity;
             rb2d.bodyType = RigidbodyType2D.Static;
+
+            GameObject.Find("Game Manager").GetComponent<MenuScript>().Main[0].Select();
         }
         else
         {
@@ -727,8 +730,12 @@ public class PlatformerController : MonoBehaviour {
                 if (!collision.gameObject.GetComponent<checkPoint>().isHit)
                 {
                     Debug.Log("Save");
-                    collision.gameObject.GetComponent<checkPoint>().isHit = true;
+                    if (lastHitCheckPoint != null) {
+                        lastHitCheckPoint.GetComponent<checkPoint>().DeactivateCheckpoint();
+                    }
+                    collision.gameObject.GetComponent<checkPoint>().ActivateCheckpoint();
                     checkPointSave = collision.gameObject.transform.position;
+                    lastHitCheckPoint = collision.gameObject;
                     currSave = SaveGame();
                 }
             }
