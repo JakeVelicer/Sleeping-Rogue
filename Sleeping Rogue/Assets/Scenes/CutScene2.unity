@@ -263,7 +263,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: They're going to go after you now though, you are to valuable of an asset
+  m_Text: They're going to go after you now though, you are too valuable of an asset
     to let go.
 --- !u!222 &160038274
 CanvasRenderer:
