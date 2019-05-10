@@ -4,25 +4,22 @@ using UnityEngine;
 
 public class checkPoint : MonoBehaviour
 {
-    private SpriteRenderer Render;
-
+    private Animator anim;
     public bool isHit = false;
 
     private void Start() {
 
-        Render = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
     }
 
-    private void Update() {
+    public void ActivateCheckpoint() {
 
-        /*
-        if (isHit) {
-            Render.sprite = Activated;
-        }
-        else {
-             Render.sprite = Unactivated;
-        }
-        */
-        
+        isHit = true;
+        anim.Play("CheckpointActivated");
+    }
+
+    public void DeactivateCheckpoint() {
+
+        anim.Play("CheckpointDead");
     }
 }
