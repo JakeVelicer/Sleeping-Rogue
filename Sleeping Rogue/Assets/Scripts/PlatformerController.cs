@@ -589,6 +589,8 @@ public class PlatformerController : MonoBehaviour {
             menuOptions.SetActive(false);
             velocHolder = rb2d.velocity;
             rb2d.bodyType = RigidbodyType2D.Static;
+
+            GameObject.Find("Game Manager").GetComponent<MenuScript>().Main[0].Select();
         }
         else
         {
