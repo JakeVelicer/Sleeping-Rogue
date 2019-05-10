@@ -263,8 +263,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: A mysterious company who only calls themselves The Corporation offered you
-    an impressive sum of cash for your services.
+  m_Text: A mysterious company who only ever calls themselves The Corporation offered
+    you an impressive sum of cash for your services
 --- !u!222 &160038274
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -948,8 +948,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: He didn't finish the job. Your soul is now trapped between two worlds, the
-    real and the dream.
+  m_Text: He failed, at least not entirely. Your soul is now trapped between two worlds,
+    the real and the dream.
 --- !u!222 &657256324
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1064,8 +1064,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: You failed your last mission, and The Corporation kidnapped your family
-    because of it. You have just recovered from your injuries.
+  m_Text: You have just recovered from your injuries and the Corporation now wishes
+    you to complete one last job
 --- !u!222 &687789256
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1332,7 +1332,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "You no longer wish to live your life as a criminal for hire\u2014you have
-    a child to think of now."
+    a child to think of now"
 --- !u!222 &759682812
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1447,7 +1447,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: But the Corporation found out; they always find out.
+  m_Text: But the Corporation found out, they always find out
 --- !u!222 &814046868
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1749,8 +1749,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: The Corporation wants you to pull off one last heist. If you can successfully
-    complete the heist, then your family will be set free.
+  m_Text: If you can successfully complete the heist, then your family will be set
+    free
 --- !u!222 &1228933577
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1964,8 +1964,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Though you have always been a thief, your views on it all have changed since
-    accepting this opportunity.
+  m_Text: Your viewpoint on it all has changed since then
 --- !u!222 &1328056405
 CanvasRenderer:
   m_ObjectHideFlags: 0
