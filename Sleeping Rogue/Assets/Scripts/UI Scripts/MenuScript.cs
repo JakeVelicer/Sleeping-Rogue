@@ -41,7 +41,8 @@ public class MenuScript : MonoBehaviour
             Destroy(manage[0]);
         }
         DontDestroyOnLoad(this.gameObject);
-
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
 
@@ -103,6 +104,7 @@ public class MenuScript : MonoBehaviour
                 if (Input.GetButtonDown("Cancel"))
                 {
                     Main[0].onClick.Invoke();
+                    audioSource.PlayOneShot(select);
                 }
             }
         }
@@ -113,6 +115,7 @@ public class MenuScript : MonoBehaviour
             if (Input.GetButtonDown("Cancel"))
             {
                 FindObjectOfType<Button>().onClick.Invoke();
+                audioSource.PlayOneShot(select);
             }
             if (EventSystem.current.currentSelectedGameObject == FindObjectOfType<Slider>())
             {
@@ -140,6 +143,7 @@ public class MenuScript : MonoBehaviour
                 if (Input.GetButtonDown("Cancel"))
                 {
                     FindObjectOfType<Button>().onClick.Invoke();
+                    audioSource.PlayOneShot(select);
                 }
             }
         }
