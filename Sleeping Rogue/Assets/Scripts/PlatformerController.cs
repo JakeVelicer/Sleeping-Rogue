@@ -38,9 +38,12 @@ public class PlatformerController : MonoBehaviour {
     public AudioClip landing;
     public AudioClip sizzle;
     public AudioClip collect;
+    public AudioClip twinkle;
+    public AudioClip dreamEnd;
 
     public AudioSource audioSource;
     public AudioSource externals;
+    public AudioSource returnToDream;
 
     [Header("Performance Checks")]
     public bool step = true;
@@ -526,6 +529,8 @@ public class PlatformerController : MonoBehaviour {
                     movingToBody = false;
                     Destroy(ShadowInScene);
                     dreaming = false;
+                    returnToDream.Stop();
+                    returnToDream.PlayOneShot(dreamEnd, .7f);
                     playerCollider.enabled = true;
                     rb2d.gravityScale = 1.0f;
                     canMove = true;
@@ -564,6 +569,7 @@ public class PlatformerController : MonoBehaviour {
 
             canMove = false;
             movingToBody = true;
+            returnToDream.Play();
             playerCollider.enabled = false;
             canDream = true;
             //CancelInvoke("Wave");
