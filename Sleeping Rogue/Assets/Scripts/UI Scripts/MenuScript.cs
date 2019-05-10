@@ -82,7 +82,7 @@ public class MenuScript : MonoBehaviour
         opMenu = GameObject.Find("Options");
         mMenu = GameObject.Find("Main");
 
-        if (Input.GetAxisRaw("Vertical") != 0 && canInteract)
+        if (Mathf.Abs(Input.GetAxis("Vertical")) > 0.1f && canInteract)
         {
             canInteract = false;
             if (canSelect==true)
