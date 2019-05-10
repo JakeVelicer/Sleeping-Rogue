@@ -76,6 +76,8 @@ public class MenuScript : MonoBehaviour
         Selected = 0;
     }
 
+
+    bool MenuVol = false;
     private void Update()
     {
         
@@ -131,6 +133,12 @@ public class MenuScript : MonoBehaviour
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Main Menu"))
         {
             collectibles = 0;
+            if (!MenuVol)
+            {
+                FindObjectOfType<Slider>().GetComponent<Volume>().setVolumes();
+                opMenu.SetActive(false);
+                MenuVol = true;
+            }
             if (mMenu != null)
             {
                 if (playAdded == 0)
@@ -153,6 +161,7 @@ public class MenuScript : MonoBehaviour
         }
         else
         {
+            MenuVol = false;
             if (mMenu != null)
             {
                 if (menuAdded == 0)
