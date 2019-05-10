@@ -19,6 +19,7 @@ public class MenuScript : MonoBehaviour
     public GameObject mMenu, opMenu;
 
     public float Volume = 100;
+    public float MaxVolume;
 
     public static int Selected;
     public bool canInteract = true;
@@ -38,7 +39,7 @@ public class MenuScript : MonoBehaviour
         GameObject[] manage = GameObject.FindGameObjectsWithTag("Manager");
         if (manage.Length > 1)
         {
-            Destroy(manage[0]);
+            Destroy(manage[1]);
         }
         DontDestroyOnLoad(this.gameObject);
         Cursor.visible = false;
@@ -77,7 +78,7 @@ public class MenuScript : MonoBehaviour
 
     private void Update()
     {
-
+        
 
         opMenu = GameObject.Find("Options");
         mMenu = GameObject.Find("Main");
@@ -129,7 +130,7 @@ public class MenuScript : MonoBehaviour
 
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Main Menu"))
         {
-
+            collectibles = 0;
             if (mMenu != null)
             {
                 if (playAdded == 0)

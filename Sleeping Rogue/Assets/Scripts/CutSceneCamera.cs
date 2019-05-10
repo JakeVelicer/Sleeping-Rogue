@@ -15,6 +15,9 @@ public class CutSceneCamera : MonoBehaviour
     {
         fade = GameObject.Find("DeathFade").GetComponent<DeathFade>();
         StartCoroutine(CameraMovement());
+
+
+        audioManager.volume = audioManager.volume * (GameObject.Find("Game Manager").GetComponent<MenuScript>().Volume / GameObject.Find("Game Manager").GetComponent<MenuScript>().MaxVolume);
     }
 
     // Update is called once per frame

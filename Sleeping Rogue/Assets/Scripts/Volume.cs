@@ -9,12 +9,15 @@ public class Volume : MonoBehaviour
     GameObject manage;
 
     List<float> initVolumes = new List<float>();
+
     AudioSource[] allSound;
     // Start is called before the first frame update
     void Start()
     {
         manage = GameObject.Find("Game Manager");
         GetComponent<Slider>().value = manage.GetComponent<MenuScript>().Volume;
+
+        manage.GetComponent<MenuScript>().MaxVolume = GetComponent<Slider>().maxValue;
 
 
         allSound = FindObjectsOfType<AudioSource>();
@@ -35,6 +38,7 @@ public class Volume : MonoBehaviour
             manage.GetComponent<MenuScript>().Volume = GetComponent<Slider>().value;
             setVolumes();
         }
+
     }
 
 
@@ -44,7 +48,7 @@ public class Volume : MonoBehaviour
         {
             if(allSound[i] != null)
             {
-                allSound[i].volume = initVolumes[i] * (GetComponent<Slider>().value / GetComponent<Slider>().maxValue);
+                allSound[i].volume = initVolumes[i] * (manage.GetComponent<MenuScript>().Volume / manage.GetComponent<MenuScript>().MaxVolume);
             }
         }
         

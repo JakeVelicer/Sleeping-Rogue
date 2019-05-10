@@ -146,12 +146,17 @@ public class PlatformerController : MonoBehaviour {
 
         GameObject.Find("Button 0").GetComponent<Button>().onClick.AddListener(Pause);
 
+
         menuMain.SetActive(false);
-        menuOptions.SetActive(false);
     }
 
     void Start()
     {
+
+        FindObjectOfType<Slider>().GetComponent<Volume>().setVolumes();
+
+        menuOptions.SetActive(false);
+
         checkPointSave = this.transform.position;
         canMove = true;
         dragSpeed = groundSpeed / 2;
@@ -161,6 +166,10 @@ public class PlatformerController : MonoBehaviour {
         step = true;
 
         audioManager = AudioManager.instance;
+
+
+        //GameObject.Find("Game Manager").GetComponent<Volume>().setVolumes();
+
     }
 
     public float leftGround;
@@ -432,6 +441,17 @@ public class PlatformerController : MonoBehaviour {
                         if (this.transform.parent != null)
                             gameObject.transform.position = new Vector3(transform.parent.position.x, transform.position.y, 0);
                         climbing = true;
+                        if (climbNoising == true)
+                        {
+                            ladderSource.Play();
+                            climbNoising = false;
+                            StartCoroutine(climbNoise());
+                        }
+                           
+                    }
+                    else
+                    {
+                        ladderSource.Stop();
                     }
                     if (grounded)
                     {
@@ -796,20 +816,20 @@ public class PlatformerController : MonoBehaviour {
                 canLadder = false;
                 rb2d.gravityScale = .8f;
             }
-            if (Input.GetAxis("Vertical") != 0)
-            {
-                if(climbNoising== true)
-                {
-                    ladderSource.Play();
-                    climbNoising = false;
-                    StartCoroutine(climbNoise());
-                }
+            //if (Input.GetAxis("Vertical") != 0)
+            //{
+            //    if(climbNoising== true)
+            //    {
+            //        ladderSource.Play();
+            //        climbNoising = false;
+            //        StartCoroutine(climbNoise());
+            //    }
 
-            }
-            else
-            {
-                ladderSource.Stop();
-            }
+            //}
+            //else
+            //{
+            //    ladderSource.Stop();
+            //}
         }
     }
 
@@ -940,14 +960,17 @@ public class PlatformerController : MonoBehaviour {
             {
                 foreach (GameObject j in currSave.buttons[i].GetComponent<ButtonScript>().connected)
                 {
-                    Debug.Log("Swapping");
-                    if (j.GetComponent<InteractableObject>().isActive)
+                    if (j != null)
                     {
-                        j.GetComponent<InteractableObject>().isActive = false;
-                    }
-                    else
-                    {
-                        j.GetComponent<InteractableObject>().isActive = true;
+                        Debug.Log("Swapping");
+                        if (j.GetComponent<InteractableObject>().isActive)
+                        {
+                            j.GetComponent<InteractableObject>().isActive = false;
+                        }
+                        else
+                        {
+                            j.GetComponent<InteractableObject>().isActive = true;
+                        }
                     }
                 }
             }
