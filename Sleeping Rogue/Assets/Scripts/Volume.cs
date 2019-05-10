@@ -44,10 +44,11 @@ public class Volume : MonoBehaviour
 
     public void setVolumes()
     {
-        for(int i = 0; i < allSound.Length; i++)
+        for(int i = 0; i < initVolumes.Count; i++)
         {
             if(allSound[i] != null)
             {
+                Debug.Log("Setting");
                 allSound[i].volume = initVolumes[i] * (manage.GetComponent<MenuScript>().Volume / manage.GetComponent<MenuScript>().MaxVolume);
             }
         }
