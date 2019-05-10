@@ -33,36 +33,45 @@ public class NewLasers : InteractableObject
     }
 
     RaycastHit2D ray;
-    bool extending = false;
+    public bool retracting = false, extending = false;
     // Update is called once per frame
     void Update()
     {
 
         ray = Physics2D.Raycast(transform.position, transform.up, length, collides);
-        Debug.DrawRay(transform.position, transform.up, Color.blue);
-        Debug.DrawLine(transform.position, hit.position, Color.blue);
       
 
         if (!isActive)
         {
-            line.GetComponent<SpriteRenderer>().enabled = false;
-            GetComponent<BoxCollider2D>().enabled = false;
-            GetComponent<AudioSource>().enabled = false;
-            length = 0.5f;
-            laserPulse = false;
+            extending = false;
+            if(length > 0.1f)
+            {
+                StartCoroutine(eraseLaser());
+            }
+            else
+            {
+                line.GetComponent<SpriteRenderer>().enabled = false;
+                GetComponent<BoxCollider2D>().enabled = false;
+                GetComponent<AudioSource>().enabled = false;
+                laserPulse = false;
+                retracting = false;
+                length = 0;
+            }
         }
         else
         {
+            retracting = false;
             GetComponent<AudioSource>().enabled = true;
             line.GetComponent<SpriteRenderer>().enabled = true;
             GetComponent<BoxCollider2D>().enabled = true;
+            
             if (ray.collider != null)
             {
                 hit.position = ray.point;
                 length = hit.localPosition.y;
                 extending = false;
             }
-            if (length < maxLength && !extending && ray.collider == null)
+            if (!extending && ray.collider == null)
             {
                 StartCoroutine(drawLaser());
             }
@@ -105,16 +114,28 @@ public class NewLasers : InteractableObject
 
     IEnumerator drawLaser()
     {
-
-        Debug.Log("hit");
         extending = true;
-        while (length < maxLength && ray.collider == null)
+        while (ray.collider == null)
         {
             
             length += drawSpeed * Time.deltaTime;
             hit.localPosition = new Vector3(0, length, 0);
             yield return null;
         }
+    }
+
+    IEnumerator eraseLaser()
+    {
+
+        Debug.Log("hit");
+        retracting = true;
+        while (length > 0.0f)
+        {
+            length -= drawSpeed * Time.deltaTime;
+            hit.localPosition = new Vector3(0, length, 0);
+            yield return null;
+        }
+        length = 0.0f;
     }
 
     bool laserPulse = false;

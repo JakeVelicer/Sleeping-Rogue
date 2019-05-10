@@ -488,7 +488,7 @@ public class PlatformerController : MonoBehaviour {
                 if (!wall)
                 {
                     if (Input.GetAxisRaw("Horizontal") != lastMove ||
-                        Mathf.Abs(Input.GetAxis("Vertical")) >= .2f)
+                        Mathf.Abs(Input.GetAxis("Vertical")) >= .1f)
                     {
                         wallJumping = false;
                         lastMove = Mathf.Infinity;
@@ -834,7 +834,7 @@ public class PlatformerController : MonoBehaviour {
     {
         float cappedYVelocity = Mathf.Max(rb2d.velocity.y, maxFallSpeed);
 
-        rb2d.velocity = new Vector2(0, cappedYVelocity);
+        rb2d.velocity = new Vector2(rb2d.velocity.x, cappedYVelocity);
         if (rb2d.velocity.y == cappedYVelocity)
         {
             Debug.Log("capping velocity");
