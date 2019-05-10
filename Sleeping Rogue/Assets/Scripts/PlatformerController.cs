@@ -40,10 +40,12 @@ public class PlatformerController : MonoBehaviour {
     public AudioClip collect;
     public AudioClip twinkle;
     public AudioClip dreamEnd;
+    public AudioClip ladder;
 
     public AudioSource audioSource;
     public AudioSource externals;
     public AudioSource returnToDream;
+    public AudioSource ladderSource;
 
     [Header("Performance Checks")]
     public bool step = true;
@@ -78,6 +80,7 @@ public class PlatformerController : MonoBehaviour {
     //Determines if the player is climbing or can climb
     public bool canLadder;
     [HideInInspector] public bool climbing;
+    public bool climbNoising = true;
 
 
     [HideInInspector] public bool canMove;
@@ -746,6 +749,7 @@ public class PlatformerController : MonoBehaviour {
                 }
             }
         }
+
         if (collision.gameObject.tag == "Kill")
         {
             if (!dreaming)
@@ -780,6 +784,7 @@ public class PlatformerController : MonoBehaviour {
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        bool isClimbing = true;
         if (collision.gameObject.tag == "Inhibitor")
         {
             canDream = false;
@@ -795,6 +800,20 @@ public class PlatformerController : MonoBehaviour {
                 canLadder = false;
                 rb2d.gravityScale = .8f;
             }
+            if (Input.GetAxis("Vertical") != 0)
+            {
+                if(climbNoising== true)
+                {
+                    ladderSource.Play();
+                    climbNoising = false;
+                    StartCoroutine(climbNoise());
+                }
+
+            }
+            else
+            {
+                ladderSource.Stop();
+            }
         }
     }
 
@@ -809,6 +828,7 @@ public class PlatformerController : MonoBehaviour {
             this.transform.SetParent(null);
             if (!dreaming)
             {
+                ladderSource.Stop();
                 canLadder = false;
                 climbing = false;
                 rb2d.gravityScale = 1.0f;
@@ -851,7 +871,11 @@ public class PlatformerController : MonoBehaviour {
         yield return new WaitForSeconds(.2f);
         step = true;
     }
-
+    private IEnumerator climbNoise()
+    {
+        yield return new WaitForSeconds(.1f);
+        climbNoising = true;
+    }
 
     Save currSave;
 
