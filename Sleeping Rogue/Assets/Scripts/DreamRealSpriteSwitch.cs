@@ -11,6 +11,7 @@ public class DreamRealSpriteSwitch : MonoBehaviour
 
     // Start is called before the first frame update
     void Start() {
+
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlatformerController>();
         Renderer = gameObject.GetComponent<SpriteRenderer>();
     }
@@ -19,9 +20,11 @@ public class DreamRealSpriteSwitch : MonoBehaviour
     void Update() {
 
         if (Player.dreaming) {
-            Renderer.sprite = DreamSprite;           
+
+            Renderer.sprite = DreamSprite;
         }
         else {
+            
             Renderer.sprite = RealitySprite;
         }
     }
