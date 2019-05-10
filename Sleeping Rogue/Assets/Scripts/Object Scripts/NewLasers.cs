@@ -47,11 +47,13 @@ public class NewLasers : InteractableObject
         {
             line.GetComponent<SpriteRenderer>().enabled = false;
             GetComponent<BoxCollider2D>().enabled = false;
+            GetComponent<AudioSource>().enabled = false;
             length = 0.5f;
             laserPulse = false;
         }
         else
         {
+            GetComponent<AudioSource>().enabled = true;
             line.GetComponent<SpriteRenderer>().enabled = true;
             GetComponent<BoxCollider2D>().enabled = true;
             if (ray.collider != null)
