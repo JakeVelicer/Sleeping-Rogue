@@ -21,7 +21,12 @@ public class CutSceneCamera : MonoBehaviour
     void Update()
     {
         if (Input.GetButtonDown("Submit")) {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            if (SceneManager.GetActiveScene().name == "CutScene") {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
+            else if (SceneManager.GetActiveScene().name == "CutScene2") {
+                SceneManager.LoadScene(0);
+            }
         }
     }
 
@@ -45,11 +50,17 @@ public class CutSceneCamera : MonoBehaviour
             }
         }
         yield return new WaitForSeconds(2);
-        GameObject.Find("PlayerAnim").GetComponent<Animator>().enabled = true;
-        yield return new WaitForSeconds(4);
+        if (SceneManager.GetActiveScene().name == "CutScene") {
+            GameObject.Find("PlayerAnim").GetComponent<Animator>().enabled = true;
+            yield return new WaitForSeconds(4);
+        }
         fade.FadeOut();
         yield return new WaitForSeconds(2);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-
+        if (SceneManager.GetActiveScene().name == "CutScene") {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        else if (SceneManager.GetActiveScene().name == "CutScene2") {
+            SceneManager.LoadScene(0);
+        }
     }
 }

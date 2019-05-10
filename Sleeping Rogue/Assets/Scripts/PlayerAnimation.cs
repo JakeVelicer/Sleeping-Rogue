@@ -24,6 +24,18 @@ public class PlayerAnimation : MonoBehaviour
     void Update()
     {
 
+        if (!PlayerScript.dreaming) {
+            NormalAnims();
+        }
+        else if (PlayerScript.dreaming) {
+            SleepAnims();
+        }
+    }
+
+    private void NormalAnims() {
+
+        anim.SetBool("Dreaming", false);
+
         if (!PlayerScript.Freeze) {
 
             // Controls Idle and Running anim
@@ -117,6 +129,86 @@ public class PlayerAnimation : MonoBehaviour
         }
         else if (PlayerScript.Freeze && !anim.GetCurrentAnimatorStateInfo(0).IsName("PlayerCrawl")) {
             anim.Play("PlayerCrawl");
+        }
+
+    }
+
+    private void SleepAnims() {
+
+        anim.SetBool("Dreaming", true);
+
+        if (!PlayerScript.Freeze) {
+
+            // Controls Idle and Running anim
+            if (PlayerScript.isMoving && PlayerScript.grounded)
+            {
+                anim.SetInteger("BasicAnimSwitch", 1);
+            }
+            else if (!PlayerScript.isMoving && PlayerScript.grounded)
+            {
+                anim.SetInteger("BasicAnimSwitch", 0);
+            }
+            
+            // Activates jumping anim, falling anim, and slide fall anim
+            if (rb2d.velocity.y > 0 && PlayerScript.jumping == true
+            && PlayerScript.canMove && !PlayerScript.grounded && !PlayerScript.dragging && !PlayerScript.climbing)
+            {
+                anim.Play("PlayerDreamJumpIni");
+            }
+            if (rb2d.velocity.y > 0 && PlayerScript.wallJumping == true
+            && PlayerScript.canMove && !PlayerScript.grounded && !PlayerScript.dragging)
+            {
+                anim.Play("PlayerDreamJumpIni");
+            }
+            if (rb2d.velocity.y < 1)
+            {
+                FallingTimer -= Time.deltaTime;
+                if (anim.GetCurrentAnimatorStateInfo(0).IsName("PlayerDreamJumpIni"))
+                {
+                    anim.SetTrigger("Falling");
+                }
+                else if (!anim.GetCurrentAnimatorStateInfo(0).IsName("PlayerDreamJumpIni")
+                && FallingTimer <= 0 && !PlayerScript.grounded && !PlayerScript.climbing && !PlayerScript.wall)
+                {
+                    anim.Play("PlayerDreamJumpFall");
+                }
+            }
+
+            // Checks if player is grounded so it can switch back from jump anims
+            if (PlayerScript.grounded)
+            {
+                anim.SetBool("AnimGrounded", true);
+                FallingTimer = 0.1f;
+            }
+            else if (!PlayerScript.grounded)
+            {
+                anim.SetBool("AnimGrounded", false);
+            }
+            
+            // Controls animation for dragging boxes
+            if (PlayerScript.dragging && !anim.GetCurrentAnimatorStateInfo(0).IsName("PlayerPush"))
+            {
+                anim.Play("PlayerDreamPush");
+            }
+            else if (!PlayerScript.dragging && anim.GetCurrentAnimatorStateInfo(0).IsName("PlayerDreamPush"))
+            {
+                anim.SetTrigger("LeaveDrag");
+            }
+            if (Mathf.Abs(Input.GetAxis("Horizontal")) > .1f && PlayerScript.dragging)
+            {
+                anim.speed = 1;
+            }
+            else if (Mathf.Abs(Input.GetAxis("Horizontal")) <= 0 && PlayerScript.dragging)
+            {
+                anim.speed = 0;
+            }
+
+            // Sets the anim speed back to 1 if needed
+            if (!PlayerScript.climbing && !PlayerScript.dragging)
+            {
+                anim.speed = 1;
+            }
+
         }
 
     }
