@@ -38,7 +38,7 @@ public class NewLasers : InteractableObject
     void Update()
     {
 
-        ray = Physics2D.Raycast(transform.position, transform.up, length, collides);
+        ray = Physics2D.Raycast(transform.position, transform.up, length+.5f, collides);
       
 
         if (!isActive)
