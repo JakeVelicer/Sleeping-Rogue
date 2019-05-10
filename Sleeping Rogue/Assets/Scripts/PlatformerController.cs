@@ -502,11 +502,7 @@ public class PlatformerController : MonoBehaviour {
 
                 }
             }
-
-            if (Input.GetButtonDown("Cancel") && canMove)
-            {
-                StartCoroutine(Respawn());
-            }
+            
 
             // Handles returning player to real body when exiting dream mode
             if (movingToBody)
