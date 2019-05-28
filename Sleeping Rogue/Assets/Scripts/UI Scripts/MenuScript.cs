@@ -54,17 +54,22 @@ public class MenuScript : MonoBehaviour
         audioSource.PlayOneShot(select);
         canSelect = false;
     }
+    
     public void QuitGame()
     {
         Debug.Log("Quit");
-        Application.Quit();
         audioSource.PlayOneShot(select);
+        Application.Quit();
     }
 
     public void MainMenu()
     {
-        SceneManager.LoadScene("Main Menu");
-        playAdded = 0;
+        if (menuAdded == 0)
+        {
+            menuAdded++;
+            SceneManager.LoadScene("Main Menu");
+            playAdded = 0;
+        }
     }
     public void Resume()
     {
@@ -76,12 +81,10 @@ public class MenuScript : MonoBehaviour
         Selected = 0;
     }
 
-
     bool MenuVol = false;
+
     private void Update()
     {
-        
-
         opMenu = GameObject.Find("Options");
         mMenu = GameObject.Find("Main");
 
@@ -167,7 +170,6 @@ public class MenuScript : MonoBehaviour
                 if (menuAdded == 0)
                 {
                     Main[2].onClick.AddListener(() => MainMenu());
-                    menuAdded++;
                 }
                 Main[Selected].Select();
             }

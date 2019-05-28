@@ -10,7 +10,7 @@ public class InBetweenLevel : MonoBehaviour
     public int DetermineTime;
     public Text TimerText;
     private DeathFade fade;
-    private int Timer;
+    public int Timer;
     private PlatformerController Player;
     private bool CountingDown = true;
 
@@ -29,7 +29,7 @@ public class InBetweenLevel : MonoBehaviour
 
     private IEnumerator CountDown() {
 
-        int Timer = DetermineTime;
+        Timer = DetermineTime;
 
         while (CountingDown) {
 
