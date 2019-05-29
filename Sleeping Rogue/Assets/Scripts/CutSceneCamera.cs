@@ -28,7 +28,7 @@ public class CutSceneCamera : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
             else if (SceneManager.GetActiveScene().name == "CutScene2") {
-                SceneManager.LoadScene(0);
+                GameObject.Find("Game Manager").GetComponent<MenuScript>().MainMenu();
             }
         }
     }
@@ -63,7 +63,7 @@ public class CutSceneCamera : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
         else if (SceneManager.GetActiveScene().name == "CutScene2") {
-            SceneManager.LoadScene(0);
+            GameObject.Find("Game Manager").GetComponent<MenuScript>().MainMenu();
         }
     }
 }
