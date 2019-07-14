@@ -33,7 +33,7 @@ public class dreamObject : MonoBehaviour
         else
         {
             this.spriteRenderer.enabled = false;
-            if (m_Collider != null) {            
+            if (m_Collider != null) {
                 this.m_Collider.enabled = false;
             }
         }
