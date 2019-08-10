@@ -32,7 +32,7 @@ public class FollowPlayerPeek : MonoBehaviour
         Vector3 movement = new Vector3 (horizontalInput, verticalInput, 0);
         
         Distance = Mathf.Abs(Vector3.Distance(Player.position, transform.position));
-        Debug.Log("Input" + movement);
+        //Debug.Log("Input" + movement);
 
         if (Distance <= 8f) {
             Rigidbody.velocity = movement * speed;
