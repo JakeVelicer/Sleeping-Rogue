@@ -588,10 +588,10 @@ PlayerSettings:
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
   apiCompatibilityLevel: 2
-  cloudProjectId: a91ce044-47d0-4682-94f3-e32aa3a2e3e4
+  cloudProjectId: 81892375-f369-43f3-9b0d-7bc3f8c06255
   framebufferDepthMemorylessMode: 0
   projectName: Sleeping Rogue
-  organizationId: bu-team-5
+  organizationId: jake-velicer
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

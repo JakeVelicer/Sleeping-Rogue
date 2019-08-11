@@ -168,7 +168,7 @@ public class PlayerAnimation : MonoBehaviour
                     anim.SetTrigger("Falling");
                 }
                 else if (!anim.GetCurrentAnimatorStateInfo(0).IsName("PlayerDreamJumpIni")
-                && FallingTimer <= 0 && !PlayerScript.grounded && !PlayerScript.climbing && !PlayerScript.wall)
+                && FallingTimer <= 0 && !PlayerScript.grounded && !PlayerScript.climbing && !PlayerScript.wall && !PlayerScript.dragging)
                 {
                     anim.Play("PlayerDreamJumpFall");
                 }
